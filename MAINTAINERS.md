@@ -9,8 +9,6 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Praveen Sameneni | [praveensameneni](https://github.com/praveensameneni) | Amazon      |
 | Khushboo Rajput  | [khushbr](https://github.com/khushbr)                 | Amazon      |
 | Saurabh Singh    | [getsaurabh02](https://github.com/getsaurabh02)       | Amazon      |
-| Nick Knize       | [nknize](https://github.com/nknize)                   | Amazon      |
-| CEHENKLE         | [CEHENKLE](https://github.com/CEHENKLE)               | Amazon      |
 
 ## Previous Maintainers
 
