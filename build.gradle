@@ -1,0 +1,149 @@
+/*
+ * Copyright OpenSearch Contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+buildscript {
+    ext {
+        isSnapshot = "true" == System.getProperty("build.snapshot", "true")
+        buildVersionQualifier = System.getProperty("build.version_qualifier", "")
+        buildDockerJdkVersion = System.getProperty("build.docker_jdk_ver", "11")
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'com.diffplug.spotless' version '5.11.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+}
+
+allprojects {
+    group 'org.opensearch.performanceanalyzer.commons'
+    version = '1.0.0'
+    if (buildVersionQualifier) {
+        version += "-${buildVersionQualifier}"
+    }
+
+    if (isSnapshot) {
+        version += "-SNAPSHOT"
+    }
+}
+
+targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_11
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'signing'
+apply plugin: 'maven-publish'
+apply from: 'build-tools/coverage.gradle'
+
+dependencies {
+    if (JavaVersion.current() <= JavaVersion.VERSION_1_8) {
+        implementation files("${System.properties['java.home']}/../lib/tools.jar")
+    }
+
+    def jacksonVersion = "2.14.1"
+    def jacksonDataBindVersion = "2.14.1"
+    def junitVersion  = "4.13.1"
+
+    implementation "org.jooq:jooq:3.10.8"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDataBindVersion}"
+
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.23.0'
+    testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.0'
+    testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.0'
+    testImplementation group: 'org.powermock', name: 'powermock-core', version: '2.0.0'
+    testImplementation group: 'org.powermock', name: 'powermock-api-support', version: '2.0.0'
+    testImplementation group: 'org.powermock', name: 'powermock-module-junit4-common', version: '2.0.0'
+    testImplementation group: 'org.powermock', name: 'powermock-reflect', version: '2.0.0'
+    testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.9.3'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-library', version: '2.1'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+    testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        exceptionFormat "full"
+        events "skipped", "passed", "failed", "started"
+        showStandardStreams true
+    }
+}
+
+spotless {
+    java {
+        licenseHeaderFile(file('license-header'))
+        googleJavaFormat('1.12.0').aosp()
+        importOrder()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+
+        // add support for spotless:off and spotless:on tags to exclude sections of code
+        toggleOffOn()
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+publishing {
+    publications {
+        shadow(MavenPublication) {
+            groupId = 'org.opensearch'
+            artifactId = 'performance-analyzer-commons'
+
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = "OpenSearch Performance Analyzer Commons"
+                packaging = "jar"
+                url = "https://github.com/opensearch-project/performance-analyzer-commons"
+                description = "OpenSearch Performance Analyzer Commons"
+                scm {
+                    connection = "scm:git@github.com:opensearch-project/performance-analyzer-commons.git"
+                    developerConnection = "scm:git@github.com:opensearch-project/performance-analyzer-commons.git"
+                    url = "git@github.com:opensearch-project/performance-analyzer-commons.git"
+                }
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "amazonwebservices"
+                        organization = "Amazon Web Services"
+                        organizationUrl = "https://aws.amazon.com"
+                    }
+                }
+            }
+        }
+    }
+
+    gradle.startParameter.setShowStacktrace(ShowStacktrace.ALWAYS)
+    gradle.startParameter.setLogLevel(LogLevel.DEBUG)
+}
