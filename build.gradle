@@ -109,6 +109,10 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
 }
 
+compileJava {
+    dependsOn spotlessApply
+}
+
 test {
     testLogging {
         exceptionFormat "full"

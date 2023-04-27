@@ -14,9 +14,9 @@ import org.opensearch.performanceanalyzer.commons.rca.framework.api.persist.Jooq
  * Contract between reader and writer. Writer write using the same values of these enums as json
  * keys (See all MetricStatus's subclasses in org.opensearch.performanceanalyzer.collectors), while
  * reader creates db tables using these keys as column names and extract values using these keys.
- * You should make sure the field names in the MetricStatus's subclasses and enum names match.
- * Also, when you change anything, modify JsonKeyTest accordingly. We use camelCase instead of the
- * usual capital case for enum members because they have better readability for the above use cases.
+ * You should make sure the field names in the MetricStatus's subclasses and enum names match. Also,
+ * when you change anything, modify JsonKeyTest accordingly. We use camelCase instead of the usual
+ * capital case for enum members because they have better readability for the above use cases.
  */
 public class AllMetrics {
     // metric name (not complete, only metrics use the json format and contains
