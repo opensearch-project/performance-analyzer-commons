@@ -1,0 +1,14 @@
+<FindBugsFilter>
+    <Match>
+        <Bug pattern="DM_DEFAULT_ENCODING"/>
+    </Match>
+    <Match>
+        <Class name="org.opensearch.performanceanalyzer.commons.reader_writer_shared.EventLogFileHandler"/>
+        <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
+    </Match>
+    <Match>
+        <Class name="org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration"/>
+        <Bug pattern="MS_MUTABLE_COLLECTION"/>
+    </Match>
+
+</FindBugsFilter>
