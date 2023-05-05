@@ -3,10 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.reader;
-
-
-import org.opensearch.performanceanalyzer.commons.reader_writer_shared.Event;
+package org.opensearch.performanceanalyzer.commons.event_process;
 
 public interface EventProcessor {
     int BATCH_LIMIT = 500;

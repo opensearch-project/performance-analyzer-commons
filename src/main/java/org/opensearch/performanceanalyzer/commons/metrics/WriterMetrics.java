@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.framework.metrics;
+package org.opensearch.performanceanalyzer.commons.metrics;
 
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.rca.stats.eval.Statistics;
-import org.opensearch.performanceanalyzer.commons.rca.stats.measurements.MeasurementSet;
+import org.opensearch.performanceanalyzer.commons.rca.framework.MeasurementSet;
+import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
 
 public enum WriterMetrics implements MeasurementSet {
     /** Measures the time spent in deleting the event log files */

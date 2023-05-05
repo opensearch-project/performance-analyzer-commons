@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.measurements;
+package org.opensearch.performanceanalyzer.commons.rca.framework;
 
 
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.rca.stats.eval.Statistics;
+import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
 
 /** This is a marker interface to bring all measurement sets under one type. */
 public interface MeasurementSet {

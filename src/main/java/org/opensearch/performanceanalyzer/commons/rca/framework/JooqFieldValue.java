@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.framework.api.persist;
+package org.opensearch.performanceanalyzer.commons.rca.framework;
 
 
 import org.jooq.Field;

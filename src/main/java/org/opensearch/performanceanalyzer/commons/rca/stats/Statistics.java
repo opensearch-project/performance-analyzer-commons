@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.eval;
+package org.opensearch.performanceanalyzer.commons.rca.stats;
 
 /** List of stats that are currently supported. */
 public enum Statistics {

@@ -3,11 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.format;
+package org.opensearch.performanceanalyzer.commons.rca.stats;
 
 
-import org.opensearch.performanceanalyzer.commons.rca.stats.eval.Statistics;
-import org.opensearch.performanceanalyzer.commons.rca.stats.measurements.MeasurementSet;
+import org.opensearch.performanceanalyzer.commons.rca.framework.MeasurementSet;
 
 /**
  * A formatter is used to get the final formatted output of an aggregation.

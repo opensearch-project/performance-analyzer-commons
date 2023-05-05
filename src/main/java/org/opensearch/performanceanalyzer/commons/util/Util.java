@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.core;
+package org.opensearch.performanceanalyzer.commons.util;
 
 
 import java.io.File;

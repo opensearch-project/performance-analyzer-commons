@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons;
+package org.opensearch.performanceanalyzer.commons.config;
 
 public final class ConfigStatus {
     private boolean configMissingOrIncorrect = false;
