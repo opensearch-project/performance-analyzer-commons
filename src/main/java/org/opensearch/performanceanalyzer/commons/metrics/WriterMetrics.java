@@ -9,7 +9,6 @@ package org.opensearch.performanceanalyzer.commons.metrics;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.rca.framework.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
 
 public enum WriterMetrics implements MeasurementSet {
