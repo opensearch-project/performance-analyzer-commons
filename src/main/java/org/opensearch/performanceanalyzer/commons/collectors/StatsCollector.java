@@ -22,9 +22,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.config.PluginSettings;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
-import org.opensearch.performanceanalyzer.commons.rca.Version;
-import org.opensearch.performanceanalyzer.commons.rca.format.StatsCollectorFormatter;
-import org.opensearch.performanceanalyzer.commons.rca.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.format.StatsCollectorFormatter;
+import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 
 public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     public static final String COLLECTOR_NAME = "StatsCollector";

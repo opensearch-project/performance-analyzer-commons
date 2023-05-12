@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.impl;
+package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
 
 /** To get the maximum observed value */
 public class Max extends MinMaxCommon {

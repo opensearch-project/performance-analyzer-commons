@@ -8,7 +8,7 @@ package org.opensearch.performanceanalyzer.commons.metrics;
 
 import org.jooq.Field;
 import org.jooq.impl.DSL;
-import org.opensearch.performanceanalyzer.commons.rca.stats.JooqFieldValue;
+import org.opensearch.performanceanalyzer.commons.stats.JooqFieldValue;
 
 /**
  * Contract between reader and writer. Writer write using the same values of these enums as json

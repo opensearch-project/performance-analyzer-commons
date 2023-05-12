@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats;
+package org.opensearch.performanceanalyzer.commons.stats;
 
 
 import com.google.common.annotations.VisibleForTesting;
@@ -18,23 +18,23 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.opensearch.performanceanalyzer.commons.format.Formatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
-import org.opensearch.performanceanalyzer.commons.rca.format.Formatter;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.Count;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.IStatistic;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.Max;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.Mean;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.Min;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.NamedCounter;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.Sample;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.Sum;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.vals.Value;
+import org.opensearch.performanceanalyzer.commons.stats.impl.Count;
+import org.opensearch.performanceanalyzer.commons.stats.impl.IStatistic;
+import org.opensearch.performanceanalyzer.commons.stats.impl.Max;
+import org.opensearch.performanceanalyzer.commons.stats.impl.Mean;
+import org.opensearch.performanceanalyzer.commons.stats.impl.Min;
+import org.opensearch.performanceanalyzer.commons.stats.impl.NamedCounter;
+import org.opensearch.performanceanalyzer.commons.stats.impl.Sample;
+import org.opensearch.performanceanalyzer.commons.stats.impl.Sum;
+import org.opensearch.performanceanalyzer.commons.stats.impl.vals.Value;
 
 /**
  * This class is mainly to collect stats between runs of the RCA framework before we can write them
  * using the Stats Collector.
  *
- * <p>This is suitable for cases where we want to calculate statistics before we report it, e.g the
+ * <p>This is suitable for cases where we want to calculate statistics before we report it, e.g. the
  * RCA graph evaluation. We want to know the long pole in the Graph node execution and how much it
  * deviates from the mean, but we also don't want to report the time taken by each graph node.
  */

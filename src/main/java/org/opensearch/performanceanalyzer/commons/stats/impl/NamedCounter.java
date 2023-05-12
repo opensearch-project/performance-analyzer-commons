@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.impl;
+package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 
 import java.util.Collection;
@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.vals.NamedAggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
 
 public class NamedCounter implements IStatistic<NamedAggregateValue> {
 

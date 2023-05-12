@@ -3,13 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.measurements;
+package org.opensearch.performanceanalyzer.commons.metrics;
 
 
 import java.util.Arrays;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
 
 public enum MeasurementSetTestHelper implements MeasurementSet {
     TEST_MEASUREMENT1(

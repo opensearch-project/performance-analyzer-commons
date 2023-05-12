@@ -3,12 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.impl;
+package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 
 import java.util.Collections;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.vals.NamedAggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
 
 /**
  * This is a utility class that is shares methods that are used for statistics where values are

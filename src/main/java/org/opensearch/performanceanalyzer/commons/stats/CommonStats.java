@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats;
+package org.opensearch.performanceanalyzer.commons.stats;
 
 /* Catalogue class that is to be populated upon PerformanceAnalyzerApp class load
 and to be used by both PA and PA-RCA as well as commons repo.

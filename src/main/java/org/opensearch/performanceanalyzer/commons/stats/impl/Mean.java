@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.impl;
+package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.vals.AggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.impl.vals.AggregateValue;
 
 public class Mean implements IStatistic<AggregateValue> {
     private BigInteger sum;

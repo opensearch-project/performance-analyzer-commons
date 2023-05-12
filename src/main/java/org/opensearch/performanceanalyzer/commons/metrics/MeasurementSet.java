@@ -7,7 +7,7 @@ package org.opensearch.performanceanalyzer.commons.metrics;
 
 
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
 
 /** This is a marker interface to bring all measurement sets under one type. */
 public interface MeasurementSet {

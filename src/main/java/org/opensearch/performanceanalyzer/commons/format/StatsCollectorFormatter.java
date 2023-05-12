@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.format;
+package org.opensearch.performanceanalyzer.commons.format;
 
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
 
 public class StatsCollectorFormatter implements Formatter {
     StringBuilder formatted;

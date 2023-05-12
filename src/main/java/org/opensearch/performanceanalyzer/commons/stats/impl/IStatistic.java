@@ -3,12 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.rca.stats.impl;
+package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 
 import java.util.Collection;
-import org.opensearch.performanceanalyzer.commons.rca.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.rca.stats.impl.vals.Value;
+import org.opensearch.performanceanalyzer.commons.stats.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.impl.vals.Value;
 
 /** This is the template of the statistic classes. Max, min etc. all follow this template. */
 public interface IStatistic<V extends Value> {
