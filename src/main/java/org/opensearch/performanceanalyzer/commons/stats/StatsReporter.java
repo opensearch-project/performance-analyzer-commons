@@ -8,8 +8,8 @@ package org.opensearch.performanceanalyzer.commons.stats;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.format.Formatter;
+import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 
 /**
  * This is meant to be the registry for all the stats that are collected by the Rca framework and

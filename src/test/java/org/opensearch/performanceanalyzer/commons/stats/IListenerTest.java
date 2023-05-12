@@ -13,8 +13,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSetTestHelper;
-import org.opensearch.performanceanalyzer.commons.stats.IListener;
-import org.opensearch.performanceanalyzer.commons.stats.SampleAggregator;
 
 public class IListenerTest {
     class Listener implements IListener {

@@ -8,7 +8,6 @@ package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.opensearch.performanceanalyzer.commons.stats.impl.NamedCounter;
 import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
 
 public class NamedCounterTest {

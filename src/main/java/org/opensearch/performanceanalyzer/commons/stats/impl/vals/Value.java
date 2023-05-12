@@ -7,8 +7,8 @@ package org.opensearch.performanceanalyzer.commons.stats.impl.vals;
 
 
 import java.util.Objects;
-import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.format.Formatter;
+import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.stats.Statistics;
 
 public class Value {
