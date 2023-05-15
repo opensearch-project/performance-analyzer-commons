@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.format;
+package org.opensearch.performanceanalyzer.commons.formatter;
 
 
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.AggregateValue;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.Value;
+import org.opensearch.performanceanalyzer.commons.stats.vals.AggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.NamedAggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.Value;
 
 public class DefaultFormatter implements Formatter {
     private Map<MeasurementSet, Map<Statistics, List<Value>>> map;

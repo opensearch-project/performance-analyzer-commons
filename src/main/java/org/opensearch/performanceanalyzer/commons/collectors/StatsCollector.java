@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.config.PluginSettings;
-import org.opensearch.performanceanalyzer.commons.format.StatsCollectorFormatter;
+import org.opensearch.performanceanalyzer.commons.formatter.StatsCollectorFormatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.format;
+package org.opensearch.performanceanalyzer.commons.formatter;
 
 
 import java.util.ArrayList;

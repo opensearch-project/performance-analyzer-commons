@@ -23,7 +23,10 @@ public class MetricsConfiguration {
             this.rotationInterval = rotationInterval;
         }
     }
-
+    /*
+    With this refactoring, the CONFIG_MAP initialization has been moved out
+    and will be statically initialized within the PerformanceAnalyzerApp
+     */
     public static final Map<Class, MetricConfig> CONFIG_MAP = new HashMap<>();
     public static final MetricConfig cdefault;
 

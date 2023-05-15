@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.NamedAggregateValue;
 
 public class NamedCounter implements IStatistic<NamedAggregateValue> {
 

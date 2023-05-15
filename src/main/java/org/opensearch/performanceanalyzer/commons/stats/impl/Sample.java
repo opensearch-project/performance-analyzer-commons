@@ -9,7 +9,7 @@ package org.opensearch.performanceanalyzer.commons.stats.impl;
 import java.util.Collections;
 import java.util.List;
 import org.opensearch.performanceanalyzer.commons.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.Value;
+import org.opensearch.performanceanalyzer.commons.stats.vals.Value;
 
 public class Sample implements IStatistic<Value> {
     private Number value;

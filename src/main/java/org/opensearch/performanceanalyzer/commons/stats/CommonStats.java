@@ -5,8 +5,8 @@
 
 package org.opensearch.performanceanalyzer.commons.stats;
 
-/* Catalogue class that is to be populated upon PerformanceAnalyzerApp class load
-and to be used by both PA and PA-RCA as well as commons repo.
+/* Catalog Operational Metrics class that is to be populated upon PerformanceAnalyzerApp
+class load and to be used by both PA and PA-RCA.
  */
 public class CommonStats {
     public static SampleAggregator RCA_GRAPH_METRICS_AGGREGATOR,

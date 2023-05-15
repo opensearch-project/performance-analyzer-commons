@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.opensearch.performanceanalyzer.commons.stats.Statistics;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.AggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.AggregateValue;
 
 public class Sum implements IStatistic<AggregateValue> {
     private AtomicLong sum;

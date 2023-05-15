@@ -8,7 +8,7 @@ package org.opensearch.performanceanalyzer.commons.stats;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.format.Formatter;
+import org.opensearch.performanceanalyzer.commons.formatter.Formatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 
 /**

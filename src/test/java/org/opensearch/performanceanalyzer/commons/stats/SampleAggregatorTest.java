@@ -16,13 +16,13 @@ import java.util.Map;
 import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
-import org.opensearch.performanceanalyzer.commons.format.DefaultFormatter;
+import org.opensearch.performanceanalyzer.commons.formatter.DefaultFormatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSetTestHelper;
 import org.opensearch.performanceanalyzer.commons.stats.impl.IStatistic;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.AggregateValue;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.Value;
+import org.opensearch.performanceanalyzer.commons.stats.vals.AggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.NamedAggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.Value;
 
 public class SampleAggregatorTest {
 

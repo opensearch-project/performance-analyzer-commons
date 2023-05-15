@@ -8,7 +8,7 @@ package org.opensearch.performanceanalyzer.commons.stats.impl;
 
 import java.util.Collections;
 import java.util.List;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.NamedAggregateValue;
+import org.opensearch.performanceanalyzer.commons.stats.vals.NamedAggregateValue;
 
 /**
  * This is a utility class that is shares methods that are used for statistics where values are

@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.opensearch.performanceanalyzer.commons.format.Formatter;
+import org.opensearch.performanceanalyzer.commons.formatter.Formatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.stats.impl.Count;
 import org.opensearch.performanceanalyzer.commons.stats.impl.IStatistic;
@@ -28,7 +28,7 @@ import org.opensearch.performanceanalyzer.commons.stats.impl.Min;
 import org.opensearch.performanceanalyzer.commons.stats.impl.NamedCounter;
 import org.opensearch.performanceanalyzer.commons.stats.impl.Sample;
 import org.opensearch.performanceanalyzer.commons.stats.impl.Sum;
-import org.opensearch.performanceanalyzer.commons.stats.impl.vals.Value;
+import org.opensearch.performanceanalyzer.commons.stats.vals.Value;
 
 /**
  * This class is mainly to collect stats between runs of the RCA framework before we can write them
