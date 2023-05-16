@@ -32,5 +32,6 @@ public class MetricsConfiguration {
 
     static {
         cdefault = new MetricConfig(SAMPLING_INTERVAL, 0);
+        CONFIG_MAP.put(PerformanceAnalyzerMetrics.class, new MetricConfig(0, ROTATION_INTERVAL));
     }
 }
