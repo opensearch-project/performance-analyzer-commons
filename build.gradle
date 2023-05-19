@@ -9,12 +9,23 @@ buildscript {
         isSnapshot = "true" == System.getProperty("build.snapshot", "true")
         buildVersionQualifier = System.getProperty("build.version_qualifier", "")
         buildDockerJdkVersion = System.getProperty("build.docker_jdk_ver", "11")
+
+        // 3.0.0-SNAPSHOT -> 3.0.0.0-SNAPSHOT
+        version_tokens = opensearch_version.tokenize('-')
+        opensearch_build = version_tokens[0] + '.0'
+        if (buildVersionQualifier) {
+            opensearch_build += "-${buildVersionQualifier}"
+        }
+        if (isSnapshot) {
+            opensearch_build += "-SNAPSHOT"
+        }
     }
 
     repositories {
         mavenLocal()
         mavenCentral()
         maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
@@ -25,6 +36,8 @@ buildscript {
 }
 
 plugins {
+    id 'java'
+    id 'application'
     id 'java-library'
     id 'maven-publish'
     id 'com.diffplug.spotless' version '5.11.0'
@@ -51,18 +64,12 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "https://plugins.gradle.org/m2/" }
 }
 
 allprojects {
     group 'org.opensearch.performanceanalyzer.commons'
-    version = '1.0.0'
-    if (buildVersionQualifier) {
-        version += "-${buildVersionQualifier}"
-    }
-
-    if (isSnapshot) {
-        version += "-SNAPSHOT"
-    }
+    version = opensearch_build
 }
 
 targetCompatibility = JavaVersion.VERSION_11
@@ -126,11 +133,36 @@ compileJava {
     dependsOn spotlessApply
 }
 
+distZip {
+    archiveName "performance-analyzer-commons-${version}.zip"
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.opensearch'
+            artifactId = 'performanceanalyzer-commons'
+            from components.java
+        }
+    }
+}
+
 test {
     testLogging {
         exceptionFormat "full"
         events "skipped", "passed", "failed", "started"
         showStandardStreams true
+    }
+}
+
+distributions {
+    main {
+        contents {
+            eachFile {
+                it.path = it.path.replace("-$version/", '/')
+            }
+        }
     }
 }
 
