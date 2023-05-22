@@ -17,17 +17,17 @@ public class EventDispatcher {
 
     private List<EventProcessor> eventProcessors = new ArrayList<>();
 
-    void registerEventProcessor(EventProcessor processor) {
+    public void registerEventProcessor(EventProcessor processor) {
         eventProcessors.add(processor);
     }
 
-    void initializeProcessing(long startTime, long endTime) {
+    public void initializeProcessing(long startTime, long endTime) {
         for (EventProcessor p : eventProcessors) {
             p.initializeProcessing(startTime, endTime);
         }
     }
 
-    void finalizeProcessing() {
+    public void finalizeProcessing() {
         for (EventProcessor p : eventProcessors) {
             p.finalizeProcessing();
         }
