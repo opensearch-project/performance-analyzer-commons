@@ -95,7 +95,6 @@ dependencies {
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4jVersion}"
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4jVersion}"
 
-
     testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.0'
     testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.0'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.23.0'
@@ -124,6 +123,11 @@ configurations.each {
 
 compileJava {
     dependsOn spotlessApply
+    JavaVersion targetVersion = JavaVersion.toVersion(targetCompatibility);
+    if (targetVersion.isJava9Compatible()) {
+        options.compilerArgs += ["--add-exports", "jdk.attach/sun.tools.attach=ALL-UNNAMED"]
+        options.compilerArgs += ["--add-exports", "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED"]
+    }
 }
 
 test {
