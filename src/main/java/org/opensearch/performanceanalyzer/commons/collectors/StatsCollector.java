@@ -23,6 +23,7 @@ import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.config.PluginSettings;
 import org.opensearch.performanceanalyzer.commons.formatter.StatsCollectorFormatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
+import org.opensearch.performanceanalyzer.commons.rca.Version;
 import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 
 public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
