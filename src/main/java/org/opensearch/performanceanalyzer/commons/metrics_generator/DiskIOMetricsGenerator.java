@@ -25,5 +25,11 @@ public interface DiskIOMetricsGenerator {
 
     double getAvgTotalSyscallRate(String threadId);
 
+    double getAvgPageCacheReadThroughputBps(String threadId);
+
+    double getAvgPageCacheWriteThroughputBps(String threadId);
+
+    double getAvgPageCacheTotalThroughputBps(String threadId);
+
     void addSample();
 }

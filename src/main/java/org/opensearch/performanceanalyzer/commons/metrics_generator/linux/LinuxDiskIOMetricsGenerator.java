@@ -56,6 +56,21 @@ public class LinuxDiskIOMetricsGenerator implements DiskIOMetricsGenerator {
     }
 
     @Override
+    public double getAvgPageCacheReadThroughputBps(final String threadId) {
+        return diskIOMetricsMap.get(threadId).avgPageCacheReadThroughputBps;
+    }
+
+    @Override
+    public double getAvgPageCacheWriteThroughputBps(String threadId) {
+        return diskIOMetricsMap.get(threadId).avgPageCacheWriteThroughputBps;
+    }
+
+    @Override
+    public double getAvgPageCacheTotalThroughputBps(String threadId) {
+        return diskIOMetricsMap.get(threadId).avgPageCacheTotalThroughputBps;
+    }
+
+    @Override
     public boolean hasDiskIOMetrics(final String threadId) {
 
         return diskIOMetricsMap.containsKey(threadId);
