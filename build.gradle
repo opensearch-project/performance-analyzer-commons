@@ -5,14 +5,13 @@
 
 buildscript {
     ext {
-        opensearch_version = System.getProperty("opensearch.version", "3.0.0-SNAPSHOT")
+        library_version="1.0.0-SNAPSHOT"
         isSnapshot = "true" == System.getProperty("build.snapshot", "true")
         buildVersionQualifier = System.getProperty("build.version_qualifier", "")
-        buildDockerJdkVersion = System.getProperty("build.docker_jdk_ver", "11")
 
-        // 3.0.0-SNAPSHOT -> 3.0.0.0-SNAPSHOT
-        version_tokens = opensearch_version.tokenize('-')
-        opensearch_build = version_tokens[0] + '.0'
+        // 1.0.0-SNAPSHOT -> 1.0.0.0-SNAPSHOT
+        version_tokens = library_version.tokenize('-')
+        opensearch_build = library_version[0] + '.0'
         if (buildVersionQualifier) {
             opensearch_build += "-${buildVersionQualifier}"
         }
@@ -29,9 +28,8 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.opensearch.gradle:build-tools:${opensearch_version}"
+        //classpath "org.opensearch.gradle:build-tools:${opensearch_version}"
         classpath group: 'com.google.guava', name: 'guava', version: '30.1-jre'
-        classpath 'org.ajoberstar:gradle-git:0.2.3'
     }
 }
 
@@ -81,16 +79,12 @@ apply plugin: 'signing'
 apply plugin: 'maven-publish'
 apply from: 'build-tools/coverage.gradle'
 
-import org.opensearch.gradle.VersionProperties
-
 dependencies {
     if (JavaVersion.current() <= JavaVersion.VERSION_1_8) {
         implementation files("${System.properties['java.home']}/../lib/tools.jar")
     }
 
-    def versions = VersionProperties.versions
-
-    def jacksonVersion = "${versions.jackson}"
+    def jacksonVersion = "2.15.1"
     def jacksonDataBindVersion = "2.14.1"
     def junitVersion  = "4.13.1"
     def log4jVersion = "2.17.1"
@@ -118,23 +112,8 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
 }
 
-// TODO: remove once spotbugs upgrades to 4.7.4
-configurations.each {
-    c -> c.resolutionStrategy.dependencySubstitution {
-        all { DependencySubstitution dependency ->
-            if (dependency.requested.group == 'org.apache.bcel') {
-                dependency.useTarget 'org.apache.bcel:bcel:6.6.1'
-            }
-        }
-    }
-}
-
 compileJava {
     dependsOn spotlessApply
-}
-
-distZip {
-    archiveName "performance-analyzer-commons-${version}.zip"
 }
 
 test {

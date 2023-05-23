@@ -15,7 +15,7 @@ import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
 import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSetTestHelper;
 
 public class IListenerTest {
-    class Listener implements IListener {
+    static class Listener implements IListener {
         private AtomicInteger count;
 
         public Listener() {
@@ -27,8 +27,8 @@ public class IListenerTest {
             Set<MeasurementSet> set =
                     new HashSet() {
                         {
-                            this.add(MeasurementSetTestHelper.TEST_MEASUREMENT1);
-                            this.add(MeasurementSetTestHelper.TEST_MEASUREMENT2);
+                            add(MeasurementSetTestHelper.TEST_MEASUREMENT1);
+                            add(MeasurementSetTestHelper.TEST_MEASUREMENT2);
                         }
                     };
             return set;
