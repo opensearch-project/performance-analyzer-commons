@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.opensearch.performanceanalyzer.commons.metrics.ExceptionsAndErrors;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
 import org.opensearch.performanceanalyzer.commons.metrics.WriterMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
@@ -108,8 +109,8 @@ public class EventLogFileHandler {
                 LOG.error("Error moving file {} to {}.", tmpPath.toString(), path.toString(), e);
             }
         } else {
-            CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                    WriterMetrics.WRITER_FILE_CREATION_SKIPPED, "", 1);
+            CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
+                    ExceptionsAndErrors.WRITER_FILE_CREATION_SKIPPED, "", 1);
         }
     }
 

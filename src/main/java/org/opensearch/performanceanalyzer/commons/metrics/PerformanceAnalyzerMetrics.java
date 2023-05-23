@@ -118,8 +118,8 @@ public class PerformanceAnalyzerMetrics {
 
     private static void emitMetric(BlockingQueue<Event> q, Event entry) {
         if (!q.offer(entry)) {
-            CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                    WriterMetrics.METRICS_WRITE_ERROR, "", 1);
+            CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
+                    ExceptionsAndErrors.METRICS_WRITE_ERROR, "", 1);
             LOG.debug("Could not enter metric {}", entry);
         }
     }
@@ -175,13 +175,13 @@ public class PerformanceAnalyzerMetrics {
         }
         try {
             if (!keyPathFile.delete()) {
-                CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                        WriterMetrics.METRICS_REMOVE_ERROR, "", 1);
+                CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
+                        ExceptionsAndErrors.METRICS_REMOVE_ERROR, "", 1);
                 LOG.debug("Purge Could not delete file {}", keyPathFile);
             }
         } catch (Exception ex) {
-            CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                    WriterMetrics.METRICS_REMOVE_ERROR, "", 1);
+            CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
+                    ExceptionsAndErrors.METRICS_REMOVE_ERROR, "", 1);
             LOG.debug(
                     (Supplier<?>)
                             () ->
@@ -189,7 +189,7 @@ public class PerformanceAnalyzerMetrics {
                                             "Error in deleting file: {} for keyPath:{} with ExceptionCode: {}",
                                             ex.toString(),
                                             keyPathFile.getAbsolutePath(),
-                                            WriterMetrics.METRICS_REMOVE_ERROR.toString()),
+                                            ExceptionsAndErrors.METRICS_REMOVE_ERROR.toString()),
                     ex);
         }
     }

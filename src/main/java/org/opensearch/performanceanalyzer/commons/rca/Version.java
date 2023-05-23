@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package org.opensearch.performanceanalyzer.commons.collectors;
+package org.opensearch.performanceanalyzer.commons.rca;
 
 /**
  * The version of the RCA framework and the graphs combined. The version is a combination of the

@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.util.Util;
 
 public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
-    enum State {
+    public enum State {
         HEALTHY,
 
         // This collector could not complete between two runs of
@@ -56,7 +56,7 @@ public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
         return collectorName;
     }
 
-    abstract void collectMetrics(long startTime);
+    public abstract void collectMetrics(long startTime);
 
     public void setStartTime(long startTime) {
         this.startTime = startTime;
