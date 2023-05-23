@@ -82,7 +82,7 @@ public class NamedCounterTest {
         }
     }
 
-    class Th extends Thread {
+    static class Th extends Thread {
         String[] arr;
         int start;
         int delta;

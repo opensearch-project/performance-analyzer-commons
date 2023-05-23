@@ -33,7 +33,7 @@ public enum MeasurementSetTestHelper implements MeasurementSet {
     }
 
     public String toString() {
-        return new StringBuilder(name).append("-").append(unit).toString();
+        return name + "-" + unit;
     }
 
     @Override
