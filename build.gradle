@@ -137,17 +137,6 @@ distZip {
     archiveName "performance-analyzer-commons-${version}.zip"
 }
 
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'org.opensearch'
-            artifactId = 'performanceanalyzer-commons'
-            from components.java
-        }
-    }
-}
-
 test {
     testLogging {
         exceptionFormat "full"
@@ -181,14 +170,9 @@ spotless {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
     from sourceSets.main.allJava
 }
 
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
 tasks.withType(Test) {
     jvmArgs('--add-opens=java.base/sun.nio.fs=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.nio.file=ALL-UNNAMED')
@@ -204,13 +188,12 @@ publishing {
             artifactId = 'performance-analyzer-commons'
 
             artifact sourcesJar
-            artifact javadocJar
 
             pom {
                 name = "OpenSearch Performance Analyzer Commons"
                 packaging = "jar"
                 url = "https://github.com/opensearch-project/performance-analyzer-commons"
-                description = "OpenSearch Performance Analyzer Commons"
+                description = "OpenSearch Performance Analyzer Commons Library"
                 scm {
                     connection = "scm:git@github.com:opensearch-project/performance-analyzer-commons.git"
                     developerConnection = "scm:git@github.com:opensearch-project/performance-analyzer-commons.git"
@@ -224,11 +207,20 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = "amazonwebservices"
-                        organization = "Amazon Web Services"
-                        organizationUrl = "https://aws.amazon.com"
+                        name = "OpenSearch"
+                        url = "https://github.com/opensearch-project/performance-analyzer-commons"
                     }
                 }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "Snapshots"
+            url = "https://aws.oss.sonatype.org/content/repositories/snapshots"
+            credentials {
+                username "$System.env.SONATYPE_USERNAME"
+                password "$System.env.SONATYPE_PASSWORD"
             }
         }
     }
