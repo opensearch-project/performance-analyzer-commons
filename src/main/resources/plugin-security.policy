@@ -20,6 +20,7 @@ grant {
     permission java.lang.RuntimePermission "accessClassInPackage.sun.tools.attach";
     permission java.lang.RuntimePermission "createClassLoader";
     permission java.lang.RuntimePermission "defineClass";
+    permission java.lang.management.ManagementPermission "control";
 };
 
 
