@@ -5,20 +5,31 @@
 
 buildscript {
     ext {
-        library_version="1.0.0.0-SNAPSHOT"
-        isSnapshot = "true" == System.getProperty("build.snapshot", "true")
-        buildVersionQualifier = System.getProperty("build.version_qualifier", "")
+        // Detect version from version.properties and align it with the build settings
+        def build = new Properties()
+        file("version.properties").withInputStream { build.load(it) }
+        var isSnapshot = "true" == System.getProperty("build.snapshot", "true")
+        buildVersion = build.getProperty("version")
+        if (isSnapshot && !buildVersion.endsWith("SNAPSHOT")) {
+            buildVersion = buildVersion + "-SNAPSHOT"
+        } else if (!isSnapshot && buildVersion.endsWith("SNAPSHOT")) {
+            throw GradleException("Expecting release (non-SNAPSHOT) build but version is not set accordingly: " + buildVersion)
+        }
+
+        // Check if tag release version (if provided) matches the version from build settings
+        tagVersion = System.getProperty("build.version", buildVersion)
+        if (!buildVersion.equals(tagVersion)) {
+            throw GradleException("The tagged version " + tagVersion + " does not match the build version " + buildVersion)
+        }
     }
 
     repositories {
         mavenLocal()
         mavenCentral()
         maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
-        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
-        //classpath "org.opensearch.gradle:build-tools:${opensearch_version}"
         classpath group: 'com.google.guava', name: 'guava', version: '30.1-jre'
     }
 }
@@ -47,17 +58,15 @@ spotbugsTest {
     ignoreFailures = true
 }
 
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
-    maven { url "https://plugins.gradle.org/m2/" }
-}
-
 allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
     group 'org.opensearch.performanceanalyzer.commons'
-    version = library_version
+    version = buildVersion
 }
 
 targetCompatibility = JavaVersion.VERSION_11
@@ -195,13 +204,19 @@ publishing {
         }
     }
     repositories {
-        maven {
-            name = "Snapshots"
-            url = "https://aws.oss.sonatype.org/content/repositories/snapshots"
-            credentials {
-                username "$System.env.SONATYPE_USERNAME"
-                password "$System.env.SONATYPE_PASSWORD"
+        if (buildVersion.toString().endsWith("SNAPSHOT")) {
+            maven {
+                name = "Snapshots"
+                url = "https://aws.oss.sonatype.org/content/repositories/snapshots/"
+                credentials {
+                    username = System.getenv("SONATYPE_USERNAME")
+                    password = System.getenv("SONATYPE_PASSWORD")
+                }
             }
+        }
+        maven {
+            name = "localRepo"
+            url = "${rootProject.buildDir}/repository"
         }
     }
 

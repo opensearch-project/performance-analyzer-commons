@@ -1,6 +1,10 @@
 name: Release drafter
 
 # Push events to every tag not containing "/"
+#
+# Publish the commons JAR to Maven Local, and create 'artifacts.tar.gz'
+# using build dir and adding the contents of repository
+#
 on:
   push:
     tags:
@@ -25,7 +29,7 @@ jobs:
           cache: gradle
       - name: Build with Gradle
         run: |
-          ./gradlew --no-daemon -Dbuild.snapshot=false publishCreatePublicationToMavenLocal && tar -C build -cvf artifacts.tar.gz repository
+          ./gradlew --no-daemon -Dbuild.snapshot=false publishCreatePublicationToLocalRepoRepository && tar -C build -cvf artifacts.tar.gz repository
       - name: Draft a release
         uses: softprops/action-gh-release@v1
         with:
