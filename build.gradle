@@ -158,10 +158,6 @@ spotless {
     }
 }
 
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-}
-
 tasks.withType(Test) {
     jvmArgs('--add-opens=java.base/sun.nio.fs=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.nio.file=ALL-UNNAMED')
@@ -176,7 +172,7 @@ publishing {
             groupId = 'org.opensearch'
             artifactId = 'performance-analyzer-commons'
 
-            artifact sourcesJar
+            from components.java
 
             pom {
                 name = "OpenSearch Performance Analyzer Commons"
