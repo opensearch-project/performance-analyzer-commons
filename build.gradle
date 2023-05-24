@@ -163,7 +163,7 @@ tasks.withType(Test) {
 
 publishing {
     publications {
-        shadow(MavenPublication) {
+        create(MavenPublication) {
             groupId = 'org.opensearch'
             artifactId = 'performance-analyzer-commons'
 
