@@ -1,4 +1,4 @@
-name: Publish snapshots to maven
+name: Build and Publish Snapshots to Maven
 
 on:
   workflow_dispatch:
