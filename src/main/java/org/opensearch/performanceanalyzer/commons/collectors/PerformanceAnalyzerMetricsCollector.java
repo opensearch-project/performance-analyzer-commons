@@ -10,6 +10,9 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.stats.measurements.MeasurementSet;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
 import org.opensearch.performanceanalyzer.commons.util.Util;
 
 public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
@@ -30,14 +33,24 @@ public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
             LogManager.getLogger(PerformanceAnalyzerMetricsCollector.class);
     private int timeInterval;
     private long startTime;
+
     private String collectorName;
+    private MeasurementSet statLatencyMetric;
+    private StatExceptionCode errorMetric;
     protected StringBuilder value;
+
     protected State state;
     private boolean threadContentionMonitoringEnabled;
 
-    protected PerformanceAnalyzerMetricsCollector(int timeInterval, String collectorName) {
+    protected PerformanceAnalyzerMetricsCollector(
+            int timeInterval,
+            String collectorName,
+            MeasurementSet statLatencyMetric,
+            StatExceptionCode errorMetric) {
         this.timeInterval = timeInterval;
         this.collectorName = collectorName;
+        this.statLatencyMetric = statLatencyMetric;
+        this.errorMetric = errorMetric;
         this.value = new StringBuilder();
         this.state = State.HEALTHY;
     }
@@ -65,17 +78,16 @@ public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
 
     public void run() {
         try {
+            long mCurrT = System.currentTimeMillis();
             Util.invokePrivileged(() -> collectMetrics(startTime));
+            CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
+                    statLatencyMetric, System.currentTimeMillis() - mCurrT);
         } catch (Exception ex) {
-            // - should not be any...but in case, absorbing here
-            // - logging...we shouldn't be doing as it will slow down; as well as fill up the log.
-            // Need to
-            // find a way to catch these
             LOG.error(
-                    "Error In Collect Metrics: {} with ExceptionCode: {}",
-                    () -> ex.toString(),
-                    () -> StatExceptionCode.OTHER_COLLECTION_ERROR.toString());
-            StatsCollector.instance().logException(StatExceptionCode.OTHER_COLLECTION_ERROR);
+                    "[{}] Error In Collect Metrics: {}",
+                    () -> getCollectorName(),
+                    () -> ex.toString());
+            StatsCollector.instance().logException(errorMetric);
         } finally {
             bInProgress.set(false);
         }

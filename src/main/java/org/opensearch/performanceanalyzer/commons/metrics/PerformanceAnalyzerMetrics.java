@@ -16,9 +16,10 @@ import java.util.function.Supplier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.ParameterizedMessage;
+import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 import org.opensearch.performanceanalyzer.commons.config.PluginSettings;
 import org.opensearch.performanceanalyzer.commons.event_process.Event;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
 
 @SuppressWarnings("checkstyle:constantname")
 public class PerformanceAnalyzerMetrics {
@@ -118,9 +119,8 @@ public class PerformanceAnalyzerMetrics {
 
     private static void emitMetric(BlockingQueue<Event> q, Event entry) {
         if (!q.offer(entry)) {
-            CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
-                    ExceptionsAndErrors.METRICS_WRITE_ERROR, "", 1);
             LOG.debug("Could not enter metric {}", entry);
+            StatsCollector.instance().logException(StatExceptionCode.METRICS_WRITE_ERROR);
         }
     }
 
@@ -175,13 +175,10 @@ public class PerformanceAnalyzerMetrics {
         }
         try {
             if (!keyPathFile.delete()) {
-                CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
-                        ExceptionsAndErrors.METRICS_REMOVE_ERROR, "", 1);
                 LOG.debug("Purge Could not delete file {}", keyPathFile);
+                StatsCollector.instance().logException(StatExceptionCode.METRICS_REMOVE_ERROR);
             }
         } catch (Exception ex) {
-            CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
-                    ExceptionsAndErrors.METRICS_REMOVE_ERROR, "", 1);
             LOG.debug(
                     (Supplier<?>)
                             () ->
@@ -189,8 +186,9 @@ public class PerformanceAnalyzerMetrics {
                                             "Error in deleting file: {} for keyPath:{} with ExceptionCode: {}",
                                             ex.toString(),
                                             keyPathFile.getAbsolutePath(),
-                                            ExceptionsAndErrors.METRICS_REMOVE_ERROR.toString()),
+                                            StatExceptionCode.METRICS_REMOVE_ERROR.toString()),
                     ex);
+            StatsCollector.instance().logException(StatExceptionCode.METRICS_REMOVE_ERROR);
         }
     }
 

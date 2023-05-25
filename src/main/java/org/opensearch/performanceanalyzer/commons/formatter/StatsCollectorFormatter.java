@@ -5,35 +5,53 @@
 
 package org.opensearch.performanceanalyzer.commons.formatter;
 
+import static org.opensearch.performanceanalyzer.commons.stats.metrics.StatsType.LATENCIES;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-import org.opensearch.performanceanalyzer.commons.metrics.MeasurementSet;
-import org.opensearch.performanceanalyzer.commons.stats.Statistics;
+import java.util.Objects;
+import org.opensearch.performanceanalyzer.commons.stats.eval.Statistics;
+import org.opensearch.performanceanalyzer.commons.stats.format.Formatter;
+import org.opensearch.performanceanalyzer.commons.stats.measurements.MeasurementSet;
 
 public class StatsCollectorFormatter implements Formatter {
-    StringBuilder formatted;
-    String sep = "";
+    private StringBuilder metricsBuilder;
+    private Map<String, Double> latencyMap = new HashMap<>();
+
+    private String sep = "";
     long startTime;
     long endTime;
 
     public StatsCollectorFormatter() {
-        formatted = new StringBuilder();
+        metricsBuilder = new StringBuilder();
+        latencyMap.clear();
     }
 
     private void format(
             MeasurementSet measurementSet, Statistics aggregationType, String name, Number value) {
-        formatted.append(sep);
-        formatted.append(measurementSet.getName()).append("=").append(value);
-        if (!measurementSet.getUnit().isEmpty()) {
-            formatted.append(" ").append(measurementSet.getUnit());
+        if (Objects.equals(measurementSet.getStatsType(), LATENCIES)) {
+            latencyMap.put(measurementSet.getName(), value.doubleValue());
+        } else {
+            formatStat(metricsBuilder, measurementSet, aggregationType, name, value);
         }
-        formatted.append(" ").append("aggr|").append(aggregationType);
+    }
+
+    private void formatStat(
+            StringBuilder metricsBuilder,
+            MeasurementSet measurementSet,
+            Statistics aggregationType,
+            String name,
+            Number value) {
+        metricsBuilder.append(sep);
+        metricsBuilder.append(measurementSet.getName()).append("=").append(value);
+        if (!measurementSet.getUnit().isEmpty()) {
+            metricsBuilder.append(" ").append(measurementSet.getUnit());
+        }
+        metricsBuilder.append(" ").append("aggr|").append(aggregationType);
         if (!name.isEmpty()) {
-            formatted.append(" ").append("key|").append(name);
+            metricsBuilder.append(" ").append("key|").append(name);
         }
         sep = ",";
     }
@@ -60,29 +78,24 @@ public class StatsCollectorFormatter implements Formatter {
         List<StatsCollectorReturn> list = new ArrayList<>();
         StatsCollectorReturn statsCollectorReturn =
                 new StatsCollectorReturn(this.startTime, this.endTime);
-        statsCollectorReturn.statsdata.put("Metrics", formatted.toString());
-        list.add(statsCollectorReturn);
+        statsCollectorReturn.statsdata.put("Metrics", metricsBuilder.toString());
+        statsCollectorReturn.latencies = new HashMap<>(latencyMap);
 
+        list.add(statsCollectorReturn);
         return list;
     }
 
     public static class StatsCollectorReturn {
-        private Map<String, AtomicInteger> counters;
         private Map<String, String> statsdata;
         private Map<String, Double> latencies;
         private long startTimeMillis;
         private long endTimeMillis;
 
         public StatsCollectorReturn(long startTimeMillis, long endTimeMillis) {
-            counters = new HashMap<>();
             statsdata = new HashMap<>();
             latencies = new HashMap<>();
             this.startTimeMillis = startTimeMillis;
             this.endTimeMillis = endTimeMillis;
-        }
-
-        public Map<String, AtomicInteger> getCounters() {
-            return counters;
         }
 
         public Map<String, String> getStatsdata() {
@@ -102,7 +115,7 @@ public class StatsCollectorFormatter implements Formatter {
         }
 
         public boolean isEmpty() {
-            return counters.isEmpty() && statsdata.isEmpty() && latencies.isEmpty();
+            return statsdata.isEmpty() && latencies.isEmpty();
         }
     }
 }

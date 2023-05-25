@@ -22,10 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.opensearch.performanceanalyzer.commons.metrics.ExceptionsAndErrors;
+import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
-import org.opensearch.performanceanalyzer.commons.metrics.WriterMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
 import org.opensearch.performanceanalyzer.commons.util.Util;
 
 public class EventLogFileHandler {
@@ -109,8 +110,7 @@ public class EventLogFileHandler {
                 LOG.error("Error moving file {} to {}.", tmpPath.toString(), path.toString(), e);
             }
         } else {
-            CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
-                    ExceptionsAndErrors.WRITER_FILE_CREATION_SKIPPED, "", 1);
+            StatsCollector.instance().logException(StatExceptionCode.WRITER_FILE_CREATION_SKIPPED);
         }
     }
 
@@ -190,9 +190,9 @@ public class EventLogFileHandler {
         }
         long duration = System.currentTimeMillis() - startTime;
         CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.EVENT_LOG_FILES_DELETION_TIME, "", duration);
+                WriterMetrics.EVENT_LOG_FILES_DELETION_TIME, duration);
         CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.EVENT_LOG_FILES_DELETED, "", filesDeletedCount);
+                WriterMetrics.EVENT_LOG_FILES_DELETED, filesDeletedCount);
         LOG.debug("'{}' Old writer files cleaned up.", filesDeletedCount);
     }
 
