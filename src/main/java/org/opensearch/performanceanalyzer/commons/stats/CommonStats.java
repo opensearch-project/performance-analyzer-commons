@@ -7,10 +7,12 @@ package org.opensearch.performanceanalyzer.commons.stats;
 
 
 import java.util.Arrays;
-import org.opensearch.performanceanalyzer.commons.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.collectors.SampleAggregator;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
 
-/* Catalog Operational Metrics class that is to be populated upon PerformanceAnalyzerApp
-class load and to be used by both PA and PA-RCA.
+/**
+ * Catalog Service Metrics class that is to be populated upon PerformanceAnalyzerApp class load and
+ * to be used by both PA and RCA.
  */
 public class CommonStats {
     public static SampleAggregator RCA_GRAPH_METRICS_AGGREGATOR,

@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,28 +26,33 @@ import org.opensearch.performanceanalyzer.commons.formatter.StatsCollectorFormat
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.rca.Version;
 import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
 
 public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
+    private static final Logger STATS_LOGGER = LogManager.getLogger("stats_log");
+    private static final Logger GENERAL_LOG = LogManager.getLogger(StatsCollector.class);
     public static final String COLLECTOR_NAME = "StatsCollector";
+    public static String STATS_TYPE = "plugin-stats-metadata";
+
     private static final String LOG_ENTRY_INIT =
             "------------------------------------------------------------------------";
     private static final String LOG_ENTRY_END = "EOE";
     private static final String LOG_LINE_BREAK = "\n";
     private static final double MILLISECONDS_TO_SECONDS_DIVISOR = 1000D;
 
-    private static final Logger STATS_LOGGER = LogManager.getLogger("stats_log");
-    private static final Logger GENERAL_LOG = LogManager.getLogger(StatsCollector.class);
     private static StatsCollector statsCollector = null;
-    public static String STATS_TYPE = "plugin-stats-metadata";
-
     private final Map<String, String> metadata;
     private Map<String, AtomicInteger> counters = new ConcurrentHashMap<>();
+    private final List<StatExceptionCode> defaultExceptionCodes = new Vector<>();
     private Date objectCreationTime = new Date();
 
-    private List<StatExceptionCode> defaultExceptionCodes = new Vector<>();
-
     public StatsCollector(String name, int samplingIntervalMillis, Map<String, String> metadata) {
-        super(samplingIntervalMillis, name);
+        super(
+                samplingIntervalMillis,
+                name,
+                WriterMetrics.STAT_COLLECTOR_EXECUTION_TIME,
+                StatExceptionCode.STATS_COLLECTOR_ERROR);
         this.metadata = metadata;
         addRcaVersionMetadata(this.metadata);
         defaultExceptionCodes.add(StatExceptionCode.TOTAL_ERROR);
@@ -84,6 +90,11 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
             currentCounters.putIfAbsent(statExceptionCode.toString(), new AtomicInteger(0));
         }
 
+        /**
+         * Each run StatsCollector collectMetric(scheduled every 60s) emits 2 entries. The first
+         * entry via {@link writeStats} writes counters and metrics, and the second {@link
+         * collectAndWriteRcaStats} writes timers and metrics.
+         */
         writeStats(
                 metadata,
                 currentCounters,
@@ -104,7 +115,7 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
                     formatter.getAllMetrics()) {
                 if (!statsReturn.isEmpty()) {
                     logStatsRecord(
-                            statsReturn.getCounters(),
+                            counters = null,
                             statsReturn.getStatsdata(),
                             statsReturn.getLatencies(),
                             statsReturn.getStartTimeMillis(),
@@ -126,11 +137,11 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
 
     public void logStatsRecord(
             Map<String, AtomicInteger> counters,
-            Map<String, String> statsdata,
+            Map<String, String> statsData,
             Map<String, Double> latencies,
             long startTimeMillis,
             long endTimeMillis) {
-        writeStats(metadata, counters, statsdata, latencies, startTimeMillis, endTimeMillis);
+        writeStats(metadata, counters, statsData, latencies, startTimeMillis, endTimeMillis);
     }
 
     private void addRcaVersionMetadata(Map<String, String> metadata) {
@@ -146,7 +157,6 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
             try (InputStream input =
                     new FileInputStream(
                             PluginSettings.instance().getConfigFolderPath() + fileLocation); ) {
-                // load properties file
                 props.load(input);
             } catch (Exception ex) {
                 GENERAL_LOG.error(
@@ -185,27 +195,22 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
             Map<String, Double> latencies,
             long startTimeMillis,
             long endTimeMillis) {
+
         StringBuilder builder = new StringBuilder();
         builder.append(LOG_ENTRY_INIT + LOG_LINE_BREAK);
         logValues(metadata, builder);
+        // Stats Data
         logValues(statsdata, builder);
         logTimeMetrics(startTimeMillis, endTimeMillis, builder);
 
-        Map<String, Double> tmpLatencies;
-
-        if (latencies == null) {
-            tmpLatencies = new ConcurrentHashMap<>();
-        } else {
-            tmpLatencies = new ConcurrentHashMap<>(latencies);
-        }
-
-        tmpLatencies.put("total-time", (double) endTimeMillis - startTimeMillis);
-        addEntry("Timing", getLatencyMetrics(tmpLatencies), builder);
-
+        // Timers and Counters
+        Optional.ofNullable(latencies)
+                .ifPresent(
+                        e -> latencies.put("total-time", (double) endTimeMillis - startTimeMillis));
+        addEntry("Timing", getLatencyMetrics(latencies), builder);
         addEntry("Counters", getCountersString(counters), builder);
-        builder.append(LOG_ENTRY_END); // + LOG_LINE_BREAK);
-        /* Setting this log level to debug (and not info) to avoid logging noisy plugin stats
-        logs to the console and opensearch.log file */
+
+        builder.append(LOG_ENTRY_END);
         STATS_LOGGER.debug(builder.toString());
     }
 
