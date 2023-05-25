@@ -5,6 +5,7 @@
 
 package org.opensearch.performanceanalyzer.commons.os;
 
+import static org.opensearch.performanceanalyzer.commons.util.Util.ALL_THREADS;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -111,31 +112,35 @@ public class ThreadDiskIO {
         }
     }
 
-    public static synchronized void addSample() {
-        tids = OSGlobals.getTids();
+    public static synchronized void addSample(String threadInfo) {
         oldtidKVMap.clear();
         oldtidKVMap.putAll(tidKVMap);
+
+        if (ALL_THREADS.equals(threadInfo)) {
+            addSampleForAllThreads();
+        } else {
+            addSampleForThread(threadInfo);
+        }
+    }
+
+    private static void addSampleForAllThreads() {
+        tids = OSGlobals.getTids();
 
         tidKVMap.clear();
         oldkvTimestamp = kvTimestamp;
         kvTimestamp = System.currentTimeMillis();
+
         for (String tid : tids) {
             addSampleTid(tid);
         }
     }
 
-    public static synchronized void addSample(String threadId) {
-        tids = OSGlobals.getTids();
-        oldtidKVMap.clear();
-        oldtidKVMap.putAll(tidKVMap);
+    private static void addSampleForThread(String threadId) {
+        tidKVMap.remove(threadId);
 
-        tidKVMap.clear();
         oldkvTimestamp = kvTimestamp;
         kvTimestamp = System.currentTimeMillis();
         addSampleTid(threadId);
-        for (String tid : tids) {
-            addSampleTid(tid);
-        }
     }
 
     public static synchronized LinuxDiskIOMetricsGenerator getIOUtilization() {

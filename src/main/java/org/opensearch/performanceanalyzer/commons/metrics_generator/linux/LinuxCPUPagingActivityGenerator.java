@@ -5,6 +5,7 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator.linux;
 
+import static org.opensearch.performanceanalyzer.commons.util.Util.ALL_THREADS;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class LinuxCPUPagingActivityGenerator implements CPUPagingActivityGenerat
 
         cpu.clear();
         pagingActivities.clear();
-        ThreadCPU.INSTANCE.addSample();
+        ThreadCPU.INSTANCE.addSample(ALL_THREADS);
     }
 
     @Override

@@ -36,6 +36,8 @@ public class Util {
     public static final String LEGACY_OPENDISTRO_ACTIONS_QUERY_URL =
             LEGACY_OPENDISTRO_PA_BASE_URL + "/actions";
 
+    public static final String ALL_THREADS = "all_threads";
+
     public static final String OPENSEARCH_HOME = System.getProperty("opensearch.path.home");
     public static final String PLUGIN_LOCATION =
             OPENSEARCH_HOME

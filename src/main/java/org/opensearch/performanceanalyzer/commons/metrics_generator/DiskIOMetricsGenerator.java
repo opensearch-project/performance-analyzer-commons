@@ -32,4 +32,6 @@ public interface DiskIOMetricsGenerator {
     double getAvgPageCacheTotalThroughputBps(String threadId);
 
     void addSample();
+
+    void addSample(String threadId);
 }

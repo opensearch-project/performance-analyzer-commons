@@ -123,7 +123,7 @@ public class ThreadList {
         }
         if (vmAttachLock.tryLock()) {
             try {
-                // Thread dumps are expensive and therefore we make sure that at least
+                // Thread dumps are expensive, and therefore we make sure that at least
                 // minRunInterval milliseconds have elapsed between two attempts.
                 if (System.currentTimeMillis() > lastRunTime + minRunInterval) {
                     runThreadDump(pid, new String[0]);
@@ -269,6 +269,16 @@ public class ThreadList {
         jTidNameMap.put(id, name);
     }
 
+    /**
+     * A thread dump is a snapshot of the state of all the threads of a Java process. 1. We use
+     * HotSpotVirtualMachine to capture thread dump. VirtualMachine is type cast to
+     * HotSpotVirtualMachine to access the method at runtime. 2. Use this method ONLY when
+     * NativeThreadId is required, for all other purpose us ThreadMxBeans API’s. 3. Running Thread
+     * Dump is expensive and should be only judiciously done.
+     *
+     * @param pid
+     * @param args
+     */
     static void runThreadDump(String pid, String[] args) {
         String currentThreadName = Thread.currentThread().getName();
 

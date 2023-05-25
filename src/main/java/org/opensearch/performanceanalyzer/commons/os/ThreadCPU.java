@@ -5,6 +5,7 @@
 
 package org.opensearch.performanceanalyzer.commons.os;
 
+import static org.opensearch.performanceanalyzer.commons.util.Util.ALL_THREADS;
 
 import java.util.HashMap;
 import java.util.List;
@@ -139,18 +140,29 @@ public final class ThreadCPU {
         }
     }
 
-    public synchronized void addSample() {
-        tids = OSGlobals.getTids();
-
+    public synchronized void addSample(String threadInfo) {
         oldtidKVMap.clear();
         oldtidKVMap.putAll(tidKVMap);
+
+        if (ALL_THREADS.equals(threadInfo)) {
+            addSampleForAllThreads();
+        } else {
+            addSampleForThread(threadInfo);
+        }
+    }
+
+    /**
+     * Creates the thread sample and adds it to a sample map Additionally, we need 2 service timers
+     * - to measure the time taken for parsing, calculateCPUDetails and calculatePagingActivity
+     */
+    private void addSampleForAllThreads() {
+        tids = OSGlobals.getTids();
 
         tidKVMap.clear();
         oldkvTimestamp = kvTimestamp;
         kvTimestamp = System.currentTimeMillis();
         for (String tid : tids) {
             Map<String, Object> sample =
-                    // (new SchemaFileParser("/proc/"+tid+"/stat",
                     (new SchemaFileParser(
                                     "/proc/" + pid + "/task/" + tid + "/stat",
                                     statKeys,
@@ -160,21 +172,16 @@ public final class ThreadCPU {
             tidKVMap.put(tid, sample);
         }
 
-        calculateCPUDetails();
-        calculatePagingActivity();
+        calculateCPUDetails(ALL_THREADS);
+        calculatePagingActivity(ALL_THREADS);
     }
 
-    public synchronized void addSample(String threadId) {
-        tids = OSGlobals.getTids();
+    private void addSampleForThread(String threadId) {
+        tidKVMap.remove(threadId);
 
-        oldtidKVMap.clear();
-        oldtidKVMap.putAll(tidKVMap);
-
-        tidKVMap.clear();
         oldkvTimestamp = kvTimestamp;
         kvTimestamp = System.currentTimeMillis();
         Map<String, Object> sample =
-                // (new SchemaFileParser("/proc/"+tid+"/stat",
                 (new SchemaFileParser(
                                 "/proc/" + pid + "/task/" + threadId + "/stat",
                                 statKeys,
@@ -183,58 +190,73 @@ public final class ThreadCPU {
                         .parse();
         tidKVMap.put(threadId, sample);
 
-        calculateCPUDetails();
-        calculatePagingActivity();
+        calculateCPUDetails(threadId);
+        calculatePagingActivity(threadId);
     }
 
-    private void calculateCPUDetails() {
+    private void calculateCPUDetails(String threadInfo) {
         if (oldkvTimestamp == kvTimestamp) {
             return;
         }
-
-        for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
-            Map<String, Object> v = entry.getValue();
-            Map<String, Object> oldv = oldtidKVMap.get(entry.getKey());
-            if (v != null && oldv != null) {
-                if (!v.containsKey("utime") || !oldv.containsKey("utime")) {
-                    continue;
-                }
-                long diff =
-                        ((long) (v.getOrDefault("utime", 0L))
-                                        - (long) (oldv.getOrDefault("utime", 0L)))
-                                + ((long) (v.getOrDefault("stime", 0L))
-                                        - (long) (oldv.getOrDefault("stime", 0L)));
-                double util = (1.0e3 * diff / scClkTck) / (kvTimestamp - oldkvTimestamp);
-                cpuPagingActivityMap.setCPUUtilization(entry.getKey(), util);
+        if (threadInfo.equals(ALL_THREADS)) {
+            for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
+                Map<String, Object> v = entry.getValue();
+                calculateThreadCPUDetails(entry.getKey(), v);
             }
+        } else {
+            Map<String, Object> v = tidKVMap.get(threadInfo);
+            calculateThreadCPUDetails(threadInfo, v);
+        }
+    }
+
+    private void calculateThreadCPUDetails(String threadId, Map<String, Object> v) {
+        Map<String, Object> oldv = oldtidKVMap.get(threadId);
+        if (v != null && oldv != null) {
+            if (!v.containsKey("utime") || !oldv.containsKey("utime")) {
+                return;
+            }
+            long diff =
+                    ((long) (v.getOrDefault("utime", 0L)) - (long) (oldv.getOrDefault("utime", 0L)))
+                            + ((long) (v.getOrDefault("stime", 0L))
+                                    - (long) (oldv.getOrDefault("stime", 0L)));
+            double util = (1.0e3 * diff / scClkTck) / (kvTimestamp - oldkvTimestamp);
+            cpuPagingActivityMap.setCPUUtilization(threadId, util);
         }
     }
 
     /** Note: major faults include mmap()'ed accesses */
-    private void calculatePagingActivity() {
+    private void calculatePagingActivity(String threadInfo) {
         if (oldkvTimestamp == kvTimestamp) {
             return;
         }
-
-        for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
-            Map<String, Object> v = entry.getValue();
-            Map<String, Object> oldv = oldtidKVMap.get(entry.getKey());
-            if (v != null && oldv != null) {
-                if (!v.containsKey("majflt") || !oldv.containsKey("majflt")) {
-                    continue;
-                }
-                double majdiff =
-                        ((long) (v.getOrDefault("majflt", 0L))
-                                - (long) (oldv.getOrDefault("majflt", 0L)));
-                majdiff /= 1.0e-3 * (kvTimestamp - oldkvTimestamp);
-                double mindiff =
-                        ((long) (v.getOrDefault("minflt", 0L))
-                                - (long) (oldv.getOrDefault("minflt", 0L)));
-                mindiff /= 1.0e-3 * (kvTimestamp - oldkvTimestamp);
-
-                Double[] fltarr = {majdiff, mindiff, (double) ((long) v.getOrDefault("rss", 0L))};
-                cpuPagingActivityMap.setPagingActivities(entry.getKey(), fltarr);
+        if (threadInfo.equals(ALL_THREADS)) {
+            for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
+                Map<String, Object> v = entry.getValue();
+                calculateThreadPagingActivity(entry.getKey(), v);
             }
+        } else {
+            Map<String, Object> v = tidKVMap.get(threadInfo);
+            calculateThreadPagingActivity(threadInfo, v);
+        }
+    }
+
+    private void calculateThreadPagingActivity(String threadId, Map<String, Object> v) {
+        Map<String, Object> oldv = oldtidKVMap.get(threadId);
+        if (v != null && oldv != null) {
+            if (!v.containsKey("majflt") || !oldv.containsKey("majflt")) {
+                return;
+            }
+            double majdiff =
+                    ((long) (v.getOrDefault("majflt", 0L))
+                            - (long) (oldv.getOrDefault("majflt", 0L)));
+            majdiff /= 1.0e-3 * (kvTimestamp - oldkvTimestamp);
+            double mindiff =
+                    ((long) (v.getOrDefault("minflt", 0L))
+                            - (long) (oldv.getOrDefault("minflt", 0L)));
+            mindiff /= 1.0e-3 * (kvTimestamp - oldkvTimestamp);
+
+            Double[] fltarr = {majdiff, mindiff, (double) ((long) v.getOrDefault("rss", 0L))};
+            cpuPagingActivityMap.setPagingActivities(threadId, fltarr);
         }
     }
 

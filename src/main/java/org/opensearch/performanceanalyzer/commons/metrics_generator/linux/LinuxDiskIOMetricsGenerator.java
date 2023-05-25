@@ -5,6 +5,7 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator.linux;
 
+import static org.opensearch.performanceanalyzer.commons.util.Util.ALL_THREADS;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +79,12 @@ public class LinuxDiskIOMetricsGenerator implements DiskIOMetricsGenerator {
 
     @Override
     public void addSample() {
-        ThreadDiskIO.addSample();
+        ThreadDiskIO.addSample(ALL_THREADS);
+    }
+
+    @Override
+    public void addSample(String threadId) {
+        ThreadDiskIO.addSample(threadId);
     }
 
     public void setDiskIOMetrics(final String threadId, final ThreadDiskIO.IOMetrics ioMetrics) {
