@@ -63,8 +63,9 @@ public class LinuxCPUPagingActivityGenerator implements CPUPagingActivityGenerat
 
     @Override
     public void addSample(String threadId) {
-        cpu.clear();
-        pagingActivities.clear();
+        cpu.remove(threadId);
+        pagingActivities.remove(threadId);
+
         ThreadCPU.INSTANCE.addSample(threadId);
     }
 

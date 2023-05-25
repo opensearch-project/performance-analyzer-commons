@@ -5,6 +5,7 @@
 
 package org.opensearch.performanceanalyzer.commons.os;
 
+import static org.opensearch.performanceanalyzer.commons.util.Util.ALL_THREADS;
 
 import java.util.HashMap;
 import java.util.List;
@@ -74,11 +75,19 @@ public final class ThreadSched {
         }
     }
 
-    public synchronized void addSample() {
-        tids = OSGlobals.getTids();
-
+    public synchronized void addSample(String threadInfo) {
         oldtidKVMap.clear();
         oldtidKVMap.putAll(tidKVMap);
+
+        if (ALL_THREADS.equals(threadInfo)) {
+            addSampleForAllThreads();
+        } else {
+            addSampleForThread(threadInfo);
+        }
+    }
+
+    private void addSampleForAllThreads() {
+        tids = OSGlobals.getTids();
 
         tidKVMap.clear();
         oldkvTimestamp = kvTimestamp;
@@ -93,16 +102,11 @@ public final class ThreadSched {
             tidKVMap.put(tid, sample);
         }
 
-        calculateSchedLatency();
+        calculateSchedLatency(ALL_THREADS);
     }
 
-    public synchronized void addSample(String threadId) {
-        tids = OSGlobals.getTids();
-
-        oldtidKVMap.clear();
-        oldtidKVMap.putAll(tidKVMap);
-
-        tidKVMap.clear();
+    private void addSampleForThread(String threadId) {
+        tidKVMap.remove(threadId);
         oldkvTimestamp = kvTimestamp;
         kvTimestamp = System.currentTimeMillis();
         Map<String, Object> sample =
@@ -113,46 +117,54 @@ public final class ThreadSched {
                         .parse();
         tidKVMap.put(threadId, sample);
 
-        calculateSchedLatency();
+        calculateSchedLatency(threadId);
     }
 
-    private void calculateSchedLatency() {
+    private synchronized void calculateSchedLatency(String threadInfo) {
         if (oldkvTimestamp == kvTimestamp) {
             return;
         }
 
-        for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
-            Map<String, Object> v = entry.getValue();
-            Map<String, Object> oldv = oldtidKVMap.get(entry.getKey());
-            if (v != null && oldv != null) {
-                if (!v.containsKey("totctxsws") || !oldv.containsKey("totctxsws")) {
-                    continue;
-                }
-                long ctxdiff =
-                        (long) v.getOrDefault("totctxsws", 0L)
-                                - (long) oldv.getOrDefault("totctxsws", 0L);
-                double avgRuntime =
-                        1.0e-9
-                                * ((long) v.getOrDefault("runticks", 0L)
-                                        - (long) oldv.getOrDefault("runticks", 0L));
-                double avgWaittime =
-                        1.0e-9
-                                * ((long) v.getOrDefault("waitticks", 0L)
-                                        - (long) oldv.getOrDefault("waitticks", 0L));
-                if (ctxdiff == 0) {
-                    avgRuntime = 0;
-                    avgWaittime = 0;
-                } else {
-                    avgRuntime /= 1.0 * ctxdiff;
-                    avgWaittime /= 1.0 * ctxdiff;
-                }
-                double contextSwitchRate = ctxdiff;
-                contextSwitchRate /= 1.0e-3 * (kvTimestamp - oldkvTimestamp);
-
-                schedLatencyMap.setSchedMetric(
-                        entry.getKey(),
-                        new SchedMetrics(avgRuntime, avgWaittime, contextSwitchRate));
+        if (ALL_THREADS.equals(threadInfo)) {
+            for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
+                Map<String, Object> v = entry.getValue();
+                calculateThreadSchedLatency(entry.getKey(), v);
             }
+        } else {
+            Map<String, Object> v = tidKVMap.get(threadInfo);
+            calculateThreadSchedLatency(threadInfo, v);
+        }
+    }
+
+    private void calculateThreadSchedLatency(String threadId, Map<String, Object> v) {
+        Map<String, Object> oldv = oldtidKVMap.get(threadId);
+        if (v != null && oldv != null) {
+            if (!v.containsKey("totctxsws") || !oldv.containsKey("totctxsws")) {
+                return;
+            }
+            long ctxdiff =
+                    (long) v.getOrDefault("totctxsws", 0L)
+                            - (long) oldv.getOrDefault("totctxsws", 0L);
+            double avgRuntime =
+                    1.0e-9
+                            * ((long) v.getOrDefault("runticks", 0L)
+                                    - (long) oldv.getOrDefault("runticks", 0L));
+            double avgWaittime =
+                    1.0e-9
+                            * ((long) v.getOrDefault("waitticks", 0L)
+                                    - (long) oldv.getOrDefault("waitticks", 0L));
+            if (ctxdiff == 0) {
+                avgRuntime = 0;
+                avgWaittime = 0;
+            } else {
+                avgRuntime /= 1.0 * ctxdiff;
+                avgWaittime /= 1.0 * ctxdiff;
+            }
+            double contextSwitchRate = ctxdiff;
+            contextSwitchRate /= 1.0e-3 * (kvTimestamp - oldkvTimestamp);
+
+            schedLatencyMap.setSchedMetric(
+                    threadId, new SchedMetrics(avgRuntime, avgWaittime, contextSwitchRate));
         }
     }
 

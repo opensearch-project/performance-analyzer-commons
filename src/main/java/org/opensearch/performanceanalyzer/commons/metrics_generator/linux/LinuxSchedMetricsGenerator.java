@@ -5,6 +5,7 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator.linux;
 
+import static org.opensearch.performanceanalyzer.commons.util.Util.ALL_THREADS;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,12 +48,12 @@ public class LinuxSchedMetricsGenerator implements SchedMetricsGenerator {
     public void addSample() {
 
         schedMetricsMap.clear();
-        ThreadSched.INSTANCE.addSample();
+        ThreadSched.INSTANCE.addSample(ALL_THREADS);
     }
 
     @Override
     public void addSample(String threadId) {
-        schedMetricsMap.clear();
+        schedMetricsMap.remove(threadId);
         ThreadSched.INSTANCE.addSample(threadId);
     }
 

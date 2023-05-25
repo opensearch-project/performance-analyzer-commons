@@ -198,7 +198,7 @@ public final class ThreadCPU {
         if (oldkvTimestamp == kvTimestamp) {
             return;
         }
-        if (threadInfo.equals(ALL_THREADS)) {
+        if (ALL_THREADS.equals(threadInfo)) {
             for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
                 Map<String, Object> v = entry.getValue();
                 calculateThreadCPUDetails(entry.getKey(), v);
@@ -229,7 +229,7 @@ public final class ThreadCPU {
         if (oldkvTimestamp == kvTimestamp) {
             return;
         }
-        if (threadInfo.equals(ALL_THREADS)) {
+        if (ALL_THREADS.equals(threadInfo)) {
             for (Map.Entry<String, Map<String, Object>> entry : tidKVMap.entrySet()) {
                 Map<String, Object> v = entry.getValue();
                 calculateThreadPagingActivity(entry.getKey(), v);
