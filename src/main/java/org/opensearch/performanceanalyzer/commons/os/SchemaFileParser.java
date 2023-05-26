@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
 
 public class SchemaFileParser {
@@ -77,6 +78,7 @@ public class SchemaFileParser {
                     () -> Arrays.toString(values),
                     () -> Arrays.toString(types),
                     () -> StatExceptionCode.SCHEMA_PARSER_ERROR.toString());
+            StatsCollector.instance().logException(StatExceptionCode.SCHEMA_PARSER_ERROR);
         }
         int lim = Math.min(values.length, types.length);
         for (int idx = 0; idx < lim; idx++) {
@@ -133,6 +135,7 @@ public class SchemaFileParser {
                     "Error in parse with exception: {} with ExceptionCode: {}",
                     () -> e.toString(),
                     () -> StatExceptionCode.SCHEMA_PARSER_ERROR.toString());
+            StatsCollector.instance().logException(StatExceptionCode.SCHEMA_PARSER_ERROR);
         }
         return map;
     }
@@ -157,6 +160,7 @@ public class SchemaFileParser {
                     "Error in parseMultiple with exception: {} with ExceptionCode: {}",
                     () -> e.toString(),
                     () -> StatExceptionCode.SCHEMA_PARSER_ERROR.toString());
+            StatsCollector.instance().logException(StatExceptionCode.SCHEMA_PARSER_ERROR);
         }
         return mapList;
     }

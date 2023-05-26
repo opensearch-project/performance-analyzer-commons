@@ -9,22 +9,25 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.OSMetricsGeneratorFactory;
+import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsProcessor;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.DiskMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.OSMetricsGenerator;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class DisksCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {
 
-    public DisksCollector(String name, int samplingIntervalMillis) {
+    private static final int sTimeInterval =
+            MetricsConfiguration.CONFIG_MAP.get(DisksCollector.class).samplingInterval;
+
+    public DisksCollector() {
         super(
-                samplingIntervalMillis,
-                name,
-                WriterMetrics.DISKS_COLLECTOR_EXECUTION_TIME,
+                sTimeInterval,
+                "DisksCollector",
+                StatMetrics.DISKS_COLLECTOR_EXECUTION_TIME,
                 StatExceptionCode.DISK_METRICS_COLLECTOR_ERROR);
     }
 
@@ -45,15 +48,10 @@ public class DisksCollector extends PerformanceAnalyzerMetricsCollector
         if (generator == null) {
             return;
         }
-        long mCurrT = System.currentTimeMillis();
         DiskMetricsGenerator diskMetricsGenerator = generator.getDiskMetricsGenerator();
         diskMetricsGenerator.addSample();
 
         saveMetricValues(getMetrics(diskMetricsGenerator), startTime);
-        CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.DISKS_COLLECTOR_EXECUTION_TIME,
-                "",
-                System.currentTimeMillis() - mCurrT);
     }
 
     private Map<String, DiskMetrics> getMetricsMap(DiskMetricsGenerator diskMetricsGenerator) {

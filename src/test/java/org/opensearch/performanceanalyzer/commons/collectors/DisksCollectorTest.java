@@ -8,13 +8,11 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 
 public class DisksCollectorTest extends AbstractCollectorTest {
     @Before
     public void setup() {
-        int interval = MetricsConfiguration.CONFIG_MAP.get(DisksCollector.class).samplingInterval;
-        setUut(new DisksCollector("DiskCollector", interval));
+        setUut(new DisksCollector());
     }
 
     @Override

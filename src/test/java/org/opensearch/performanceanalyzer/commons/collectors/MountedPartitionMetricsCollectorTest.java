@@ -8,15 +8,11 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 
 public class MountedPartitionMetricsCollectorTest extends AbstractCollectorTest {
     @Before
     public void setup() {
-        int interval =
-                MetricsConfiguration.CONFIG_MAP.get(MountedPartitionMetricsCollector.class)
-                        .samplingInterval;
-        setUut(new MountedPartitionMetricsCollector("MountedPartitionMetricsCollector", interval));
+        setUut(new MountedPartitionMetricsCollector());
     }
 
     @Override

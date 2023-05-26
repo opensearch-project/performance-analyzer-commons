@@ -164,7 +164,9 @@ spotless {
 }
 
 tasks.withType(Test) {
+    jvmArgs('-Dopensearch.path.conf=config')
     jvmArgs('--add-opens=java.base/sun.nio.fs=ALL-UNNAMED')
+    jvmArgs('--add-opens=java.base/java.io=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.nio.file=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.lang=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.util=ALL-UNNAMED')

@@ -16,7 +16,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
  */
 public class ServiceMetrics {
     public static SampleAggregator READER_METRICS_AGGREGATOR,
-            // WRITER_METRICS_AGGREGATOR = new SampleAggregator(WriterMetrics.values()),
+            WRITER_METRICS_AGGREGATOR = new SampleAggregator(StatMetrics.values()),
             ERRORS_AND_EXCEPTIONS_AGGREGATOR,
             PERIODIC_SAMPLE_AGGREGATOR,
             RCA_GRAPH_METRICS_AGGREGATOR,

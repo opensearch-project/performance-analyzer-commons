@@ -10,16 +10,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 
 public class NetworkE2ECollectorTest extends AbstractCollectorTest {
     private static final Logger LOG = LogManager.getLogger(NetworkE2ECollectorTest.class);
 
     @Before
     public void setup() {
-        int interval =
-                MetricsConfiguration.CONFIG_MAP.get(NetworkE2ECollector.class).samplingInterval;
-        setUut(new NetworkE2ECollector("NetworkE2ECollector", interval));
+        System.setProperty("clk.tck", "100");
+        setUut(new NetworkE2ECollector());
     }
 
     @Override

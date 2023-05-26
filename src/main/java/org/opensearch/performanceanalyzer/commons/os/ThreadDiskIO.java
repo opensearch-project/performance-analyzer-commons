@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.linux.LinuxDiskIOMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
 
@@ -108,6 +109,7 @@ public class ThreadDiskIO {
                     () -> tid,
                     () -> e.toString(),
                     () -> StatExceptionCode.THREAD_IO_ERROR.toString());
+            StatsCollector.instance().logException(StatExceptionCode.THREAD_IO_ERROR);
         }
     }
 

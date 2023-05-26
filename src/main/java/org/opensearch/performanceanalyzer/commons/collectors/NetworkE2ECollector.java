@@ -9,21 +9,24 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.OSMetricsGeneratorFactory;
+import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsProcessor;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.OSMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.TCPMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class NetworkE2ECollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {
+    private static final int sTimeInterval =
+            MetricsConfiguration.CONFIG_MAP.get(NetworkE2ECollector.class).samplingInterval;
 
-    public NetworkE2ECollector(String name, int samplingIntervalMillis) {
+    public NetworkE2ECollector() {
         super(
-                samplingIntervalMillis,
-                name,
-                WriterMetrics.NETWORK_E2E_COLLECTOR_EXECUTION_TIME,
+                sTimeInterval,
+                "NetworkE2ECollector",
+                StatMetrics.NETWORK_E2E_COLLECTOR_EXECUTION_TIME,
                 StatExceptionCode.NETWORK_COLLECTION_ERROR);
     }
 

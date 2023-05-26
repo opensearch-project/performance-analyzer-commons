@@ -14,16 +14,11 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
 
 public class HeapMetricsCollectorGCTypesTest {
     private static final ObjectMapper mapper = new ObjectMapper();
-    private static final HeapMetricsCollector uut =
-            new HeapMetricsCollector(
-                    "HeapMetricsCollector",
-                    MetricsConfiguration.CONFIG_MAP.get(HeapMetricsCollector.class)
-                            .samplingInterval);
+    private static final HeapMetricsCollector uut = new HeapMetricsCollector();
     private static final Set<String> gcTypes =
             ImmutableSet.of(
                     AllMetrics.GCType.HEAP.toString(),

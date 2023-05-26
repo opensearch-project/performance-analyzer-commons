@@ -168,7 +168,8 @@ public class NetworkE2E {
     protected static void calculateTCPMetrics() {
 
         Map<String, double[]> localMap = new HashMap<>();
-        for (Map.Entry<String, destTCPFlowMetrics> entry : destnodeFlowMetricsMap.entrySet()) {
+        for (Map.Entry<String, NetworkE2E.destTCPFlowMetrics> entry :
+                destnodeFlowMetricsMap.entrySet()) {
             destTCPFlowMetrics m = entry.getValue();
 
             double[] metrics = new double[6];

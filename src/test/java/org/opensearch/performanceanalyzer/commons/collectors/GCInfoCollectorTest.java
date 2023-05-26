@@ -8,13 +8,11 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 
 public class GCInfoCollectorTest extends AbstractCollectorTest {
     @Before
     public void setup() {
-        int interval = MetricsConfiguration.CONFIG_MAP.get(GCInfoCollector.class).samplingInterval;
-        setUut(new GCInfoCollector("GCInfoCollector", interval));
+        setUut(new GCInfoCollector());
     }
 
     @Override

@@ -18,28 +18,29 @@ import org.opensearch.performanceanalyzer.commons.jvm.HeapMetrics;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.GCType;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.HeapDimension;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.HeapValue;
+import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsProcessor;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class HeapMetricsCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {
     private static final Logger LOG = LogManager.getLogger(HeapMetricsCollector.class);
+    public static final int SAMPLING_TIME_INTERVAL =
+            MetricsConfiguration.CONFIG_MAP.get(HeapMetricsCollector.class).samplingInterval;
     private static final int KEYS_PATH_LENGTH = 0;
 
-    public HeapMetricsCollector(String name, int samplingIntervalMillis) {
+    public HeapMetricsCollector() {
         super(
-                samplingIntervalMillis,
-                name,
-                WriterMetrics.HEAP_METRICS_COLLECTOR_EXECUTION_TIME,
+                SAMPLING_TIME_INTERVAL,
+                "HeapMetrics",
+                StatMetrics.HEAP_METRICS_COLLECTOR_EXECUTION_TIME,
                 StatExceptionCode.HEAP_METRICS_COLLECTOR_ERROR);
     }
 
     @Override
     public void collectMetrics(long startTime) {
-        long mCurrT = System.currentTimeMillis();
         GCMetrics.runGCMetrics();
 
         value.setLength(0);
@@ -77,10 +78,6 @@ public class HeapMetricsCollector extends PerformanceAnalyzerMetricsCollector
         }
 
         saveMetricValues(value.toString(), startTime);
-        CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.HEAP_METRICS_COLLECTOR_EXECUTION_TIME,
-                "",
-                System.currentTimeMillis() - mCurrT);
     }
 
     @Override

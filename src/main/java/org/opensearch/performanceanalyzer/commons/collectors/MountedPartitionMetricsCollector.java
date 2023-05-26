@@ -8,23 +8,27 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 
 import java.util.Set;
 import org.opensearch.performanceanalyzer.commons.OSMetricsGeneratorFactory;
+import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsProcessor;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.MountedPartitionMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.OSMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class MountedPartitionMetricsCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {
 
+    private static final int SAMPLING_TIME_INTERVAL =
+            MetricsConfiguration.CONFIG_MAP.get(MountedPartitionMetricsCollector.class)
+                    .samplingInterval;
     private static final int EXPECTED_KEYS_PATH_LENGTH = 0;
 
-    public MountedPartitionMetricsCollector(String name, int samplingIntervalMillis) {
+    public MountedPartitionMetricsCollector() {
         super(
-                samplingIntervalMillis,
-                name,
-                WriterMetrics.MOUNTED_PARTITION_METRICS_COLLECTOR_EXECUTION_TIME,
+                SAMPLING_TIME_INTERVAL,
+                "MountedPartition",
+                StatMetrics.MOUNTED_PARTITION_METRICS_COLLECTOR_EXECUTION_TIME,
                 StatExceptionCode.MOUNTED_PARTITION_METRICS_COLLECTOR_ERROR);
     }
 

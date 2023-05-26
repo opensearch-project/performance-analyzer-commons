@@ -8,14 +8,11 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 
 public class HeapMetricsCollectorTest extends AbstractCollectorTest {
     @Before
     public void setup() {
-        int interval =
-                MetricsConfiguration.CONFIG_MAP.get(HeapMetricsCollector.class).samplingInterval;
-        setUut(new HeapMetricsCollector("HeapMetricsCollector", interval));
+        setUut(new HeapMetricsCollector());
     }
 
     @Override

@@ -25,7 +25,12 @@ import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.OSMetricsGeneratorFactory;
+import org.opensearch.performanceanalyzer.commons.collectors.ScheduledMetricCollectorsExecutor;
+import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
+import org.opensearch.performanceanalyzer.commons.stats.ServiceMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 import org.opensearch.performanceanalyzer.commons.util.Util;
 import sun.tools.attach.HotSpotVirtualMachine;
 
@@ -131,7 +136,11 @@ public class ThreadList {
             } finally {
                 vmAttachLock.unlock();
             }
+        } else {
+            StatsCollector.instance()
+                    .logException(StatExceptionCode.JVM_ATTACH_LOCK_ACQUISITION_FAILED);
         }
+
         // - sending a copy so that if runThreadDump next iteration clears it; caller still has the
         // state at the call time
         // - not too expensive as this is only being called from Scheduled Collectors (only once in
@@ -152,7 +161,11 @@ public class ThreadList {
      * @return If we have successfully captured the ThreadState, then we emit it or Null otherwise.
      */
     public static ThreadState getThreadState(long threadId) {
-        return jTidMap.get(threadId);
+        ThreadState retVal = jTidMap.get(threadId);
+        if (retVal == null) {
+            StatsCollector.instance().logException(StatExceptionCode.NO_THREAD_STATE_INFO);
+        }
+        return retVal;
     }
 
     // Attach to pid and perform a thread dump
@@ -162,6 +175,12 @@ public class ThreadList {
         try {
             vm = VirtualMachine.attach(pid);
         } catch (Exception ex) {
+            if (ex.getMessage().contains("java_pid")) {
+                StatsCollector.instance()
+                        .logException(StatExceptionCode.JVM_ATTACH_ERROR_JAVA_PID_FILE_MISSING);
+            } else {
+                StatsCollector.instance().logException(StatExceptionCode.JVM_ATTACH_ERROR);
+            }
             // If the thread dump failed then we clean up the old map. So, next time when the
             // collection
             // happens as it would after a bootup.
@@ -172,13 +191,16 @@ public class ThreadList {
         try (InputStream in = ((HotSpotVirtualMachine) vm).remoteDataDump(args); ) {
             createMap(in);
         } catch (Exception ex) {
+            StatsCollector.instance().logException(StatExceptionCode.JVM_ATTACH_ERROR);
             oldNativeTidMap.clear();
         }
 
         try {
             vm.detach();
+            ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
+                    StatMetrics.JVM_THREAD_DUMP_SUCCESSFUL, 1);
         } catch (Exception ex) {
-            LOGGER.error("VM detaching failed", ex);
+            StatsCollector.instance().logException(StatExceptionCode.JVM_ATTACH_ERROR);
         }
     }
 
@@ -187,9 +209,11 @@ public class ThreadList {
             try {
                 parseThreadInfo(info);
             } catch (Exception ex) {
-                LOGGER.error("Parsing thread info failed", ex);
-                //                CommonStats.ERRORS_AND_EXCEPTIONS_AGGREGATOR.updateStat(
-                //                        StatExceptionCode.JVM_THREAD_ID_NO_LONGER_EXISTS, "", 1);
+                // If the ids provided to the getThreadInfo() call are not valid ids or the threads
+                // no
+                // longer exists, then the corresponding info object will contain null.
+                StatsCollector.instance()
+                        .logException(StatExceptionCode.JVM_THREAD_ID_NO_LONGER_EXISTS);
             }
         }
     }
@@ -273,7 +297,12 @@ public class ThreadList {
 
     static void runThreadDump(String pid, String[] args) {
         String currentThreadName = Thread.currentThread().getName();
-
+        assert currentThreadName.startsWith(
+                                ScheduledMetricCollectorsExecutor.COLLECTOR_THREAD_POOL_NAME)
+                        || currentThreadName.equals(
+                                ScheduledMetricCollectorsExecutor.class.getSimpleName())
+                : String.format(
+                        "Thread dump called from a non os collector thread: %s", currentThreadName);
         jTidNameMap.clear();
         oldNativeTidMap.putAll(nativeTidMap);
         nativeTidMap.clear();

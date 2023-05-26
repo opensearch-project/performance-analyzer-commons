@@ -11,11 +11,11 @@ import java.util.Map;
 import java.util.function.Supplier;
 import org.opensearch.performanceanalyzer.commons.jvm.GarbageCollectorInfo;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.GCInfoDimension;
+import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsProcessor;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 /**
  * A collector that collects info about the current garbage collectors for various regions in the
@@ -24,19 +24,20 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
 public class GCInfoCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {
 
+    private static final int SAMPLING_TIME_INTERVAL =
+            MetricsConfiguration.CONFIG_MAP.get(GCInfoCollector.class).samplingInterval;
     private static final int EXPECTED_KEYS_PATH_LENGTH = 0;
 
-    public GCInfoCollector(String name, int samplingIntervalMillis) {
+    public GCInfoCollector() {
         super(
-                samplingIntervalMillis,
-                name,
-                WriterMetrics.GC_INFO_COLLECTOR_EXECUTION_TIME,
+                SAMPLING_TIME_INTERVAL,
+                "GCInfo",
+                StatMetrics.GC_INFO_COLLECTOR_EXECUTION_TIME,
                 StatExceptionCode.GC_INFO_COLLECTOR_ERROR);
     }
 
     @Override
     public void collectMetrics(long startTime) {
-        long mCurrT = System.currentTimeMillis();
         // Zero the string builder
         value.setLength(0);
 
@@ -51,10 +52,6 @@ public class GCInfoCollector extends PerformanceAnalyzerMetricsCollector
         }
 
         saveMetricValues(value.toString(), startTime);
-        CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.GC_INFO_COLLECTOR_EXECUTION_TIME,
-                "",
-                System.currentTimeMillis() - mCurrT);
     }
 
     @Override

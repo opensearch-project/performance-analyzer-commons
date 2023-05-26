@@ -7,15 +7,11 @@ package org.opensearch.performanceanalyzer.commons.collectors;
 
 
 import org.junit.Before;
-import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 
 public class NetworkInterfaceCollectorTest extends AbstractCollectorTest {
     @Before
     public void setup() {
-        int interval =
-                MetricsConfiguration.CONFIG_MAP.get(NetworkInterfaceCollector.class)
-                        .samplingInterval;
-        setUut(new NetworkInterfaceCollector("NetworkInterfaceCollector", interval));
+        setUut(new NetworkInterfaceCollector());
     }
 
     @Override

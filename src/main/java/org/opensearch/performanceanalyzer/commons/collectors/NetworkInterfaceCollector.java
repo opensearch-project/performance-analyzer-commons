@@ -14,9 +14,8 @@ import org.opensearch.performanceanalyzer.commons.metrics.MetricsProcessor;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.IPMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.OSMetricsGenerator;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class NetworkInterfaceCollector extends PerformanceAnalyzerMetricsCollector
         implements MetricsProcessor {
@@ -24,12 +23,12 @@ public class NetworkInterfaceCollector extends PerformanceAnalyzerMetricsCollect
             MetricsConfiguration.CONFIG_MAP.get(NetworkInterfaceCollector.class).samplingInterval;
     private static final Logger LOG = LogManager.getLogger(NetworkInterfaceCollector.class);
 
-    public NetworkInterfaceCollector(String name, int samplingIntervalMillis) {
+    public NetworkInterfaceCollector() {
         super(
-                samplingIntervalMillis,
-                name,
-                WriterMetrics.NETWORK_INTERFACE_COLLECTOR_EXECUTION_TIME,
-                StatExceptionCode.RCA_NETWORK_ERROR);
+                sTimeInterval,
+                "NetworkInterfaceCollector",
+                StatMetrics.NETWORK_INTERFACE_COLLECTOR_EXECUTION_TIME,
+                StatExceptionCode.NETWORK_COLLECTION_ERROR);
     }
 
     @Override
@@ -39,16 +38,11 @@ public class NetworkInterfaceCollector extends PerformanceAnalyzerMetricsCollect
             return;
         }
 
-        long mCurrT = System.currentTimeMillis();
         IPMetricsGenerator IPMetricsGenerator = generator.getIPMetricsGenerator();
         IPMetricsGenerator.addSample();
         saveMetricValues(
                 getMetrics(IPMetricsGenerator) + PerformanceAnalyzerMetrics.sMetricNewLineDelimitor,
                 startTime);
-        CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.NETWORK_INTERFACE_COLLECTOR_EXECUTION_TIME,
-                "",
-                System.currentTimeMillis() - mCurrT);
     }
 
     @Override
