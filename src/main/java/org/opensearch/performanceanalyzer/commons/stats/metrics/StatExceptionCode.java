@@ -32,12 +32,6 @@ public enum StatExceptionCode {
     JVM_THREAD_ID_NO_LONGER_EXISTS("JVMThreadIdNoLongerExists"),
 
     /**
-     * This metric indicates that we successfully completed a thread-dump. Likewise, an omission of
-     * this should indicate that the thread taking the dump got stuck.
-     */
-    JVM_THREAD_DUMP_SUCCESSFUL("JvmThreadDumpSuccessful"),
-
-    /**
      * We start 6 threads within RCA Agent, details at {@link
      * org.opensearch.performanceanalyzer.PerformanceAnalyzerThreads}. Below metrics track count of
      * thread started and ended.
