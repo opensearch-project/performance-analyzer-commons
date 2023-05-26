@@ -24,9 +24,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 import org.opensearch.performanceanalyzer.commons.metrics.PerformanceAnalyzerMetrics;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.stats.ServiceMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 import org.opensearch.performanceanalyzer.commons.util.Util;
 
 public class EventLogFileHandler {
@@ -189,10 +189,10 @@ public class EventLogFileHandler {
             filesDeletedCount += 1;
         }
         long duration = System.currentTimeMillis() - startTime;
-        CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.EVENT_LOG_FILES_DELETION_TIME, duration);
-        CommonStats.WRITER_METRICS_AGGREGATOR.updateStat(
-                WriterMetrics.EVENT_LOG_FILES_DELETED, filesDeletedCount);
+        ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
+                StatMetrics.EVENT_LOG_FILES_DELETION_TIME, duration);
+        ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
+                StatMetrics.EVENT_LOG_FILES_DELETED, filesDeletedCount);
         LOG.debug("'{}' Old writer files cleaned up.", filesDeletedCount);
     }
 

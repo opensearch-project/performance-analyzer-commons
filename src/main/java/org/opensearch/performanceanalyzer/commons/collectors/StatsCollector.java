@@ -25,9 +25,9 @@ import org.opensearch.performanceanalyzer.commons.config.PluginSettings;
 import org.opensearch.performanceanalyzer.commons.formatter.StatsCollectorFormatter;
 import org.opensearch.performanceanalyzer.commons.metrics.MetricsConfiguration;
 import org.opensearch.performanceanalyzer.commons.rca.Version;
-import org.opensearch.performanceanalyzer.commons.stats.CommonStats;
+import org.opensearch.performanceanalyzer.commons.stats.ServiceMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
-import org.opensearch.performanceanalyzer.commons.stats.metrics.WriterMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     private static final Logger STATS_LOGGER = LogManager.getLogger("stats_log");
@@ -51,7 +51,7 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
         super(
                 samplingIntervalMillis,
                 name,
-                WriterMetrics.STAT_COLLECTOR_EXECUTION_TIME,
+                StatMetrics.STAT_COLLECTOR_EXECUTION_TIME,
                 StatExceptionCode.STATS_COLLECTOR_ERROR);
         this.metadata = metadata;
         addRcaVersionMetadata(this.metadata);
@@ -110,7 +110,7 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
         boolean hasNext;
         do {
             StatsCollectorFormatter formatter = new StatsCollectorFormatter();
-            hasNext = CommonStats.RCA_STATS_REPORTER.getNextReport(formatter);
+            hasNext = ServiceMetrics.STATS_REPORTER.getNextReport(formatter);
             for (StatsCollectorFormatter.StatsCollectorReturn statsReturn :
                     formatter.getAllMetrics()) {
                 if (!statsReturn.isEmpty()) {
