@@ -6,10 +6,6 @@
 package org.opensearch.performanceanalyzer.commons.metrics_generator;
 
 public interface CPUPagingActivityGenerator {
-
-    // This method will be called before all following get methods
-    // to make sure that all information exists for a thread id
-
     /**
      * This method will be called before all following get methods to make sure that all information
      * exists for a thread id
