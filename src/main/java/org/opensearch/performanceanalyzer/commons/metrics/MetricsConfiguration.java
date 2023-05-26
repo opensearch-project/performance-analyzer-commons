@@ -8,6 +8,14 @@ package org.opensearch.performanceanalyzer.commons.metrics;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.opensearch.performanceanalyzer.commons.collectors.*;
+import org.opensearch.performanceanalyzer.commons.jvm.GCMetrics;
+import org.opensearch.performanceanalyzer.commons.jvm.HeapMetrics;
+import org.opensearch.performanceanalyzer.commons.jvm.ThreadList;
+import org.opensearch.performanceanalyzer.commons.os.OSGlobals;
+import org.opensearch.performanceanalyzer.commons.os.ThreadCPU;
+import org.opensearch.performanceanalyzer.commons.os.ThreadDiskIO;
+import org.opensearch.performanceanalyzer.commons.os.ThreadSched;
 
 public class MetricsConfiguration {
     public static final int SAMPLING_INTERVAL = 5000;
@@ -33,5 +41,19 @@ public class MetricsConfiguration {
     static {
         cdefault = new MetricConfig(SAMPLING_INTERVAL, 0);
         CONFIG_MAP.put(PerformanceAnalyzerMetrics.class, new MetricConfig(0, ROTATION_INTERVAL));
+        CONFIG_MAP.put(ThreadCPU.class, cdefault);
+        CONFIG_MAP.put(ThreadDiskIO.class, cdefault);
+        CONFIG_MAP.put(ThreadSched.class, cdefault);
+        CONFIG_MAP.put(ThreadList.class, cdefault);
+        CONFIG_MAP.put(GCMetrics.class, cdefault);
+        CONFIG_MAP.put(HeapMetrics.class, cdefault);
+        CONFIG_MAP.put(NetworkE2ECollector.class, cdefault);
+        CONFIG_MAP.put(NetworkInterfaceCollector.class, cdefault);
+        CONFIG_MAP.put(OSGlobals.class, cdefault);
+        CONFIG_MAP.put(StatsCollector.class, new MetricConfig(STATS_ROTATION_INTERVAL, 0));
+        CONFIG_MAP.put(DisksCollector.class, cdefault);
+        CONFIG_MAP.put(HeapMetricsCollector.class, cdefault);
+        CONFIG_MAP.put(GCInfoCollector.class, cdefault);
+        CONFIG_MAP.put(MountedPartitionMetricsCollector.class, cdefault);
     }
 }
