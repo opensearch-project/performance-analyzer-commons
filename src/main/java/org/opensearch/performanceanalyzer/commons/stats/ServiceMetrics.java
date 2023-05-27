@@ -8,6 +8,8 @@ package org.opensearch.performanceanalyzer.commons.stats;
 
 import java.util.Arrays;
 import org.opensearch.performanceanalyzer.commons.stats.collectors.SampleAggregator;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.CollectorMetrics;
+import org.opensearch.performanceanalyzer.commons.stats.metrics.ExceptionsAndErrors;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 /**
@@ -16,8 +18,10 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
  */
 public class ServiceMetrics {
     public static SampleAggregator READER_METRICS_AGGREGATOR,
-            WRITER_METRICS_AGGREGATOR = new SampleAggregator(StatMetrics.values()),
-            ERRORS_AND_EXCEPTIONS_AGGREGATOR,
+            STAT_METRICS_AGGREGATOR = new SampleAggregator(StatMetrics.values()),
+            COLLECTORS_METRICS_AGGREGATOR = new SampleAggregator(CollectorMetrics.values()),
+            PA_COLLECTORS_METRICS_AGGREGATOR,
+            ERRORS_AND_EXCEPTIONS_AGGREGATOR = new SampleAggregator(ExceptionsAndErrors.values()),
             PERIODIC_SAMPLE_AGGREGATOR,
             RCA_GRAPH_METRICS_AGGREGATOR,
             RCA_RUNTIME_METRICS_AGGREGATOR,
@@ -35,10 +39,13 @@ public class ServiceMetrics {
                         Arrays.asList(
                                 COMMONS_STAT_METRICS_AGGREGATOR,
                                 READER_METRICS_AGGREGATOR,
+                                STAT_METRICS_AGGREGATOR,
+                                COLLECTORS_METRICS_AGGREGATOR,
+                                PA_COLLECTORS_METRICS_AGGREGATOR,
+                                ERRORS_AND_EXCEPTIONS_AGGREGATOR,
+                                PERIODIC_SAMPLE_AGGREGATOR,
                                 RCA_GRAPH_METRICS_AGGREGATOR,
                                 RCA_RUNTIME_METRICS_AGGREGATOR,
-                                RCA_VERTICES_METRICS_AGGREGATOR,
-                                ERRORS_AND_EXCEPTIONS_AGGREGATOR,
-                                PERIODIC_SAMPLE_AGGREGATOR));
+                                RCA_VERTICES_METRICS_AGGREGATOR));
     }
 }

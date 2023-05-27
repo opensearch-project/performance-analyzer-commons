@@ -77,14 +77,18 @@ public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
     }
 
     public void run() {
+        long mCurrT = System.currentTimeMillis();
         try {
-            long mCurrT = System.currentTimeMillis();
             Util.invokePrivileged(() -> collectMetrics(startTime));
+            LOG.debug(
+                    "[ {} ]Successfully collected ClusterManager Event Metrics.",
+                    getCollectorName());
             ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
                     statLatencyMetric, System.currentTimeMillis() - mCurrT);
         } catch (Exception ex) {
             LOG.error(
-                    "[{}] Error In Collect Metrics: {}",
+                    "[ {} ] Error in metric collection for startTime {}: {}",
+                    () -> mCurrT,
                     () -> getCollectorName(),
                     () -> ex.toString());
             StatsCollector.instance().logException(errorMetric);
