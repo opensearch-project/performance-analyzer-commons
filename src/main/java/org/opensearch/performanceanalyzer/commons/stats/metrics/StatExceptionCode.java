@@ -87,6 +87,7 @@ public enum StatExceptionCode {
     STATS_COLLECTOR_ERROR("StatsCollectorError"),
     THREADPOOL_METRICS_COLLECTOR_ERROR("ThreadPoolMetricsCollectorError"),
     SHARD_STATE_COLLECTOR_ERROR("ShardStateCollectorError"),
+    CACHE_CONFIG_METRICS_COLLECTOR_ERROR("CacheConfigMetricsCollectorError"),
     ADMISSION_CONTROL_COLLECTOR_ERROR("AdmissionControlCollectorError"),
     CIRCUIT_BREAKER_COLLECTOR_ERROR("CircuitBreakerCollectorError"),
     CLUSTER_MANAGER_METRICS_ERROR("ClusterManagerMetricsError"),
