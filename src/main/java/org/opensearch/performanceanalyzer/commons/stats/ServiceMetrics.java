@@ -6,7 +6,10 @@
 package org.opensearch.performanceanalyzer.commons.stats;
 
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.opensearch.performanceanalyzer.commons.stats.collectors.SampleAggregator;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.CollectorMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.ExceptionsAndErrors;
@@ -34,9 +37,8 @@ public class ServiceMetrics {
     public static StatsReporter STATS_REPORTER;
 
     public static void initStatsReporter() {
-        STATS_REPORTER =
-                new StatsReporter(
-                        Arrays.asList(
+        List<SampleAggregator> aggregators =
+                Stream.of(
                                 COMMONS_STAT_METRICS_AGGREGATOR,
                                 READER_METRICS_AGGREGATOR,
                                 STAT_METRICS_AGGREGATOR,
@@ -46,6 +48,10 @@ public class ServiceMetrics {
                                 PERIODIC_SAMPLE_AGGREGATOR,
                                 RCA_GRAPH_METRICS_AGGREGATOR,
                                 RCA_RUNTIME_METRICS_AGGREGATOR,
-                                RCA_VERTICES_METRICS_AGGREGATOR));
+                                RCA_VERTICES_METRICS_AGGREGATOR)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+
+        STATS_REPORTER = new StatsReporter(aggregators);
     }
 }
