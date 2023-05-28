@@ -92,6 +92,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDataBindVersion}"
     implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'com.google.code.gson:gson:2.9.0'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4jVersion}"
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4jVersion}"
 
@@ -164,7 +165,7 @@ spotless {
 }
 
 tasks.withType(Test) {
-    jvmArgs('-Dopensearch.path.conf=config')
+    jvmArgs('-Dopensearch.path.conf=src/test/resources/config')
     jvmArgs('--add-opens=java.base/sun.nio.fs=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.io=ALL-UNNAMED')
     jvmArgs('--add-opens=java.base/java.nio.file=ALL-UNNAMED')
