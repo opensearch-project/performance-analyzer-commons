@@ -87,6 +87,10 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
         counters = new ConcurrentHashMap<>();
 
         for (StatExceptionCode statExceptionCode : defaultExceptionCodes) {
+            // TODO: remove null guard when counters are sorted out
+            if (currentCounters == null) {
+                currentCounters = new ConcurrentHashMap<>();
+            }
             currentCounters.putIfAbsent(statExceptionCode.toString(), new AtomicInteger(0));
         }
 
@@ -173,6 +177,10 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     }
 
     private void incCounter(String counterName) {
+        // TODO: remove null guard when counters are sorted out
+        if (counters == null) {
+            counters = new ConcurrentHashMap<>();
+        }
         AtomicInteger val = counters.putIfAbsent(counterName, new AtomicInteger(1));
         if (val != null) {
             val.getAndIncrement();
@@ -180,6 +188,10 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     }
 
     private void incErrorCounter() {
+        // TODO: remove null guard when counters are sorted out
+        if (counters == null) {
+            counters = new ConcurrentHashMap<>();
+        }
         AtomicInteger all_val =
                 counters.putIfAbsent(
                         StatExceptionCode.TOTAL_ERROR.toString(), new AtomicInteger(1));
