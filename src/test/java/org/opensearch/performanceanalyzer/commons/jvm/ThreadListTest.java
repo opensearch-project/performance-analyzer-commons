@@ -29,7 +29,6 @@ public class ThreadListTest {
         String old_clk_tck = System.getProperty(propertyName);
         System.setProperty(propertyName, "100");
         ThreadInfo[] infos = ThreadList.getAllThreadInfos();
-        System.setProperty("opensearch.path.conf", "config");
         // Artificially injecting a null to simulate that the thread id does not exist
         // any more and therefore the corresponding threadInfo is null.
         infos[0] = null;
