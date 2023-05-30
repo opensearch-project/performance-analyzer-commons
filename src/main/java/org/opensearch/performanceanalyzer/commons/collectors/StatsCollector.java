@@ -87,16 +87,12 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
         counters = new ConcurrentHashMap<>();
 
         for (StatExceptionCode statExceptionCode : defaultExceptionCodes) {
-            // TODO: remove null guard when counters are sorted out
-            if (currentCounters == null) {
-                currentCounters = new ConcurrentHashMap<>();
-            }
             currentCounters.putIfAbsent(statExceptionCode.toString(), new AtomicInteger(0));
         }
 
         /**
          * Each run StatsCollector collectMetric(scheduled every 60s) emits 2 entries. The first
-         * entry via {@link writeStats} writes counters and metrics, and the second {@link
+         * entry via {@link writeStats} writes counters, and the second {@link
          * collectAndWriteRcaStats} writes timers and metrics.
          */
         writeStats(
@@ -119,7 +115,7 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
                     formatter.getAllMetrics()) {
                 if (!statsReturn.isEmpty()) {
                     logStatsRecord(
-                            counters = null,
+                            null,
                             statsReturn.getStatsdata(),
                             statsReturn.getLatencies(),
                             statsReturn.getStartTimeMillis(),
@@ -140,12 +136,12 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     }
 
     public void logStatsRecord(
-            Map<String, AtomicInteger> counters,
+            Map<String, AtomicInteger> counterData,
             Map<String, String> statsData,
-            Map<String, Double> latencies,
+            Map<String, Double> latencyData,
             long startTimeMillis,
             long endTimeMillis) {
-        writeStats(metadata, counters, statsData, latencies, startTimeMillis, endTimeMillis);
+        writeStats(metadata, counterData, statsData, latencyData, startTimeMillis, endTimeMillis);
     }
 
     private void addRcaVersionMetadata(Map<String, String> metadata) {
@@ -177,10 +173,6 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     }
 
     private void incCounter(String counterName) {
-        // TODO: remove null guard when counters are sorted out
-        if (counters == null) {
-            counters = new ConcurrentHashMap<>();
-        }
         AtomicInteger val = counters.putIfAbsent(counterName, new AtomicInteger(1));
         if (val != null) {
             val.getAndIncrement();
@@ -188,10 +180,6 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
     }
 
     private void incErrorCounter() {
-        // TODO: remove null guard when counters are sorted out
-        if (counters == null) {
-            counters = new ConcurrentHashMap<>();
-        }
         AtomicInteger all_val =
                 counters.putIfAbsent(
                         StatExceptionCode.TOTAL_ERROR.toString(), new AtomicInteger(1));
