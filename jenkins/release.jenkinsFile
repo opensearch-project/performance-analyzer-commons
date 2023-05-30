@@ -7,10 +7,10 @@ standardReleasePipelineWithGenericTrigger(
     tokenIdCredential: 'jenkins-performance-analyzer-commons-generic-webhook-token',
     causeString: 'A tag was cut on opensearch-project/performance-analyzer-commons repository causing this workflow to run',
     downloadReleaseAsset: true,
-    publishRelease: true) {
+    publishRelease: false) {
         publishToMaven(
             signingArtifactsPath: "$WORKSPACE/repository/",
             mavenArtifactsPath: "$WORKSPACE/repository/",
-            autoPublish: true
+            autoPublish: false
         )
     }
