@@ -81,7 +81,7 @@ public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
         try {
             Util.invokePrivileged(() -> collectMetrics(startTime));
             LOG.debug(
-                    "[ {} ]Successfully collected ClusterManager Event Metrics.",
+                    "[ {} ] Successfully collected ClusterManager Event Metrics.",
                     getCollectorName());
             ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
                     statLatencyMetric, System.currentTimeMillis() - mCurrT);
