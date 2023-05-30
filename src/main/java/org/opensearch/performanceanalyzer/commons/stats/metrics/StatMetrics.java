@@ -64,8 +64,75 @@ public enum StatMetrics implements MeasurementSet {
     OS_METRICS_COLLECTOR_EXECUTION_TIME(
             "OSMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     STAT_COLLECTOR_EXECUTION_TIME(
-            "StatCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM);
+            "StatCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
 
+    // TODO: These are part of former PACollectorMetrics and should be moved in future
+    ADMISSION_CONTROL_COLLECTOR_EXECUTION_TIME(
+            "AdmissionControlCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    CACHE_CONFIG_METRICS_COLLECTOR_EXECUTION_TIME(
+            "CacheConfigMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    CIRCUIT_BREAKER_COLLECTOR_EXECUTION_TIME(
+            "CircuitBreakerCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    CLUSTER_APPLIER_SERVICE_STATS_COLLECTOR_EXECUTION_TIME(
+            "ClusterApplierServiceStatsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    CLUSTER_MANAGER_SERVICE_EVENTS_METRICS_COLLECTOR_EXECUTION_TIME(
+            "ClusterManagerServiceEventsMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    CLUSTER_MANAGER_SERVICE_METRICS_COLLECTOR_EXECUTION_TIME(
+            "ClusterManagerServiceMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    CLUSTER_MANAGER_THROTTLING_COLLECTOR_EXECUTION_TIME(
+            "ClusterManagerThrottlingCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    ELECTION_TERM_COLLECTOR_EXECUTION_TIME(
+            "ElectionTermCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    FAULT_DETECTION_COLLECTOR_EXECUTION_TIME(
+            "FaultDetectionCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    NODE_DETAILS_COLLECTOR_EXECUTION_TIME(
+            "NodeDetailsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    NODE_STATS_ALL_SHARDS_METRICS_COLLECTOR_EXECUTION_TIME(
+            "NodeStatsAllShardsMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    NODE_STATS_FIXED_SHARDS_METRICS_COLLECTOR_EXECUTION_TIME(
+            "NodeStatsFixedShardsMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    SHARD_INDEXING_PRESSURE_COLLECTOR_EXECUTION_TIME(
+            "ShardIndexingPressureCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    SHARD_STATE_COLLECTOR_EXECUTION_TIME(
+            "ShardStateCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    THREADPOOL_METRICS_COLLECTOR_EXECUTION_TIME(
+            "ThreadPoolMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+
+    /** Tracks collector specific metrics - available/enabled/disabled and other params */
+    ADMISSION_CONTROL_COLLECTOR_NOT_AVAILABLE("AdmissionControlCollectorNotAvailable"),
+
+    CLUSTER_MANAGER_THROTTLING_COLLECTOR_NOT_AVAILABLE(
+            "ClusterManagerThrottlingCollectorNotAvailable");
     /** What we want to appear as the metric name. */
     private String name;
 
