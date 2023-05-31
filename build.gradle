@@ -174,13 +174,29 @@ tasks.withType(Test) {
     jvmArgs('--add-opens=java.xml/jdk.xml.internal=ALL-UNNAMED')
 }
 
+javadoc {
+    exclude 'org/opensearch/performanceanalyzer/commons/jvm/**'
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set("sources")
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    archiveClassifier.set("javadoc")
+    from sourceSets.main.allJava
+    dependsOn javadoc
+}
+
 publishing {
     publications {
         create(MavenPublication) {
             groupId = 'org.opensearch'
             artifactId = 'performance-analyzer-commons'
 
-            from components.java
+            artifact sourcesJar
+            artifact javadocJar
 
             pom {
                 name = "OpenSearch Performance Analyzer Commons"
@@ -207,6 +223,7 @@ publishing {
             }
         }
     }
+
     repositories {
         if (buildVersion.toString().endsWith("SNAPSHOT")) {
             maven {

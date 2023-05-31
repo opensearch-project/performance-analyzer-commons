@@ -74,7 +74,12 @@ public class PerformanceAnalyzerMetrics {
     private static final int sTimeInterval =
             MetricsConfiguration.CONFIG_MAP.get(PerformanceAnalyzerMetrics.class).rotationInterval;
 
-    /** This method aligns the given time with the ROTATION_INTERVAL */
+    /**
+     * This method aligns the given time with the ROTATION_INTERVAL
+     *
+     * @param startTime The start time.
+     * @return Timestamp in long for the interval.
+     */
     public static long getTimeInterval(long startTime) {
         return getTimeInterval(startTime, sTimeInterval);
     }
