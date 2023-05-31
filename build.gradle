@@ -8,9 +8,9 @@ buildscript {
         // Detect version from version.properties and align it with the build settings
         def build = new Properties()
         file("version.properties").withInputStream { build.load(it) }
-        var isSnapshot = "true" == System.getProperty("build.snapshot", "true")
+        var isSnapshot = System.getProperty("build.snapshot", "true")
         buildVersion = build.getProperty("version")
-        if (isSnapshot && !buildVersion.endsWith("SNAPSHOT")) {
+        if (isSnapshot.toBoolean() && !buildVersion.endsWith("SNAPSHOT")) {
             buildVersion = buildVersion + "-SNAPSHOT"
         } else if (!isSnapshot && buildVersion.endsWith("SNAPSHOT")) {
             throw GradleException("Expecting release (non-SNAPSHOT) build but version is not set accordingly: " + buildVersion)
