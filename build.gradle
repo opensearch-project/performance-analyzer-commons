@@ -194,7 +194,7 @@ publishing {
         create(MavenPublication) {
             groupId = 'org.opensearch'
             artifactId = 'performance-analyzer-commons'
-
+            from(components["java"])
             artifact sourcesJar
             artifact javadocJar
 
