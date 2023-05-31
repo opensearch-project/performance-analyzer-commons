@@ -10,8 +10,7 @@ package org.opensearch.performanceanalyzer.commons.stats.metrics;
  *
  * <p>Note: The framework also provides the specialized 'Named Counters' at {@link
  * ExceptionsAndErrors}. Named Counter take a key with it, and reports the count of occurrences for
- * each key. see <a
- * href="{@docRoot}/java/org/opensearch/performanceanalyzer/rca/stats/README.md>Stats README</a>.
+ * each key.
  */
 public enum StatExceptionCode {
     TOTAL_ERROR("TotalError"),
@@ -32,9 +31,7 @@ public enum StatExceptionCode {
     JVM_THREAD_ID_NO_LONGER_EXISTS("JVMThreadIdNoLongerExists"),
 
     /**
-     * We start 6 threads within RCA Agent, details at {@link
-     * org.opensearch.performanceanalyzer.PerformanceAnalyzerThreads}. Below metrics track count of
-     * thread started and ended.
+     * We start 6 threads within RCA Agent. Below metrics track count of thread started and ended.
      *
      * <p>Note: The 'PA' in metricName is confusing, it is meant to imply threads started within RCA
      * Agent.
@@ -42,12 +39,7 @@ public enum StatExceptionCode {
     NUM_PA_THREADS_STARTED("NumberOfPAThreadsStarted"),
     NUM_PA_THREADS_ENDED("NumberOfPAThreadsEnded"),
 
-    /**
-     * For each thread defined in {@link
-     * org.opensearch.performanceanalyzer.PerformanceAnalyzerThreads}, we add a respective
-     * 'threadExceptionCode' metric. These metrics are emitted in catch block of {@link
-     * org.opensearch.performanceanalyzer.threads.ThreadProvider#createThreadForRunnable}
-     */
+    /** For each thread, we add a respective 'threadExceptionCode' metric. */
     READER_THREAD_STOPPED("ReaderThreadStopped"),
     ERROR_HANDLER_THREAD_STOPPED("ErrorHandlerThreadStopped"),
     GRPC_SERVER_THREAD_STOPPED("GRPCServerThreadStopped"),
