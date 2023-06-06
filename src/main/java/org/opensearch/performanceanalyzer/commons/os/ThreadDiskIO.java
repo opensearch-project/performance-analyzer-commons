@@ -11,7 +11,7 @@ import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.linux.LinuxDiskIOMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.os.metrics.DiskIOMetricsCalculator;
 import org.opensearch.performanceanalyzer.commons.os.metrics.IOMetrics;
-import org.opensearch.performanceanalyzer.commons.os.observer.ResourceObserver;
+import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 import org.opensearch.performanceanalyzer.commons.os.observer.impl.IOObserver;
 
 public class ThreadDiskIO {

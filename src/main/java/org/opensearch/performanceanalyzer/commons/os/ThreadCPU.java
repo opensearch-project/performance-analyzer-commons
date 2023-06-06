@@ -13,7 +13,7 @@ import static org.opensearch.performanceanalyzer.commons.os.metrics.CPUMetricsCa
 import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.linux.LinuxCPUPagingActivityGenerator;
-import org.opensearch.performanceanalyzer.commons.os.observer.ResourceObserver;
+import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 import org.opensearch.performanceanalyzer.commons.os.observer.impl.CPUObserver;
 
 public final class ThreadCPU {

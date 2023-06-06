@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import org.opensearch.performanceanalyzer.commons.os.OSGlobals;
 import org.opensearch.performanceanalyzer.commons.os.SchemaFileParser;
 import org.opensearch.performanceanalyzer.commons.os.SchemaFileParser.FieldTypes;
-import org.opensearch.performanceanalyzer.commons.os.observer.ResourceObserver;
+import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 
 public class SchedObserver implements ResourceObserver {
 

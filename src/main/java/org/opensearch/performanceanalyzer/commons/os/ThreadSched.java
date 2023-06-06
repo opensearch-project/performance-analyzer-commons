@@ -12,7 +12,7 @@ import org.opensearch.performanceanalyzer.commons.metrics_generator.SchedMetrics
 import org.opensearch.performanceanalyzer.commons.metrics_generator.linux.LinuxSchedMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.os.metrics.SchedMetrics;
 import org.opensearch.performanceanalyzer.commons.os.metrics.SchedMetricsCalculator;
-import org.opensearch.performanceanalyzer.commons.os.observer.ResourceObserver;
+import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 import org.opensearch.performanceanalyzer.commons.os.observer.impl.SchedObserver;
 
 public final class ThreadSched {
