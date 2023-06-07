@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 import org.opensearch.performanceanalyzer.commons.os.OSGlobals;
 
-public abstract class OsObserver<T> implements ResourceObserver {
+public class OsObserver<T> implements ResourceObserver {
 
     @Override
     public Map<String, T> observe(String threadId) {
