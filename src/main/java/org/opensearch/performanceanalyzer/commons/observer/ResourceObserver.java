@@ -21,23 +21,7 @@ public interface ResourceObserver<T> {
      * @param threadId
      * @return
      */
-    Map<String, T> observe(String threadId);
+    T observe(String threadId);
 
-    /**
-     * Retrieves the specified metric for the given thread, if it is present
-     *
-     * @param threadId id of the thread
-     * @param metric metric name
-     * @return metric value
-     */
-    default T observeMetricForThread(String threadId, String metric) {
-        Map<String, T> threadSample = observe(threadId);
-        if (threadSample == null || threadSample.isEmpty()) {
-            return null;
-        }
-
-        return observe(threadId).get(metric);
-    }
-
-    Map<String, Map<String, T>> observe();
+    Map<String, T> observe();
 }
