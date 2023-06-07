@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 import org.opensearch.performanceanalyzer.commons.os.OSGlobals;
 import org.opensearch.performanceanalyzer.commons.os.SchemaFileParser;
 import org.opensearch.performanceanalyzer.commons.os.SchemaFileParser.FieldTypes;
-import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
+import org.opensearch.performanceanalyzer.commons.os.observer.OsObserver;
 
-public class CPUObserver implements ResourceObserver<Object> {
+public class CPUObserver extends OsObserver<Object> {
     public enum StatKeys {
         PID("pid"),
         COMM("comm"),

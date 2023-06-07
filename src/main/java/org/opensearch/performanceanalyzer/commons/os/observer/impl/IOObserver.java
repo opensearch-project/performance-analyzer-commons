@@ -17,10 +17,10 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.os.OSGlobals;
-import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
+import org.opensearch.performanceanalyzer.commons.os.observer.OsObserver;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
 
-public class IOObserver implements ResourceObserver<Long> {
+public class IOObserver extends OsObserver<Long> {
     private static final Logger LOGGER = LogManager.getLogger(IOObserver.class);
 
     public enum StatKeys {

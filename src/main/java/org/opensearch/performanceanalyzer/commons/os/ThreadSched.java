@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.SchedMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.linux.LinuxSchedMetricsGenerator;
+import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 import org.opensearch.performanceanalyzer.commons.os.metrics.SchedMetrics;
 import org.opensearch.performanceanalyzer.commons.os.metrics.SchedMetricsCalculator;
-import org.opensearch.performanceanalyzer.commons.observer.ResourceObserver;
 import org.opensearch.performanceanalyzer.commons.os.observer.impl.SchedObserver;
 
 public final class ThreadSched {

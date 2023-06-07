@@ -9,9 +9,7 @@ package org.opensearch.performanceanalyzer.commons.os.metrics;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.os.observer.impl.IOObserver.StatKeys;
 
-/**
- * Calculates the disk io metrics for the threads considering the beginning and end measurements
- */
+/** Calculates the disk io metrics for the threads considering the beginning and end measurements */
 public final class DiskIOMetricsCalculator {
     public static IOMetrics calculateIOMetrics(
             long endMeasurementTime,

@@ -9,9 +9,7 @@ package org.opensearch.performanceanalyzer.commons.os.metrics;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.os.observer.impl.SchedObserver.SchedKeys;
 
-/**
- * Calculates sched metric resources consumption by threads
- */
+/** Calculates sched metric resources consumption by threads */
 public final class SchedMetricsCalculator {
     /**
      * Calculates sched metrics based on the values from beginning and end of measurement
@@ -42,16 +40,26 @@ public final class SchedMetricsCalculator {
         }
 
         long ctxdiff =
-            (long) endTimeResourceMetrics.getOrDefault(SchedKeys.TOTCTXSWS.getLabel(), 0L)
-                - (long) startTimeResourceMetrics.getOrDefault(SchedKeys.TOTCTXSWS.getLabel(), 0L);
+                (long) endTimeResourceMetrics.getOrDefault(SchedKeys.TOTCTXSWS.getLabel(), 0L)
+                        - (long)
+                                startTimeResourceMetrics.getOrDefault(
+                                        SchedKeys.TOTCTXSWS.getLabel(), 0L);
         double avgRuntime =
-            1.0e-9
-                * ((long) endTimeResourceMetrics.getOrDefault(SchedKeys.RUNTICKS.getLabel(), 0L)
-                - (long) startTimeResourceMetrics.getOrDefault(SchedKeys.RUNTICKS.getLabel(), 0L));
+                1.0e-9
+                        * ((long)
+                                        endTimeResourceMetrics.getOrDefault(
+                                                SchedKeys.RUNTICKS.getLabel(), 0L)
+                                - (long)
+                                        startTimeResourceMetrics.getOrDefault(
+                                                SchedKeys.RUNTICKS.getLabel(), 0L));
         double avgWaittime =
-            1.0e-9
-                * ((long) endTimeResourceMetrics.getOrDefault(SchedKeys.WAITTICKS.getLabel(), 0L)
-                - (long) startTimeResourceMetrics.getOrDefault(SchedKeys.WAITTICKS.getLabel(), 0L));
+                1.0e-9
+                        * ((long)
+                                        endTimeResourceMetrics.getOrDefault(
+                                                SchedKeys.WAITTICKS.getLabel(), 0L)
+                                - (long)
+                                        startTimeResourceMetrics.getOrDefault(
+                                                SchedKeys.WAITTICKS.getLabel(), 0L));
         if (ctxdiff == 0) {
             avgRuntime = 0;
             avgWaittime = 0;

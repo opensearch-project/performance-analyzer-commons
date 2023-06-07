@@ -6,13 +6,10 @@
 package org.opensearch.performanceanalyzer.commons.observer;
 
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import org.opensearch.performanceanalyzer.commons.os.OSGlobals;
 
 /**
- * Observers resources consumption by the threads
+ * Observers resources consumption
  *
  * @param <T> Type of the metric
  */
@@ -27,7 +24,7 @@ public interface ResourceObserver<T> {
     Map<String, T> observe(String threadId);
 
     /**
-     * Retrieves the metric for the given thread, if it is present
+     * Retrieves the specified metric for the given thread, if it is present
      *
      * @param threadId id of the thread
      * @param metric metric name
@@ -42,14 +39,5 @@ public interface ResourceObserver<T> {
         return observe(threadId).get(metric);
     }
 
-    /**
-     * Retrieves the metrics for all available threads
-     *
-     * @return map of threads and associated metrics
-     */
-    default Map<String, Map<String, T>> observe() {
-        List<String> threadIds = OSGlobals.getTids();
-        return threadIds.stream()
-                .collect(Collectors.toMap(threadId -> threadId, threadId -> observe(threadId)));
-    }
+    Map<String, Map<String, T>> observe();
 }
