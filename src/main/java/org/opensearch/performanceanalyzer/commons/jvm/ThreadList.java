@@ -42,6 +42,7 @@ public class ThreadList {
     private static final Map<Long, ThreadState> jTidMap = new ConcurrentHashMap<>();
     private static final Map<String, ThreadState> nameMap = new ConcurrentHashMap<>();
     private static final String pid = OSMetricsGeneratorFactory.getInstance().getPid();
+    private static final long MILLIS_PER_SECOND = 1000;
     static final Logger LOGGER = LogManager.getLogger(ThreadList.class);
     static final int samplingInterval =
             MetricsConfiguration.CONFIG_MAP.get(ThreadList.class).samplingInterval;
@@ -274,7 +275,11 @@ public class ThreadList {
                 CircularLongArray arr = ThreadHistory.blockedTidHistoryMap.get(t.nativeTid);
                 // NOTE: this is an upper bound
                 if (arr != null) {
-                    t.avgBlockedTime = 1.0 * arr.getAvgValue() / samplingInterval;
+                    // We need to get the value of blocked time per interval rather than per second.
+                    // (i.e How many seconds the thread was blocked in last sampling interval.
+                    // So if the blocked time for last 5 seconds interval was 3 seconds we will calculate the value as 3 seconds instead of 3/5 seconds.)
+                    // This is resulting in lower blocked time during the Total sum calculation for past 1 minute in ThreadMetricsRca
+                    t.avgBlockedTime = 1.0 * arr.getAvgValue() / MILLIS_PER_SECOND;
                 }
             }
             if (t.waitedTime != -1 && t.waitedCount > oldt.waitedCount) {
@@ -288,7 +293,11 @@ public class ThreadList {
                 CircularLongArray arr = ThreadHistory.waitedTidHistoryMap.get(t.nativeTid);
                 // NOTE: this is an upper bound
                 if (arr != null) {
-                    t.avgWaitedTime = 1.0 * arr.getAvgValue() / samplingInterval;
+                    // We need to get the value of waited time per interval rather than per second.
+                    // (i.e How many seconds the thread was waiting in last sampling interval.
+                    // So if the waited time for last 5 seconds interval was 3 seconds we will calculate the value as 3 seconds instead of 3/5 seconds.)
+                    // This is resulting in lower waited time during the Total sum calculation for past 1 minute in ThreadMetricsRca
+                    t.avgWaitedTime = 1.0 * arr.getAvgValue() / MILLIS_PER_SECOND;
                 }
             }
         }
