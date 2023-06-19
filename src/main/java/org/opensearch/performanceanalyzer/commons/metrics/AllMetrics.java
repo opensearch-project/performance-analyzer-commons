@@ -935,7 +935,15 @@ public class AllMetrics {
                         .SEARCHBP_SEARCH_SHARD_TASK_STATS_LIMITREACHEDCOUNT),
         SEARCHBP_SEARCH_SHARD_TASK_STATS_RESOURCE_USAGE_TRACKER_STATS(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SEARCH_SHARD_TASK_STATS_RESOURCE_USAGE_TRACKER_STATS);
+                        .SEARCHBP_SEARCH_SHARD_TASK_STATS_RESOURCE_USAGE_TRACKER_STATS),
+        SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_SHARD_TASK_STATS(
+                SearchBackPressureStatsValue.Constants
+                        .SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_SHARD_TASK_STATS),
+        SEARCHBP_SEARCH_BACK_PRESSURE_STATS_MODE(
+                SearchBackPressureStatsValue.Constants.SEARCHBP_SEARCH_BACK_PRESSURE_STATS_MODE),
+        SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS(
+                SearchBackPressureStatsValue.Constants
+                        .SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS);
 
         private final String value;
 
@@ -949,8 +957,7 @@ public class AllMetrics {
         }
 
         public static class Constants {
-
-            // SearchBackPressure Stats
+            // SearchBackPressure Metrics
             public static final String SEARCHBP_MODE = "searchbp_mode";
             public static final String SEARCHBP_NODEID = "searchbp_nodeid";
             public static final String SEARCHBP_SHARD_STATS_CANCELLATIONCOUNT =
@@ -1024,6 +1031,12 @@ public class AllMetrics {
             public static final String
                     SEARCHBP_SEARCH_SHARD_TASK_STATS_RESOURCE_USAGE_TRACKER_STATS =
                             "resourceUsageTrackerStats";
+            // SearchBackPressureStats
+            public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_SHARD_TASK_STATS =
+                    "searchShardTaskStats";
+            public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_MODE = "mode";
+            public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS =
+                    "searchTaskStats";
         }
     }
 
