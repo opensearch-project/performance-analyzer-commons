@@ -10,10 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.DiskIOMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.os.ThreadDiskIO;
+import org.opensearch.performanceanalyzer.commons.os.metrics.IOMetrics;
 
 public class LinuxDiskIOMetricsGenerator implements DiskIOMetricsGenerator {
 
-    private Map<String, ThreadDiskIO.IOMetrics> diskIOMetricsMap;
+    private Map<String, IOMetrics> diskIOMetricsMap;
 
     public LinuxDiskIOMetricsGenerator() {
         diskIOMetricsMap = new HashMap<>();
@@ -66,7 +67,7 @@ public class LinuxDiskIOMetricsGenerator implements DiskIOMetricsGenerator {
         ThreadDiskIO.addSample();
     }
 
-    public void setDiskIOMetrics(final String threadId, final ThreadDiskIO.IOMetrics ioMetrics) {
+    public void setDiskIOMetrics(final String threadId, final IOMetrics ioMetrics) {
         diskIOMetricsMap.put(threadId, ioMetrics);
     }
 }

@@ -83,7 +83,7 @@ public class OSGlobals {
         }
     }
 
-    static synchronized List<String> getTids() {
+    public static synchronized List<String> getTids() {
         long curtime = System.currentTimeMillis();
         if (curtime - lastUpdated > REFRESH_INTERVAL_MS) {
             enumTids();
