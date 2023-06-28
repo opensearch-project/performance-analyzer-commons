@@ -944,12 +944,10 @@ public class AllMetrics {
         SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS(
                 SearchBackPressureStatsValue.Constants
                         .SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS),
-        SEARCHBP_TABLE_NAME(
-            SearchBackPressureStatsValue.Constants.SEARCHBP_TABLE_NAME),
-        SEARCHBP_TYPE_DIM(
-            SearchBackPressureStatsValue.Constants.SEARCHBP_TYPE_DIM);
+        SEARCHBP_TABLE_NAME(SearchBackPressureStatsValue.Constants.SEARCHBP_TABLE_NAME),
+        SEARCHBP_TYPE_DIM(SearchBackPressureStatsValue.Constants.SEARCHBP_TYPE_DIM);
 
-        private final String value; 
+        private final String value;
 
         SearchBackPressureStatsValue(String value) {
             this.value = value;
@@ -1042,10 +1040,12 @@ public class AllMetrics {
             public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS =
                     "searchTaskStats";
 
-            // General Info 
-            // Table Name stored in sqlitedb
+            /*
+             * General Info
+             * Add SEARCHBP_TABLE_NAME for searchbackpressureRCA to find the corresponding table
+             * Add SEARCHBP_TYPE_DIM for searchbackpressureRCA to find the cell value for each stats type
+             */
             public static final String SEARCHBP_TABLE_NAME = "Searchbp_Stats";
-            // Column Names for difference stats stored in sqlitedb
             public static final String SEARCHBP_TYPE_DIM = "SearchBackPressureStats";
         }
     }
