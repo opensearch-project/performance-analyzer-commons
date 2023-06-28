@@ -1040,12 +1040,14 @@ public class AllMetrics {
             public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS =
                     "searchTaskStats";
 
-            /*
-             * General Info
+
+            /**
              * Add SEARCHBP_TABLE_NAME for searchbackpressureRCA to find the corresponding table
-             * Add SEARCHBP_TYPE_DIM for searchbackpressureRCA to find the cell value for each stats type
              */
             public static final String SEARCHBP_TABLE_NAME = "Searchbp_Stats";
+            /**
+             * Add SEARCHBP_TYPE_DIM for searchbackpressureRCA to find the cell value for each stats type
+             */
             public static final String SEARCHBP_TYPE_DIM = "SearchBackPressureStats";
         }
     }
