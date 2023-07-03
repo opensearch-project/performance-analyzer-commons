@@ -943,7 +943,9 @@ public class AllMetrics {
                 SearchBackPressureStatsValue.Constants.SEARCHBP_SEARCH_BACK_PRESSURE_STATS_MODE),
         SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS);
+                        .SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS),
+        SEARCHBP_TABLE_NAME(SearchBackPressureStatsValue.Constants.SEARCHBP_TABLE_NAME),
+        SEARCHBP_TYPE_DIM(SearchBackPressureStatsValue.Constants.SEARCHBP_TYPE_DIM);
 
         private final String value;
 
@@ -1037,6 +1039,16 @@ public class AllMetrics {
             public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_MODE = "mode";
             public static final String SEARCHBP_SEARCH_BACK_PRESSURE_STATS_SEARCH_TASK_STATS =
                     "searchTaskStats";
+
+
+            /**
+             * Add SEARCHBP_TABLE_NAME for searchbackpressureRCA to find the corresponding table
+             */
+            public static final String SEARCHBP_TABLE_NAME = "Searchbp_Stats";
+            /**
+             * Add SEARCHBP_TYPE_DIM for searchbackpressureRCA to find the cell value for each stats type
+             */
+            public static final String SEARCHBP_TYPE_DIM = "SearchBackPressureStats";
         }
     }
 
