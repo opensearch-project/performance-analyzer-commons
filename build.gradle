@@ -86,7 +86,7 @@ dependencies {
     def jacksonVersion = "2.15.1"
     def jacksonDataBindVersion = "2.14.1"
     def junitVersion  = "4.13.1"
-    def log4jVersion = "2.17.1"
+    def log4jVersion = "2.20.0"
 
     implementation "org.jooq:jooq:3.10.8"
     implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
