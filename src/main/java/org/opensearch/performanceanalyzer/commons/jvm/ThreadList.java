@@ -277,8 +277,10 @@ public class ThreadList {
                 if (arr != null) {
                     // We need to get the value of blocked time per interval rather than per second.
                     // (i.e How many seconds the thread was blocked in last sampling interval.
-                    // So if the blocked time for last 5 seconds interval was 3 seconds we will calculate the value as 3 seconds instead of 3/5 seconds.)
-                    // This is resulting in lower blocked time during the Total sum calculation for past 1 minute in ThreadMetricsRca
+                    // So if the blocked time for last 5 seconds interval was 3 seconds we will
+                    // calculate the value as 3 seconds instead of 3/5 seconds.)
+                    // This is resulting in lower blocked time during the Total sum calculation for
+                    // past 1 minute in ThreadMetricsRca
                     t.avgBlockedTime = 1.0 * arr.getAvgValue() / MILLIS_PER_SECOND;
                 }
             }
@@ -295,8 +297,10 @@ public class ThreadList {
                 if (arr != null) {
                     // We need to get the value of waited time per interval rather than per second.
                     // (i.e How many seconds the thread was waiting in last sampling interval.
-                    // So if the waited time for last 5 seconds interval was 3 seconds we will calculate the value as 3 seconds instead of 3/5 seconds.)
-                    // This is resulting in lower waited time during the Total sum calculation for past 1 minute in ThreadMetricsRca
+                    // So if the waited time for last 5 seconds interval was 3 seconds we will
+                    // calculate the value as 3 seconds instead of 3/5 seconds.)
+                    // This is resulting in lower waited time during the Total sum calculation for
+                    // past 1 minute in ThreadMetricsRca
                     t.avgWaitedTime = 1.0 * arr.getAvgValue() / MILLIS_PER_SECOND;
                 }
             }
