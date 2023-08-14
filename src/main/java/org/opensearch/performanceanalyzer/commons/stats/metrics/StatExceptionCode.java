@@ -92,6 +92,9 @@ public enum StatExceptionCode {
     NODESTATS_COLLECTION_ERROR("NodeStatsCollectionError"),
 
     /** Below tracks Reader specific Errors. */
+    READER_ERROR_PA_DISABLE_SUCCESS("ReaderErrorPADisableSuccess"),
+    READER_ERROR_PA_DISABLE_FAILED("ReaderErrorPADisableFailed"),
+    READER_ERROR_RCA_AGENT_STOPPED("ReaderErrorRCAAgentStopped"),
     READER_METRICSDB_ACCESS_ERRORS("ReaderMetricsdbAccessError"),
     READER_PARSER_ERROR("ReaderParserError"),
     READER_RESTART_PROCESSING("ReaderRestartProcessing"),
