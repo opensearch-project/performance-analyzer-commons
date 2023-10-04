@@ -6,6 +6,7 @@
 package org.opensearch.performanceanalyzer.commons.os;
 
 
+import com.google.common.annotations.VisibleForTesting;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,7 +138,11 @@ public final class ThreadSched {
     }
 
     public synchronized SchedMetricsGenerator getSchedLatency() {
-
         return schedLatencyMap;
+    }
+
+    @VisibleForTesting
+    public Map<String, Map<String, Object>> getTidKVMap() {
+        return this.tidKVMap;
     }
 }
