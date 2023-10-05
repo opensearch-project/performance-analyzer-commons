@@ -10,6 +10,7 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.ParameterizedMessage;
@@ -36,6 +37,27 @@ public final class ThreadSched {
             this.avgRuntime = avgRuntime;
             this.avgWaittime = avgWaittime;
             this.contextSwitchRate = contextSwitchRate;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.avgRuntime, this.avgWaittime, this.contextSwitchRate);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            SchedMetrics other = (SchedMetrics) o;
+
+            return Double.compare(avgRuntime, other.avgRuntime) == 0
+                    && Double.compare(avgWaittime, other.avgWaittime) == 0
+                    && Double.compare(contextSwitchRate, other.contextSwitchRate) == 0;
         }
 
         @Override
