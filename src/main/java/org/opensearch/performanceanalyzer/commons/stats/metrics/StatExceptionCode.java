@@ -82,14 +82,15 @@ public enum StatExceptionCode {
     CACHE_CONFIG_METRICS_COLLECTOR_ERROR("CacheConfigMetricsCollectorError"),
     ADMISSION_CONTROL_COLLECTOR_ERROR("AdmissionControlCollectorError"),
     CIRCUIT_BREAKER_COLLECTOR_ERROR("CircuitBreakerCollectorError"),
-    CLUSTER_MANAGER_METRICS_ERROR("ClusterManagerMetricsError"),
-    CLUSTER_MANAGER_NODE_NOT_UP("ClusterManagerNodeNotUp"),
+    CLUSTER_MANAGER_SERVICE_EVENTS_METRICS_COLLECTOR_ERROR("ClusterManagerServiceEventsMetricsCollectorError"),
+    CLUSTER_MANAGER_SERVICE_METRICS_COLLECTOR_ERROR("ClusterManagerServiceMetricsCollectorError"),
     CLUSTER_MANAGER_THROTTLING_COLLECTOR_ERROR("ClusterManagerThrottlingMetricsCollectorError"),
     FAULT_DETECTION_COLLECTOR_ERROR("FaultDetectionMetricsCollectorError"),
     CLUSTER_APPLIER_SERVICE_STATS_COLLECTOR_ERROR("ClusterApplierServiceStatsCollectorError"),
     ELECTION_TERM_COLLECTOR_ERROR("ElectionTermCollectorError"),
     SHARD_INDEXING_PRESSURE_COLLECTOR_ERROR("ShardIndexingPressureMetricsCollectorError"),
     NODESTATS_COLLECTION_ERROR("NodeStatsCollectionError"),
+    CLUSTER_MANAGER_NODE_NOT_UP("ClusterManagerNodeNotUp"),
 
     /** Below tracks Reader specific Errors. */
     READER_ERROR_PA_DISABLE_SUCCESS("ReaderErrorPADisableSuccess"),
