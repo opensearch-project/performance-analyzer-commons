@@ -10,10 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.SchedMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.os.ThreadSched;
+import org.opensearch.performanceanalyzer.commons.os.metrics.SchedMetrics;
 
 public class LinuxSchedMetricsGenerator implements SchedMetricsGenerator {
 
-    private final Map<String, ThreadSched.SchedMetrics> schedMetricsMap;
+    private final Map<String, SchedMetrics> schedMetricsMap;
 
     public LinuxSchedMetricsGenerator() {
         schedMetricsMap = new HashMap<>();
@@ -50,7 +51,7 @@ public class LinuxSchedMetricsGenerator implements SchedMetricsGenerator {
         ThreadSched.INSTANCE.addSample();
     }
 
-    public void setSchedMetric(final String threadId, final ThreadSched.SchedMetrics schedMetrics) {
+    public void setSchedMetric(final String threadId, final SchedMetrics schedMetrics) {
 
         schedMetricsMap.put(threadId, schedMetrics);
     }
