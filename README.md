@@ -17,6 +17,10 @@
 
 The OpenSearch Performance Analyzer Commons is focused on providing reusable Java components(data models and utility methods) for OpenSearch [Performance Analyzer](https://github.com/opensearch-project/performance-analyzer) plugin and the [Performance Analyzer RCA](https://github.com/opensearch-project/performance-analyzer-rca) Engine.
 
+## Documentation
+
+You can find a high-level overview of the project file structure [here](docs/High_Level_Explanation.md).
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
