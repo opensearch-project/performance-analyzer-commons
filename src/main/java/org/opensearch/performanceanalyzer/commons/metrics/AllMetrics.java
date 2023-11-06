@@ -845,6 +845,7 @@ public class AllMetrics {
                 SearchBackPressureStatsValue.Constants.SEARCHBP_SHARD_STATS_CANCELLATIONCOUNT),
         SEARCHBP_SHARD_STATS_LIMITREACHEDCOUNT(
                 SearchBackPressureStatsValue.Constants.SEARCHBP_SHARD_STATS_LIMITREACHEDCOUNT),
+        SEARCHBP_SHARD_STATS_COMPLETIONCOUNT(Constants.SEARCHBP_SHARD_STATS_COMPLETIONCOUNT),
         SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT(
                 SearchBackPressureStatsValue.Constants
                         .SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT),
@@ -876,6 +877,7 @@ public class AllMetrics {
                 SearchBackPressureStatsValue.Constants.SEARCHBP_TASK_STATS_CANCELLATIONCOUNT),
         SEARCHBP_TASK_STATS_LIMITREACHEDCOUNT(
                 SearchBackPressureStatsValue.Constants.SEARCHBP_TASK_STATS_LIMITREACHEDCOUNT),
+        SEARCHBP_TASK_STATS_COMPLETIONCOUNT(Constants.SEARCHBP_TASK_STATS_COMPLETIONCOUNT),
         SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT(
                 SearchBackPressureStatsValue.Constants
                         .SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT),
@@ -966,6 +968,8 @@ public class AllMetrics {
                     "searchbp_shard_stats_cancellationCount";
             public static final String SEARCHBP_SHARD_STATS_LIMITREACHEDCOUNT =
                     "searchbp_shard_stats_limitReachedCount";
+            public static final String SEARCHBP_SHARD_STATS_COMPLETIONCOUNT =
+                    "searchbp_shard_stats_completionCount";
             public static final String SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT =
                     "searchbp_shard_stats_resource_heap_usage_cancellationCount";
             public static final String SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX =
@@ -989,6 +993,8 @@ public class AllMetrics {
                     "searchbp_task_stats_cancellationCount";
             public static final String SEARCHBP_TASK_STATS_LIMITREACHEDCOUNT =
                     "searchbp_task_stats_limitReachedCount";
+            public static final String SEARCHBP_TASK_STATS_COMPLETIONCOUNT =
+                    "searchbp_task_stats_completionCount";
             public static final String SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT =
                     "searchbp_task_stats_resource_heap_usage_cancellationCount";
             public static final String SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX =
@@ -1023,6 +1029,8 @@ public class AllMetrics {
                     "cancellationCount";
             public static final String SEARCHBP_SEARCH_TASK_STATS_LIMITREACHEDCOUNT =
                     "limitReachedCount";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_COMPLETIONCOUNT =
+                    "completionCount";
             public static final String SEARCHBP_SEARCH_TASK_STATS_RESOURCE_USAGE_TRACKER_STATS =
                     "resourceUsageTrackerStats";
             // SearchShardTaskStats
@@ -1030,6 +1038,8 @@ public class AllMetrics {
                     "cancellationCount";
             public static final String SEARCHBP_SEARCH_SHARD_TASK_STATS_LIMITREACHEDCOUNT =
                     "limitReachedCount";
+            public static final String SEARCHBP_SEARCH_SHARD_TASK_STATS_COMPLETIONCOUNT =
+                    "completionCount";
             public static final String
                     SEARCHBP_SEARCH_SHARD_TASK_STATS_RESOURCE_USAGE_TRACKER_STATS =
                             "resourceUsageTrackerStats";

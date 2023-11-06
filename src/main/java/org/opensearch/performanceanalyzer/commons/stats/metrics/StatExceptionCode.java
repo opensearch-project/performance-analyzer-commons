@@ -82,7 +82,8 @@ public enum StatExceptionCode {
     CACHE_CONFIG_METRICS_COLLECTOR_ERROR("CacheConfigMetricsCollectorError"),
     ADMISSION_CONTROL_COLLECTOR_ERROR("AdmissionControlCollectorError"),
     CIRCUIT_BREAKER_COLLECTOR_ERROR("CircuitBreakerCollectorError"),
-    CLUSTER_MANAGER_SERVICE_EVENTS_METRICS_COLLECTOR_ERROR("ClusterManagerServiceEventsMetricsCollectorError"),
+    CLUSTER_MANAGER_SERVICE_EVENTS_METRICS_COLLECTOR_ERROR(
+            "ClusterManagerServiceEventsMetricsCollectorError"),
     CLUSTER_MANAGER_SERVICE_METRICS_COLLECTOR_ERROR("ClusterManagerServiceMetricsCollectorError"),
     CLUSTER_MANAGER_THROTTLING_COLLECTOR_ERROR("ClusterManagerThrottlingMetricsCollectorError"),
     FAULT_DETECTION_COLLECTOR_ERROR("FaultDetectionMetricsCollectorError"),
