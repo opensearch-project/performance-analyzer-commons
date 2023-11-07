@@ -4,7 +4,10 @@
  */
 
 package org.opensearch.performanceanalyzer.commons.os;
+
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,42 +23,52 @@ import org.junit.Test;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore("javax.management.*")
-@SuppressStaticInitializationFor({"org.opensearch.performanceanalyzer.commons.os.OSGlobals"})
+@SuppressStaticInitializationFor({ "org.opensearch.performanceanalyzer.commons.os.OSGlobals" })
 // whenNew requires the class calling the constructor to be PreparedForTest
-@PrepareForTest({SchemaFileParser.class, OSGlobals.class, ThreadDiskIO.class})
-public class ThreadDiskIOTests {
+@PrepareForTest({ SchemaFileParser.class, OSGlobals.class, ThreadDiskIO.class })
+public class ThreadDiskIOTests extends OSTests {
+	public ThreadDiskIOTests() throws Exception {
+		super(
+				new TreeMap<String, Map<String, Object>>(Map.of(
+					"1", Map.of("runticks", 200000000L, "waitticks", 200000000L, "totctxsws", 200L),
+					"2", Map.of("runticks", 500000000L, "waitticks", 500000000L, "totctxsws", 20L),
+					"3",
+					Map.of(
+							"runticks",
+							700000000L,
+							"waitticks",
+							700000000L,
+							"totctxsws",
+							220L))),
+				new TreeMap<String, Map<String, Object>>(Map.of(
+						"1",
+						Map.of("runticks", 200000000L, "waitticks", 200000000L, "totctxsws",
+								200L),
+						"2",
+						Map.of("runticks", 500000000L, "waitticks", 500000000L, "totctxsws",
+								20L),
+						"3",
+						Map.of(
+								"runticks",
+								700000000L,
+								"waitticks",
+								700000000L,
+								"totctxsws",
+								220L))),
+				"0", List.of("1", "2", "3"), 100, 10, 1010);
+	}
 
-    public static void runOnce() {
-        ThreadDiskIO.addSample();
-        System.out.println(ThreadDiskIO.getIOUtilization().toString());
-    }
+	@Test
+	public void testMetrics() throws Exception {
+		// this test checks that
+		// 1. ThreadDiskIO calls the SchemaFileParser constructor with the correct path
+		// 2. ThreadDiskIO calculates the correct metrics from procfile data
 
-    @Test
-    public void testMetrics() throws Exception {
-        // this test checks that
-        // 1. ThreadDiskIO calls the SchemaFileParser constructor with the correct path
-        // 2. ThreadDiskIO calculates the correct metrics from procfile data
-
-        // mock OSGlobals
-        PowerMockito.mockStatic(OSGlobals.class);
-        PowerMockito.when(OSGlobals.getPid()).thenReturn("0");
-        PowerMockito.when(OSGlobals.getTids()).thenReturn(List.of("1", "2", "3"));
-
-        // mock System.currentTimeMillis()
-        // used by DiskIO to compute SchedMetric
-        PowerMockito.mockStatic(System.class);
-        // having the time difference = 1000ms
-        // means that contextSwitchRate = difference in totctxsws
-        PowerMockito.when(System.currentTimeMillis()).thenReturn(10L, 1010L);
-
-        // mock the metrics generator used by DiskIO
-        LinuxDiskIOMetricsGenerator linuxDiskIOMetricsGenerator =
-                Mockito.mock(LinuxDiskIOMetricsGenerator.class);
-        PowerMockito.whenNew(LinuxDiskIOMetricsGenerator.class)
-                .withNoArguments()
-                .thenReturn(linuxDiskIOMetricsGenerator);
-
-        // mock SchemaFileParser (used by ThreadSched to read procfiles)
-        SchemaFileParser schemaFileParser = Mockito.mock(SchemaFileParser.class);
-    }
+		// mock the metrics generator used by DiskIO
+		LinuxDiskIOMetricsGenerator linuxDiskIOMetricsGenerator = Mockito
+				.mock(LinuxDiskIOMetricsGenerator.class);
+		PowerMockito.whenNew(LinuxDiskIOMetricsGenerator.class)
+				.withNoArguments()
+				.thenReturn(linuxDiskIOMetricsGenerator);
+	}
 }
