@@ -34,26 +34,18 @@ public class ThreadCPUTests extends OSTests {
                                                 "stime", 1L, "rss", 1L),
                                 "2",
                                         Map.of(
-                                                "pid", 2, "minflt", 1L, "majflt", 1L, "utime", 1L,
-                                                "stime", 1L, "rss", 1L),
-                                "3",
-                                        Map.of(
-                                                "pid", 3, "minflt", 1L, "majflt", 1L, "utime", 1L,
-                                                "stime", 1L, "rss", 1L))),
+                                                "pid", 2, "minflt", 5L, "majflt", 10L, "utime", 3L,
+                                                "stime", 13L, "rss", 1L))),
                 new TreeMap<String, Map<String, Object>>(
                         Map.of(
                                 "1",
                                         Map.of(
-                                                "pid", 1, "minflt", 10L, "majflt", 100L, "utime", 1L,
-                                                "stime", 1L, "rss", 1L),
+                                                "pid", 1, "minflt", 10L, "majflt", 100L, "utime",
+                                                6L, "stime", 6L, "rss", 2L),
                                 "2",
                                         Map.of(
-                                                "pid", 2, "minflt", 1L, "majflt", 1L, "utime", 1L,
-                                                "stime", 1L, "rss", 1L),
-                                "3",
-                                        Map.of(
-                                                "pid", 3, "minflt", 1L, "majflt", 1L, "utime", 1L,
-                                                "stime", 1L, "rss", 1L))),
+                                                "pid", 2, "minflt", 10L, "majflt", 15L, "utime",
+                                                13L, "stime", 18L, "rss", 4L))),
                 "0",
                 List.of("1", "2", "3"),
                 100,
@@ -85,17 +77,14 @@ public class ThreadCPUTests extends OSTests {
                         isA(String[].class),
                         isA(SchemaFileParser.FieldTypes[].class),
                         eq(true));
-        PowerMockito.verifyNew(SchemaFileParser.class)
-                .withArguments(
-                        eq("/proc/0/task/3/stat"),
-                        isA(String[].class),
-                        isA(SchemaFileParser.FieldTypes[].class),
-                        eq(true));
 
         ThreadCPU.INSTANCE.addSample();
 
-        verify(linuxCPUPagingActivityGenerator).setCPUUtilization("1", 1.0);
-        verify(linuxCPUPagingActivityGenerator).setCPUUtilization("2", 2.0);
-        verify(linuxCPUPagingActivityGenerator).setCPUUtilization("3", 3.0);
+        verify(linuxCPUPagingActivityGenerator)
+                .setPagingActivities("1", new Double[] {14.0, 9.0, 4.0});
+        verify(linuxCPUPagingActivityGenerator).setCPUUtilization("1", 0.29);
+        verify(linuxCPUPagingActivityGenerator)
+                .setPagingActivities("2", new Double[] {5.0, 5.0, 4.0});
+        verify(linuxCPUPagingActivityGenerator).setCPUUtilization("2", 0.15);
     }
 }
