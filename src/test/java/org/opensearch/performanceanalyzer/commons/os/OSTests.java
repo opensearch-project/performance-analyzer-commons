@@ -6,13 +6,10 @@
 package org.opensearch.performanceanalyzer.commons.os;
 
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
-import java.util.stream.Collectors;
-
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -30,7 +27,15 @@ public abstract class OSTests {
     Map<String, Map<String, Object>> tidKVMap;
     Map<String, Map<String, Object>> nextTidKVMap;
 
-    public OSTests(SortedMap<String, Map<String, Object>> tidKVMap, SortedMap<String, Map<String, Object>> nextTidKVMap, String pid, List<String> tids, long scClkTlk, long millisStart, long millisEnd) throws Exception {
+    public OSTests(
+            SortedMap<String, Map<String, Object>> tidKVMap,
+            SortedMap<String, Map<String, Object>> nextTidKVMap,
+            String pid,
+            List<String> tids,
+            long scClkTlk,
+            long millisStart,
+            long millisEnd)
+            throws Exception {
         // mock OSGlobals
         PowerMockito.mockStatic(OSGlobals.class);
         PowerMockito.when(OSGlobals.getPid()).thenReturn(pid);
@@ -44,16 +49,26 @@ public abstract class OSTests {
         // means that contextSwitchRate = difference in totctxsws
         PowerMockito.when(System.currentTimeMillis()).thenReturn(millisStart, millisEnd);
 
-        // mock SchemaFileParser (used by ThreadSched to read procfiles)
+        this.tidKVMap = tidKVMap;
+        this.nextTidKVMap = nextTidKVMap;
+    }
+
+    void mockSchemaFileParser() throws Exception {
+        // mock SchemaFileParser (used by ThreadSched and ThreadCPU to read procfiles)
         SchemaFileParser schemaFileParser = Mockito.mock(SchemaFileParser.class);
 
-        // create an array that contains all the values of tidKVMap
-        Object[] tidArr = tidKVMap.values().toArray();
-        Object[] nextTidArr = nextTidKVMap.values().toArray();
+        // create a list that contains all the values of tidKVMap
+        List<Map<String, Object>> tidArr = new ArrayList<Map<String, Object>>(tidKVMap.values());
+        List<Map<String, Object>> nextTidArr =
+                new ArrayList<Map<String, Object>>(nextTidKVMap.values());
 
-        PowerMockito.when(schemaFileParser.parse())
-                .thenReturn((Map<String, Object>) tidArr[0], (Map<String, Object>[]) Arrays.copyOfRange(tidArr, 1, nextTidArr.length))
-                .thenReturn((Map<String, Object>) nextTidArr[0], (Map<String, Object>[]) Arrays.copyOfRange(nextTidArr, 1, nextTidArr.length));
+        var thenReturn = PowerMockito.when(schemaFileParser.parse()).thenReturn(tidArr.get(0));
+        for (int i = 1; i < tidArr.size(); i++) {
+            thenReturn = thenReturn.thenReturn(tidArr.get(i));
+        }
+        for (int i = 0; i < nextTidArr.size(); i++) {
+            thenReturn = thenReturn.thenReturn(nextTidArr.get(i));
+        }
 
         PowerMockito.whenNew(SchemaFileParser.class)
                 .withAnyArguments()
