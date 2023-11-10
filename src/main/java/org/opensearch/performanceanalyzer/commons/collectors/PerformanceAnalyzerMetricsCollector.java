@@ -102,6 +102,10 @@ public abstract class PerformanceAnalyzerMetricsCollector implements Runnable {
         return value;
     }
 
+    public StatExceptionCode getErrorMetric() {
+        return errorMetric;
+    }
+
     public State getState() {
         return state;
     }

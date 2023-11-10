@@ -135,6 +135,16 @@ public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
         incErrorCounter();
     }
 
+    // returns the number of exceptions that have occurred
+    public int exceptionCount(StatExceptionCode statExceptionCode) {
+        AtomicInteger val = counters.get(statExceptionCode.toString());
+        if (val == null) {
+            return 0;
+        } else {
+            return val.get();
+        }
+    }
+
     public void logStatsRecord(
             Map<String, AtomicInteger> counterData,
             Map<String, String> statsData,
