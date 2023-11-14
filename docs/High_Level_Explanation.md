@@ -23,3 +23,20 @@ In `src/main/java/org/opensearch/performanceanalyzer/commons`:
 - `event_process/EventLogFileHandler` contains logic for writing events to files in the tmpfs. Used by  `EventLogQueueProcessor`.
 
 - `config/overrides/ConfigOverrides` and `config/overrides/ConfigOverridesWrapper` can be used to piece-wise enable and disable components. They are used by the plugin in the Performance Analyzer repository.
+
+- `stats` contains code to aggregate and report metrics, along with service metrics such as latency of executions and occurences of events.
+    - `ServiceMetrics` creates multiple `SampleAggregator`s that track useful measurements. For example, `STAT_METRICS_AGGREGATOR`, `ERRORS_AND_EXCEPTIONS_AGGREGATOR`, etc.
+    - `stats/SampleAggregator` is a class that tracks multiple related measurements and can dump them to a formatter. SampleAggregator can calculate multiple statistics (Min, Max, etc.) for a single measurement.
+        - `SampleAggregator`s are created in `ServiceMetrics` by passing in all the variants of an enum that implement `MeasurementSet`.
+        - For example, 
+            - `CollectorMetrics` is an enum that implements `MeasurementSet`.
+            - It contains multiple measurements that should be tracked:
+                - `COLLECTORS_SKIPPED("CollectorSkippedCount", "namedCount", StatsType.STATS_DATA, Collections.singletonList(Statistics.NAMED_COUNTERS)),`
+            - Code that wants to update the measurement calls to the corresponding `SampleAggregator` and passes the key of the measurement to update: `ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
+                                    StatMetrics.COLLECTORS_MUTED, collector.getCollectorName(), 1);`
+    - `ExceptionsAndErrors` seems to only record certain errors in RCA; collectors and other code instead use `StatExceptionCode` which does not write to any `SampleAggregator` but instead directly writes to counters maintained in `StatsCollector`.
+    - `StatsCollector` is responsible for processing metrics aggregated at `ServiceMetrics` through `collectMetrics`.
+        - Every `collectMetrics` call emits 2 entries into `STATS_LOGGER.debug`:
+            - The first records the state of the counters that are maintained directly in `StatsCollector`; all the enum variants of `StatExceptionCode` are converted to strings and serve as keys to the counters.
+            - The second entry records formatted reports from all the `SampleAggregators` inside `ServiceMetrics`.
+    - `StatsReporter` wraps over a list of `SampleAggregator`s and writes out their reports to a formatter passed in `getNextReport`. `ServiceMetrics` uses this class to wrap over the multiple `SampleAggregator`s it abstracts over.
