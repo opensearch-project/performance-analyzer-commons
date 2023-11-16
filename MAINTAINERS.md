@@ -4,18 +4,15 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 ## Current Maintainers
 
-| Maintainer        | GitHub ID                                             | Affiliation |
-|-------------------|-------------------------------------------------------| ----------- |
-| Praveen Sameneni  | [praveensameneni](https://github.com/praveensameneni) | Amazon      |
-| Khushboo Rajput   | [khushbr](https://github.com/khushbr)                 | Amazon      |
-| Chenyang Ji       | [ansjcy](https://github.com/ansjcy)                   | Amazon      |
-| Megha Goyal       | [goyamegh](https://github.com/goyamegh)               | Amazon      |
-| Saurabh Singh     | [getsaurabh02](https://github.com/getsaurabh02)       | Amazon      |
-| Subhobrata Dey    | [sbcd90](https://github.com/sbcd90)                   | Amazon      |
-| Sagar             | [sgup432](https://github.com/sgup432)                 | Amazon      |
-| Atharva Sharma    | [atharvasharma61](https://github.com/atharvasharma61))| Amazon      |
-| Nishchay Malhotra | [nishchay21](https://github.com/nishchay21/)          | Amazon      |
-| DevJhaAbhishek    | [DevJhaAbhishek](https://github.com/DevJhaAbhishek/)  | Amazon      |
+| Maintainer       | GitHub ID                                             | Affiliation |
+|------------------|-------------------------------------------------------| ----------- |
+| Praveen Sameneni | [praveensameneni](https://github.com/praveensameneni) | Amazon      |
+| Khushboo Rajput  | [khushbr](https://github.com/khushbr)                 | Amazon      |
+| Chenyang Ji      | [ansjcy](https://github.com/ansjcy)                   | Amazon      |
+| Megha Goyal      | [goyamegh](https://github.com/goyamegh)               | Amazon      |
+| Saurabh Singh    | [getsaurabh02](https://github.com/getsaurabh02)       | Amazon      |
+| Subhobrata Dey   | [sbcd90](https://github.com/sbcd90)                   | Amazon      |
+| Sagar            | [sgup432](https://github.com/sgup432)                 | Amazon      |
 
 ## Previous Maintainers
 
