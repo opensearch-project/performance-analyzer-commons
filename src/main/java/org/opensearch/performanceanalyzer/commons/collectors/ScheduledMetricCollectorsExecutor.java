@@ -105,13 +105,18 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
 
             prevStartTimestamp = System.currentTimeMillis();
 
+            System.out.println(metricsCollectors.toString());
+
             if (getEnabled()) {
                 long currentTime = System.currentTimeMillis();
 
                 for (Map.Entry<PerformanceAnalyzerMetricsCollector, Long> entry :
                         metricsCollectors.entrySet()) {
+                    System.out.format(
+                            "entry val: %d currtime: %d %n", entry.getValue(), currentTime);
                     if (entry.getValue() <= currentTime) {
                         PerformanceAnalyzerMetricsCollector collector = entry.getKey();
+                        System.out.println(collector.getCollectorName());
                         if (collector.getState()
                                 == PerformanceAnalyzerMetricsCollector.State.MUTED) {
                             ServiceMetrics.COMMONS_STAT_METRICS_AGGREGATOR.updateStat(
