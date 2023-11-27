@@ -841,70 +841,76 @@ public class AllMetrics {
     public enum SearchBackPressureStatsValue implements MetricValue {
         SEARCHBP_MODE(SearchBackPressureStatsValue.Constants.SEARCHBP_MODE),
         SEARCHBP_NODEID(SearchBackPressureStatsValue.Constants.SEARCHBP_NODEID),
-        SEARCHBP_SHARD_STATS_CANCELLATIONCOUNT(
-                SearchBackPressureStatsValue.Constants.SEARCHBP_SHARD_STATS_CANCELLATIONCOUNT),
-        SEARCHBP_SHARD_STATS_LIMITREACHEDCOUNT(
-                SearchBackPressureStatsValue.Constants.SEARCHBP_SHARD_STATS_LIMITREACHEDCOUNT),
-        SEARCHBP_SHARD_STATS_COMPLETIONCOUNT(Constants.SEARCHBP_SHARD_STATS_COMPLETIONCOUNT),
-        SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT(
+        SEARCHBP_SHARD_TASK_STATS_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT),
-        SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX(
+                        .SEARCHBP_SHARD_TASK_STATS_CANCELLATION_COUNT),
+        SEARCHBP_SHARD_TASK_STATS_LIMIT_REACHED_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX),
-        SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_ROLLINGAVG(
+                        .SEARCHBP_SHARD_TASK_STATS_LIMIT_REACHED_COUNT),
+        SEARCHBP_SHARD_TASK_STATS_COMPLETION_COUNT(
+                Constants.SEARCHBP_SHARD_TASK_STATS_COMPLETION_COUNT),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_ROLLINGAVG),
-        SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CANCELLATIONCOUNT(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATION_COUNT),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENT_MAX(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CANCELLATIONCOUNT),
-        SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CURRENTMAX(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENT_MAX),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLING_AVG(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CURRENTMAX),
-        SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CURRENTAVG(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLING_AVG),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CURRENTAVG),
-        SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATIONCOUNT(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATION_COUNT),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_MAX(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATIONCOUNT),
-        SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTMAX(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_MAX),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_AVG(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTMAX),
-        SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTAVG(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_AVG),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTAVG),
-        SEARCHBP_TASK_STATS_CANCELLATIONCOUNT(
-                SearchBackPressureStatsValue.Constants.SEARCHBP_TASK_STATS_CANCELLATIONCOUNT),
-        SEARCHBP_TASK_STATS_LIMITREACHEDCOUNT(
-                SearchBackPressureStatsValue.Constants.SEARCHBP_TASK_STATS_LIMITREACHEDCOUNT),
-        SEARCHBP_TASK_STATS_COMPLETIONCOUNT(Constants.SEARCHBP_TASK_STATS_COMPLETIONCOUNT),
-        SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATION_COUNT),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_MAX(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT),
-        SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_MAX),
+        SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_AVG(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX),
-        SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLINGAVG(
+                        .SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_AVG),
+        SEARCHBP_SEARCH_TASK_STATS_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLINGAVG),
-        SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATIONCOUNT(
+                        .SEARCHBP_SEARCH_TASK_STATS_CANCELLATION_COUNT),
+        SEARCHBP_SEARCH_TASK_STATS_LIMIT_REACHED_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATIONCOUNT),
-        SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CURRENTMAX(
+                        .SEARCHBP_SEARCH_TASK_STATS_LIMIT_REACHED_COUNT),
+        SEARCHBP_SEARCH_TASK_STATS_COMPLETION_COUNT(
+                Constants.SEARCHBP_SEARCH_TASK_STATS_COMPLETION_COUNT),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CURRENTMAX),
-        SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CURRENTAVG(
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATION_COUNT),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENT_MAX(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CURRENTAVG),
-        SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATIONCOUNT(
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENT_MAX),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLING_AVG(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATIONCOUNT),
-        SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTMAX(
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLING_AVG),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATION_COUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTMAX),
-        SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTAVG(
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATION_COUNT),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_MAX(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTAVG),
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_MAX),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_AVG(
+                SearchBackPressureStatsValue.Constants
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_AVG),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATION_COUNT(
+                SearchBackPressureStatsValue.Constants
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATION_COUNT),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_MAX(
+                SearchBackPressureStatsValue.Constants
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_MAX),
+        SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_AVG(
+                SearchBackPressureStatsValue.Constants
+                        .SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_AVG),
         SEARCHBP_RESOURCE_USAGE_TRACKER_STATS_CANCELLATIONCOUNT(
                 SearchBackPressureStatsValue.Constants
                         .SEARCHBP_RESOURCE_USAGE_TRACKER_STATS_CANCELLATIONCOUNT),
@@ -922,7 +928,7 @@ public class AllMetrics {
                         .SEARCHBP_RESOURCE_USAGE_TRACKER_STATS_FRAGMENT),
         SEARCHBP_SEARCH_TASK_STATS_CANCELLATIONCOUNT(
                 SearchBackPressureStatsValue.Constants
-                        .SEARCHBP_SEARCH_TASK_STATS_CANCELLATIONCOUNT),
+                        .SEARCHBP_SEARCH_TASK_STATS_CANCELLATION_COUNT),
         SEARCHBP_SEARCH_TASK_STATS_LIMITREACHEDCOUNT(
                 SearchBackPressureStatsValue.Constants
                         .SEARCHBP_SEARCH_TASK_STATS_LIMITREACHEDCOUNT),
@@ -964,56 +970,64 @@ public class AllMetrics {
             // SearchBackPressure Metrics
             public static final String SEARCHBP_MODE = "searchbp_mode";
             public static final String SEARCHBP_NODEID = "searchbp_nodeid";
-            public static final String SEARCHBP_SHARD_STATS_CANCELLATIONCOUNT =
-                    "searchbp_shard_stats_cancellationCount";
-            public static final String SEARCHBP_SHARD_STATS_LIMITREACHEDCOUNT =
-                    "searchbp_shard_stats_limitReachedCount";
-            public static final String SEARCHBP_SHARD_STATS_COMPLETIONCOUNT =
-                    "searchbp_shard_stats_completionCount";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT =
-                    "searchbp_shard_stats_resource_heap_usage_cancellationCount";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX =
-                    "searchbp_shard_stats_resource_heap_usage_currentMax";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_HEAP_USAGE_ROLLINGAVG =
-                    "searchbp_shard_stats_resource_heap_usage_rollingAvg";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CANCELLATIONCOUNT =
-                    "searchbp_shard_stats_resource_cpu_usage_cancellationCount";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CURRENTMAX =
-                    "searchbp_shard_stats_resource_cpu_usage_currentMax";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_CPU_USAGE_CURRENTAVG =
-                    "searchbp_shard_stats_resource_cpu_usage_currentAvg";
+            public static final String SEARCHBP_SHARD_TASK_STATS_CANCELLATION_COUNT =
+                    "searchbp_shard_task_stats_cancellationCount";
+            public static final String SEARCHBP_SHARD_TASK_STATS_LIMIT_REACHED_COUNT =
+                    "searchbp_shard_task_stats_limitReachedCount";
+            public static final String SEARCHBP_SHARD_TASK_STATS_COMPLETION_COUNT =
+                    "searchbp_shard_task_stats_completionCount";
             public static final String
-                    SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATIONCOUNT =
-                            "searchbp_shard_stats_resource_elaspedtime_usage_cancellationCount";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTMAX =
-                    "searchbp_shard_stats_resource_elaspedtime_usage_currentMax";
-            public static final String SEARCHBP_SHARD_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTAVG =
-                    "searchbp_shard_stats_resource_elaspedtime_usage_currentAvg";
-            public static final String SEARCHBP_TASK_STATS_CANCELLATIONCOUNT =
-                    "searchbp_task_stats_cancellationCount";
-            public static final String SEARCHBP_TASK_STATS_LIMITREACHEDCOUNT =
-                    "searchbp_task_stats_limitReachedCount";
-            public static final String SEARCHBP_TASK_STATS_COMPLETIONCOUNT =
-                    "searchbp_task_stats_completionCount";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATIONCOUNT =
-                    "searchbp_task_stats_resource_heap_usage_cancellationCount";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENTMAX =
-                    "searchbp_task_stats_resource_heap_usage_currentMax";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLINGAVG =
-                    "searchbp_task_stats_resource_heap_usage_rollingAvg";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATIONCOUNT =
-                    "searchbp_task_stats_resource_cpu_usage_cancellationCount";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CURRENTMAX =
-                    "searchbp_task_stats_resource_cpu_usage_currentMax";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_CPU_USAGE_CURRENTAVG =
-                    "searchbp_task_stats_resource_cpu_usage_currentAvg";
+                    SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATION_COUNT =
+                            "searchbp_shard_task_stats_resource_heap_usage_cancellationCount";
+            public static final String SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENT_MAX =
+                    "searchbp_shard_task_stats_resource_heap_usage_currentMax";
+            public static final String SEARCHBP_SHARD_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLING_AVG =
+                    "searchbp_shard_task_stats_resource_heap_usage_rollingAvg";
             public static final String
-                    SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATIONCOUNT =
-                            "searchbp_task_stats_resource_elaspedtime_usage_cancellationCount";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTMAX =
-                    "searchbp_task_stats_resource_elaspedtime_usage_currentMax";
-            public static final String SEARCHBP_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENTAVG =
-                    "searchbp_task_stats_resource_elaspedtime_usage_currentAvg";
+                    SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATION_COUNT =
+                            "searchbp_shard_task_stats_resource_cpu_usage_cancellationCount";
+            public static final String SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_MAX =
+                    "searchbp_shard_task_stats_resource_cpu_usage_currentMax";
+            public static final String SEARCHBP_SHARD_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_AVG =
+                    "searchbp_shard_task_stats_resource_cpu_usage_currentAvg";
+            public static final String
+                    SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATION_COUNT =
+                            "searchbp_shard_task_stats_resource_elaspedtime_usage_cancellationCount";
+            public static final String
+                    SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_MAX =
+                            "searchbp_shard_task_stats_resource_elaspedtime_usage_currentMax";
+            public static final String
+                    SEARCHBP_SHARD_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_AVG =
+                            "searchbp_shard_task_stats_resource_elaspedtime_usage_currentAvg";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_CANCELLATION_COUNT =
+                    "searchbp_search_task_stats_cancellationCount";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_LIMIT_REACHED_COUNT =
+                    "searchbp_search_task_stats_limitReachedCount";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_COMPLETION_COUNT =
+                    "searchbp_search_task_stats_completionCount";
+            public static final String
+                    SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_CANCELLATION_COUNT =
+                            "searchbp_search_task_stats_resource_heap_usage_cancellationCount";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_CURRENT_MAX =
+                    "searchbp_search_task_stats_resource_heap_usage_currentMax";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_RESOURCE_HEAP_USAGE_ROLLING_AVG =
+                    "searchbp_search_task_stats_resource_heap_usage_rollingAvg";
+            public static final String
+                    SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CANCELLATION_COUNT =
+                            "searchbp_search_task_stats_resource_cpu_usage_cancellationCount";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_MAX =
+                    "searchbp_search_task_stats_resource_cpu_usage_currentMax";
+            public static final String SEARCHBP_SEARCH_TASK_STATS_RESOURCE_CPU_USAGE_CURRENT_AVG =
+                    "searchbp_search_task_stats_resource_cpu_usage_currentAvg";
+            public static final String
+                    SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CANCELLATION_COUNT =
+                            "searchbp_search_task_stats_resource_elaspedtime_usage_cancellationCount";
+            public static final String
+                    SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_MAX =
+                            "searchbp_search_task_stats_resource_elaspedtime_usage_currentMax";
+            public static final String
+                    SEARCHBP_SEARCH_TASK_STATS_RESOURCE_ELASPEDTIME_USAGE_CURRENT_AVG =
+                            "searchbp_search_task_stats_resource_elaspedtime_usage_currentAvg";
             // ResourceUsageTrackerStats
             public static final String SEARCHBP_RESOURCE_USAGE_TRACKER_STATS_CANCELLATIONCOUNT =
                     "cancellationCount";
