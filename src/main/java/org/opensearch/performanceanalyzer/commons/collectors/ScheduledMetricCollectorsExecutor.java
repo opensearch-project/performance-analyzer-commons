@@ -133,7 +133,7 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
                         int exceptionCount =
                                 StatsCollector.instance()
                                         .exceptionCount(collector.getErrorMetric());
-                        if (!collector.inProgress() || exceptionCount > 5) {
+                        if (!collector.inProgress() && exceptionCount < 5) {
                             collector.setStartTime(currentTime);
                             metricsCollectorsTP.execute(collector);
                         } else {
