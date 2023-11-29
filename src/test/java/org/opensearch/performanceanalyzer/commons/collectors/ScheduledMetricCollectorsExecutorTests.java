@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,16 +13,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.opensearch.performanceanalyzer.commons.collectors.TestCollector.RunBehaviour;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-@RunWith(MockitoJUnitRunner.StrictStubs.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({StatsCollector.class, System.class})
 public class ScheduledMetricCollectorsExecutorTests {
     @Test
     public void testSlowMuting() throws Exception {
         // mock System.currentTimeMillis()
         // used by ThreadSched to compute SchedMetric
-        mockStatic(System.class);
+        PowerMockito.mockStatic(System.class);
         when(System.currentTimeMillis())
                 .thenReturn(
                         1L, 1L, // addScheduledMetricCollector calls
@@ -52,7 +54,7 @@ public class ScheduledMetricCollectorsExecutorTests {
         executor.addScheduledMetricCollector(tc);
 
         // mock StatsCollector.instance
-        mockStatic(StatsCollector.class);
+        PowerMockito.mockStatic(StatsCollector.class);
         // 200 ms allows
         StatsCollector sc =
                 new StatsCollector("statsCollector", 200, new HashMap<String, String>());

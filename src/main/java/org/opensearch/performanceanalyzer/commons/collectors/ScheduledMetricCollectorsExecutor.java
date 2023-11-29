@@ -130,7 +130,9 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
                         // and reset every time StatsCollector is run (i.e. every 60 sec)
                         // since other collectors run every 5 sec, we can obtain an estimate
                         // of the exceptions they've thrown in the last ~10 runs or so.
-                        int exceptionCount = StatsCollector.instance().exceptionCount(collector.getErrorMetric());
+                        int exceptionCount =
+                                StatsCollector.instance()
+                                        .exceptionCount(collector.getErrorMetric());
                         if (!collector.inProgress() || exceptionCount > 5) {
                             collector.setStartTime(currentTime);
                             metricsCollectorsTP.execute(collector);
