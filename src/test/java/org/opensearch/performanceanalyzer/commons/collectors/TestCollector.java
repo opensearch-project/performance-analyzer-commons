@@ -12,20 +12,16 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class TestCollector extends PerformanceAnalyzerMetricsCollector {
     public static class RunBehaviour {
+        int repetitions;
+        int current_reps;
         int latency;
-        boolean throwException;
+        boolean shouldThrow;
 
-        RunBehaviour(int latency, boolean throwException) {
+        RunBehaviour(int repetitions, int latency, boolean throwException) {
+            this.repetitions = repetitions;
+            this.current_reps = repetitions;
             this.latency = latency;
-            this.throwException = throwException;
-        }
-
-        public int getLatency() {
-            return latency;
-        }
-
-        public boolean getThrowException() {
-            return throwException;
+            this.shouldThrow = throwException;
         }
     }
 
@@ -47,20 +43,27 @@ public class TestCollector extends PerformanceAnalyzerMetricsCollector {
 
     @Override
     public void collectMetrics(long startTime) {
-        idx++;
         try {
             RunBehaviour b = bh.get(idx);
-            if (b.getLatency() > 0) {
-                Thread.sleep(b.getLatency());
+            if (b.latency > 0) {
+                Thread.sleep(b.latency);
             }
 
-            if (b.getThrowException()) {
+            if (b.current_reps > 0) {
+                b.current_reps--;
+            } else {
+                // reset repetitions to use for next iteration
+                b.current_reps = b.repetitions;
+                idx++;
+            }
+
+            if (b.shouldThrow) {
                 throw new RuntimeException("TestCollector exception");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IndexOutOfBoundsException e) {
-            // reset idx to 0
+            // start from beginning
             idx = 0;
         }
     }

@@ -42,13 +42,7 @@ public class ScheduledMetricCollectorsExecutorTests {
         executor.setEnabled(true);
 
         ArrayList<RunBehaviour> bh = new ArrayList<RunBehaviour>();
-        bh.add(new RunBehaviour(0, true));
-        bh.add(new RunBehaviour(0, true));
-        bh.add(new RunBehaviour(0, true));
-        bh.add(new RunBehaviour(0, true));
-        bh.add(new RunBehaviour(0, true));
-        bh.add(new RunBehaviour(0, true));
-        bh.add(new RunBehaviour(0, true));
+        bh.add(new RunBehaviour(10, 0, true));
 
         TestCollector tc = spy(new TestCollector(10, bh));
         executor.addScheduledMetricCollector(tc);
