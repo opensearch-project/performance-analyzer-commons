@@ -110,8 +110,6 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
 
                 for (Map.Entry<PerformanceAnalyzerMetricsCollector, Long> entry :
                         metricsCollectors.entrySet()) {
-                    System.out.format(
-                            "entry val: %d currtime: %d %n", entry.getValue(), currentTime);
                     if (entry.getValue() <= currentTime) {
                         PerformanceAnalyzerMetricsCollector collector = entry.getKey();
                         if (collector.getState()
