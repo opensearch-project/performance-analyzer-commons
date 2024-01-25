@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.os;
 
-
 import org.junit.Test;
 
 public class ThreadDiskIOTests {

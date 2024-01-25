@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-
 import org.opensearch.performanceanalyzer.commons.util.JsonConverter;
 
 public class MetricStatus {

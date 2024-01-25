@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.format;
 
-
 import org.opensearch.performanceanalyzer.commons.stats.eval.Statistics;
 import org.opensearch.performanceanalyzer.commons.stats.measurements.MeasurementSet;
 

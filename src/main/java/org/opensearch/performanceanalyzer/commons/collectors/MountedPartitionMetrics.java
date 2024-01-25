@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.DevicePartitionDimension;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.DevicePartitionValue;

@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.util;
 
-
 import java.io.File;
 import java.security.AccessController;
 import java.security.PrivilegedAction;

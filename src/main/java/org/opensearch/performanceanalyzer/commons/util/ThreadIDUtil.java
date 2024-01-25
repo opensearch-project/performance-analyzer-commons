@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.util;
 
-
 import org.opensearch.performanceanalyzer.commons.jvm.ThreadList;
 
 public final class ThreadIDUtil {

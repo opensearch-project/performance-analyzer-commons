@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.hwnet;
 
-
 import com.google.common.annotations.VisibleForTesting;
 import java.io.BufferedReader;
 import java.io.File;

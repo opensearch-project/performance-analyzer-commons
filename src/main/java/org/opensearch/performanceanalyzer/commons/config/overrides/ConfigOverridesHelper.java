@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.config.overrides;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.security.AccessController;

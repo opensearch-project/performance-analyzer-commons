@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.OSMetricsGeneratorFactory;

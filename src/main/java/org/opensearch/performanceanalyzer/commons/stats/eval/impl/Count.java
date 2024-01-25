@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.eval.impl;
 
-
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;

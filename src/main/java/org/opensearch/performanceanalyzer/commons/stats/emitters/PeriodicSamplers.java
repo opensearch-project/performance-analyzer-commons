@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.emitters;
 
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.List;
 import java.util.concurrent.CancellationException;

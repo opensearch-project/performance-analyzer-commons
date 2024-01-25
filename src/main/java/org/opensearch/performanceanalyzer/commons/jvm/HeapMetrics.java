@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryPoolMXBean;

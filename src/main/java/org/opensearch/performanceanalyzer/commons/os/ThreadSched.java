@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.os;
 
-
 import com.google.common.annotations.VisibleForTesting;
 import java.util.HashMap;
 import java.util.List;

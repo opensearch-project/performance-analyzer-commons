@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.config.overrides;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

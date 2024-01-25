@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import org.apache.logging.log4j.LogManager;

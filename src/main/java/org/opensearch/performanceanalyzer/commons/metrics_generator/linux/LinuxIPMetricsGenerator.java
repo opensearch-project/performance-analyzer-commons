@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator.linux;
 
-
 import org.opensearch.performanceanalyzer.commons.collectors.NetInterfaceSummary;
 import org.opensearch.performanceanalyzer.commons.hwnet.NetworkInterface;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.IPMetricsGenerator;

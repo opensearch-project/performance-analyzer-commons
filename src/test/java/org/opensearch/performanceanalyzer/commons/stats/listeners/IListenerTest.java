@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics.stats.listeners;
 
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;

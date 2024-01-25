@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons;
 
-
 import org.opensearch.performanceanalyzer.commons.collectors.StatsCollector;
 
 public class CommonsTestHelper {

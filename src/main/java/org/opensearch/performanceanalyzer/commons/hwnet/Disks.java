@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.hwnet;
 
-
 import java.io.File;
 import java.util.*;
 import org.apache.logging.log4j.LogManager;

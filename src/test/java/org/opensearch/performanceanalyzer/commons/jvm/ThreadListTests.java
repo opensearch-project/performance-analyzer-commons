@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import org.junit.Test;
 import org.opensearch.performanceanalyzer.commons.hwnet.NetworkInterface;
 import org.opensearch.performanceanalyzer.commons.os.OSGlobals;

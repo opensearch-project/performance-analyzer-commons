@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics.stats.collectors;
 
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;

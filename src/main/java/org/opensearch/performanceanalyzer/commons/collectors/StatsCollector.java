@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-
 import com.google.common.annotations.VisibleForTesting;
 import java.io.FileInputStream;
 import java.io.InputStream;

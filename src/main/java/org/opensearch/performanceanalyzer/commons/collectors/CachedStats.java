@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-
 import java.util.*;
 import org.opensearch.performanceanalyzer.commons.metrics.AllMetrics.ShardStatsValue;
 

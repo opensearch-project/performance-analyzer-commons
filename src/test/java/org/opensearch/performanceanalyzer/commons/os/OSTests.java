@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.os;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

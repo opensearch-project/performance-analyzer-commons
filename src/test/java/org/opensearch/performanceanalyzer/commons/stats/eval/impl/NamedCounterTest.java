@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.eval.impl;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.opensearch.performanceanalyzer.commons.stats.eval.impl.vals.NamedAggregateValue;

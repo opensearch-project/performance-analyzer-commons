@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.event_process;
 
-
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.file.Paths;

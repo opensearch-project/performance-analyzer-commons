@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.hwnet;
 
-
 import com.google.common.collect.ImmutableSet;
 import java.io.File;
 import java.util.HashMap;

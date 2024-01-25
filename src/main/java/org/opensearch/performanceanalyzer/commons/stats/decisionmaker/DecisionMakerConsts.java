@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.decisionmaker;
 
-
 import com.google.gson.JsonParser;
 
 public class DecisionMakerConsts {

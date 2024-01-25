@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import java.lang.management.MemoryUsage;
 import java.util.Map;
 import java.util.function.Supplier;
