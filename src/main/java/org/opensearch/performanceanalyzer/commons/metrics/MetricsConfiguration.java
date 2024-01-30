@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import org.opensearch.performanceanalyzer.commons.collectors.*;
@@ -31,6 +30,7 @@ public class MetricsConfiguration {
             this.rotationInterval = rotationInterval;
         }
     }
+
     /*
     With this refactoring, the CONFIG_MAP initialization has been moved out
     and will be statically initialized within the PerformanceAnalyzerApp

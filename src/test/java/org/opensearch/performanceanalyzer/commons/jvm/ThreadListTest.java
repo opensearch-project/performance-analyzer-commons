@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import java.lang.management.ThreadInfo;
 import org.junit.Assert;
 import org.junit.Before;

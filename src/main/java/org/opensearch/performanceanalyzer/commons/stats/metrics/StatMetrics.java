@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.metrics;
 
-
 import java.util.Collections;
 import java.util.List;
 import org.opensearch.performanceanalyzer.commons.stats.eval.Statistics;
@@ -133,6 +132,7 @@ public enum StatMetrics implements MeasurementSet {
 
     CLUSTER_MANAGER_THROTTLING_COLLECTOR_NOT_AVAILABLE(
             "ClusterManagerThrottlingCollectorNotAvailable");
+
     /** What we want to appear as the metric name. */
     private String name;
 

@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator;
 
-
 import java.util.Set;
 
 public interface MountedPartitionMetricsGenerator {

@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator.linux;
 
-
 import java.util.Set;
 import org.opensearch.performanceanalyzer.commons.hwnet.Disks;
 import org.opensearch.performanceanalyzer.commons.hwnet.MountedPartitions;

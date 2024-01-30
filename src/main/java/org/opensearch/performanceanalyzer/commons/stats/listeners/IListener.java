@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.listeners;
 
-
 import java.util.Set;
 import org.opensearch.performanceanalyzer.commons.stats.measurements.MeasurementSet;
 

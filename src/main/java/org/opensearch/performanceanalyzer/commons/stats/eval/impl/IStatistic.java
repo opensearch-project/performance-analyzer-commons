@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.eval.impl;
 
-
 import java.util.Collection;
 import org.opensearch.performanceanalyzer.commons.stats.eval.Statistics;
 import org.opensearch.performanceanalyzer.commons.stats.eval.impl.vals.Value;

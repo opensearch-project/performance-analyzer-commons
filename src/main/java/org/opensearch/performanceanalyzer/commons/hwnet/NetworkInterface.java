@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.hwnet;
 
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import java.io.BufferedReader;
@@ -38,6 +37,7 @@ public class NetworkInterface {
     static class NetInterfaceMetrics {
         Map<String, Long> PHYmetrics = new HashMap<>();
         Map<String, Long> IPmetrics = new HashMap<>();
+
         // these three are currently unused;
         // leaving them commented for now.
         /*Map<String, Long> TCPmetrics =

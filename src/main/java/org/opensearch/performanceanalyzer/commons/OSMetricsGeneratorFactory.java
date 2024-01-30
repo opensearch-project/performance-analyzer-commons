@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons;
 
-
 import org.opensearch.performanceanalyzer.commons.config.ConfigStatus;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.OSMetricsGenerator;
 import org.opensearch.performanceanalyzer.commons.metrics_generator.linux.LinuxOSMetricsGenerator;

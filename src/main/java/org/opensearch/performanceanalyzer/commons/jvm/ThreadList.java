@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import com.sun.tools.attach.VirtualMachine;
 import java.io.BufferedReader;
 import java.io.InputStream;

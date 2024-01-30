@@ -35,18 +35,18 @@ plugins {
     id 'application'
     id 'java-library'
     id 'maven-publish'
-    id 'com.diffplug.spotless' version '5.11.0'
-    id 'com.github.spotbugs' version '5.0.13'
+    id 'com.diffplug.spotless' version '6.25.0'
+    id 'com.github.spotbugs' version '6.0.7'
 }
 
 spotbugsMain {
     excludeFilter = file("checkstyle/findbugs-exclude.xml")
-    effort = 'max'
+    effort = com.github.spotbugs.snom.Effort.MAX
     ignoreFailures = true // TODO: Set this to false later as they are too many warnings to be fixed.
 
     reports {
-        xml.enabled = false
-        html.enabled = true
+        xml.required = false
+        html.required = true
     }
 }
 
@@ -65,8 +65,10 @@ allprojects {
     version = buildVersion
 }
 
-targetCompatibility = JavaVersion.VERSION_11
-sourceCompatibility = JavaVersion.VERSION_11
+java {
+    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_11
+}
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
@@ -149,7 +151,7 @@ distributions {
 spotless {
     java {
         licenseHeaderFile(file('license-header'))
-        googleJavaFormat('1.12.0').aosp()
+        googleJavaFormat('1.19.2').aosp()
         importOrder()
         removeUnusedImports()
         trimTrailingWhitespace()

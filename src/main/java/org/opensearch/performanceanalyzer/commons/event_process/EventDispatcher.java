@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.event_process;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;

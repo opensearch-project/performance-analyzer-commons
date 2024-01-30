@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics;
 
-
 import org.opensearch.performanceanalyzer.commons.util.Util;
 
 public interface MetricsProcessor {

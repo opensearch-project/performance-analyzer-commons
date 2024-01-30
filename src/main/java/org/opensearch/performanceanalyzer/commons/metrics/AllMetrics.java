@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics;
 
-
 import org.jooq.Field;
 import org.jooq.impl.DSL;
 import org.opensearch.performanceanalyzer.commons.stats.JooqFieldValue;
@@ -1066,6 +1065,7 @@ public class AllMetrics {
 
             /** Add SEARCHBP_TABLE_NAME for searchbackpressureRCA to find the corresponding table */
             public static final String SEARCHBP_TABLE_NAME = "Searchbp_Stats";
+
             /**
              * Add SEARCHBP_TYPE_DIM for searchbackpressureRCA to find the cell value for each stats
              * type
@@ -1353,6 +1353,7 @@ public class AllMetrics {
             public static final String SHARD_OP_COUNT_VALUE = "ShardEvents";
         }
     }
+
     /*
      * column names of FollowerCheck_Latency table
      * SourceNodeId | TargetNodeID | sum | avg | min |max

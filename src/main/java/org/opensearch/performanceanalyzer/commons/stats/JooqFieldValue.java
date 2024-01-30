@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats;
 
-
 import org.jooq.Field;
 
 /**

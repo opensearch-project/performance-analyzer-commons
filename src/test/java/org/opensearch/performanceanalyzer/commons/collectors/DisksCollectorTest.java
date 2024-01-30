@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
-
 import org.junit.Assert;
 import org.junit.Before;
 

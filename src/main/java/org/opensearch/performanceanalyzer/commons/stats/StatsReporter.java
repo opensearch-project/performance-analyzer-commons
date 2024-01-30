@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats;
 
-
 import com.google.common.annotations.VisibleForTesting;
 import java.util.List;
 import org.opensearch.performanceanalyzer.commons.stats.collectors.SampleAggregator;

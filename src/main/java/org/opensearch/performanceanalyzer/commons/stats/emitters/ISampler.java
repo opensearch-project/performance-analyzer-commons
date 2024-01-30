@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.emitters;
 
-
 import org.opensearch.performanceanalyzer.commons.stats.collectors.SampleAggregator;
 
 public interface ISampler {

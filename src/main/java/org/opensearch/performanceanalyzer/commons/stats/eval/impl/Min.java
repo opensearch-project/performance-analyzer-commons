@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.eval.impl;
 
-
 import org.opensearch.performanceanalyzer.commons.stats.eval.Statistics;
 
 /** To get the minimum observed value. */

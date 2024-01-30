@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.stats.collectors;
 
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
 import java.util.Collection;
@@ -43,8 +42,10 @@ import org.opensearch.performanceanalyzer.commons.stats.measurements.Measurement
 public class SampleAggregator {
 
     private static final Logger LOG = LogManager.getLogger(SampleAggregator.class);
+
     /** The set of measurements its in charge of aggregating. */
     private final MeasurementSet[] recognizedSet;
+
     /**
      * The idea is to be able to calculate multiple statistics for each measurement.
      *
@@ -55,6 +56,7 @@ public class SampleAggregator {
      * </ul>
      */
     private ImmutableMap<MeasurementSet, Set<IStatistic>> statMap;
+
     /** When was the first updateStat was called since the last reset. */
     private AtomicLong startTimeMillis;
 

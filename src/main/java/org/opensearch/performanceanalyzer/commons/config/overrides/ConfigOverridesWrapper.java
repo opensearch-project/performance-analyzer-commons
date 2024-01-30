@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.config.overrides;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
 

@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.jvm;
 
-
 import org.junit.Test;
 
 public class GCMetricsTests {

@@ -5,7 +5,6 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics_generator.linux;
 
-
 import java.util.Map;
 import java.util.Set;
 import org.opensearch.performanceanalyzer.commons.collectors.DiskMetrics;
