@@ -13,6 +13,8 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Saurabh Singh    | [getsaurabh02](https://github.com/getsaurabh02)       | Amazon      |
 | Subhobrata Dey   | [sbcd90](https://github.com/sbcd90)                   | Amazon      |
 | Sagar            | [sgup432](https://github.com/sgup432)                 | Amazon      |
+| Dharmesh Singh   | [psychbot](https://github.com/psychbot)               | Amazon      |
+| Gagan Juneja     | [Gaganjuneja](https://github.com/Gaganjuneja)         | Amazon      |
 
 ## Previous Maintainers
 
