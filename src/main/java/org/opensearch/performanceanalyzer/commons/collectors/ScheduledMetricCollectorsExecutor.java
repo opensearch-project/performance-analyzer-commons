@@ -128,7 +128,7 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
                             continue;
                         }
                         if (!canSchedule(collector)) {
-                            LOG.info(
+                            LOG.debug(
                                     "Skipping {} Collector execution since PA is running in CollectorMode: {}",
                                     collector.getCollectorName(),
                                     collectorsSetting);
