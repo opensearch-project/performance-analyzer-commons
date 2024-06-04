@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.performanceanalyzer.commons.stats.ServiceMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
+import org.opensearch.performanceanalyzer.commons.util.Util;
 
 public class ScheduledMetricCollectorsExecutor extends Thread {
     private static final Logger LOG = LogManager.getLogger(ScheduledMetricCollectorsExecutor.class);
@@ -24,6 +25,7 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
     private static final int COLLECTOR_THREAD_KEEPALIVE_SECS = 1000;
     private final boolean checkFeatureDisabledFlag;
     private boolean paEnabled = false;
+    private int collectorsSetting = Util.CollectorMode.RCA.getValue();
     private boolean threadContentionMonitoringEnabled = false;
     private int minTimeIntervalToSleep = Integer.MAX_VALUE;
     private Map<PerformanceAnalyzerMetricsCollector, Long> metricsCollectors;
@@ -46,6 +48,14 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
 
     public synchronized void setEnabled(final boolean enabled) {
         paEnabled = enabled;
+    }
+
+    public synchronized void setCollectorsSetting(final int value) {
+        collectorsSetting = value;
+    }
+
+    public synchronized int getCollectorsSetting() {
+        return collectorsSetting;
     }
 
     public synchronized boolean getEnabled() {
@@ -117,6 +127,13 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
                                     StatMetrics.COLLECTORS_MUTED, collector.getCollectorName(), 1);
                             continue;
                         }
+                        if (!canSchedule(collector)) {
+                            LOG.info(
+                                    "Skipping {} Collector execution since PA is running in CollectorMode: {}",
+                                    collector.getCollectorName(),
+                                    collectorsSetting);
+                            continue;
+                        }
                         metricsCollectors.put(
                                 collector, entry.getValue() + collector.getTimeInterval());
                         if (!collector.inProgress()) {
@@ -158,5 +175,13 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
                 }
             }
         }
+    }
+
+    private boolean canSchedule(PerformanceAnalyzerMetricsCollector collector) {
+        return (collectorsSetting == Util.CollectorMode.DUAL.getValue())
+                || (collectorsSetting == Util.CollectorMode.OTEL.getValue()
+                        && (collector instanceof TelemetryCollector))
+                || (collectorsSetting == Util.CollectorMode.RCA.getValue()
+                        && (collector instanceof RcaCollector));
     }
 }

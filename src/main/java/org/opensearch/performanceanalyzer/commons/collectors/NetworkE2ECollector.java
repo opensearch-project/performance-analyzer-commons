@@ -17,7 +17,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCod
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class NetworkE2ECollector extends PerformanceAnalyzerMetricsCollector
-        implements MetricsProcessor {
+        implements MetricsProcessor, RcaCollector {
     private static final int sTimeInterval =
             MetricsConfiguration.CONFIG_MAP.get(NetworkE2ECollector.class).samplingInterval;
 

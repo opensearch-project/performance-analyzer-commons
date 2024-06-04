@@ -28,7 +28,8 @@ import org.opensearch.performanceanalyzer.commons.stats.ServiceMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCode;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
-public class StatsCollector extends PerformanceAnalyzerMetricsCollector {
+public class StatsCollector extends PerformanceAnalyzerMetricsCollector
+        implements RcaCollector, TelemetryCollector {
     private static final Logger STATS_LOGGER = LogManager.getLogger("stats_log");
     private static final Logger GENERAL_LOG = LogManager.getLogger(StatsCollector.class);
     public static final String COLLECTOR_NAME = "StatsCollector";

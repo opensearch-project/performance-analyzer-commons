@@ -21,7 +21,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
  * heap.
  */
 public class GCInfoCollector extends PerformanceAnalyzerMetricsCollector
-        implements MetricsProcessor {
+        implements MetricsProcessor, RcaCollector {
 
     private static final int SAMPLING_TIME_INTERVAL =
             MetricsConfiguration.CONFIG_MAP.get(GCInfoCollector.class).samplingInterval;

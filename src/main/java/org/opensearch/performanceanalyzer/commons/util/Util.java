@@ -85,4 +85,20 @@ public class Util {
                             return null;
                         });
     }
+
+    public enum CollectorMode {
+        RCA(0),
+        OTEL(1),
+        DUAL(2);
+
+        private final int value;
+
+        CollectorMode(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 }
