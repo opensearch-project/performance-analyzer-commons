@@ -178,10 +178,11 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
     }
 
     private boolean canSchedule(PerformanceAnalyzerMetricsCollector collector) {
+        if (collector instanceof TelemetryCollector) {
+            return (collectorsSetting == Util.CollectorMode.DUAL.getValue())
+                    || (collectorsSetting == Util.CollectorMode.OTEL.getValue());
+        }
         return (collectorsSetting == Util.CollectorMode.DUAL.getValue())
-                || (collectorsSetting == Util.CollectorMode.OTEL.getValue()
-                        && (collector instanceof TelemetryCollector))
-                || (collectorsSetting == Util.CollectorMode.RCA.getValue()
-                        && (collector instanceof RcaCollector));
+                || (collectorsSetting == Util.CollectorMode.RCA.getValue());
     }
 }

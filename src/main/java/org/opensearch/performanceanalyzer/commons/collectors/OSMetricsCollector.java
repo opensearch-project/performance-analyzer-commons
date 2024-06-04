@@ -20,7 +20,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCod
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class OSMetricsCollector extends PerformanceAnalyzerMetricsCollector
-        implements MetricsProcessor, RcaCollector {
+        implements MetricsProcessor {
     public static final int SAMPLING_TIME_INTERVAL =
             MetricsConfiguration.CONFIG_MAP.get(ThreadList.class).samplingInterval;
     private static final int KEYS_PATH_LENGTH = 1;

@@ -17,7 +17,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCod
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class NetworkInterfaceCollector extends PerformanceAnalyzerMetricsCollector
-        implements MetricsProcessor, RcaCollector {
+        implements MetricsProcessor {
     private static final int sTimeInterval =
             MetricsConfiguration.CONFIG_MAP.get(NetworkInterfaceCollector.class).samplingInterval;
     private static final Logger LOG = LogManager.getLogger(NetworkInterfaceCollector.class);

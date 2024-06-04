@@ -17,7 +17,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCod
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class DisksCollector extends PerformanceAnalyzerMetricsCollector
-        implements MetricsProcessor, RcaCollector {
+        implements MetricsProcessor {
 
     private static final int sTimeInterval =
             MetricsConfiguration.CONFIG_MAP.get(DisksCollector.class).samplingInterval;

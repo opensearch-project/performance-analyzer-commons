@@ -16,7 +16,7 @@ import org.opensearch.performanceanalyzer.commons.stats.metrics.StatExceptionCod
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 
 public class MountedPartitionMetricsCollector extends PerformanceAnalyzerMetricsCollector
-        implements MetricsProcessor, RcaCollector {
+        implements MetricsProcessor {
 
     private static final int SAMPLING_TIME_INTERVAL =
             MetricsConfiguration.CONFIG_MAP.get(MountedPartitionMetricsCollector.class)
