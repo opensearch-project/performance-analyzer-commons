@@ -5,6 +5,10 @@
 
 package org.opensearch.performanceanalyzer.commons.metrics;
 
+import org.jooq.Field;
+import org.jooq.impl.DSL;
+import org.opensearch.performanceanalyzer.commons.stats.JooqFieldValue;
+
 /**
  * We use open telemetry semantic conventions:
  * https://opentelemetry.io/docs/specs/semconv/system/system-metrics/
@@ -175,6 +179,114 @@ public class RTFMetrics {
             public static final String REQUEST_CACHE_EVICTION_VALUE = "cache_request_eviction";
 
             public static final String REQUEST_CACHE_IN_BYTES_VALUE = "cache_request_size";
+        }
+    }
+
+    public enum HeapDimension implements MetricDimension, JooqFieldValue {
+        MEM_TYPE(Constants.TYPE_VALUE);
+
+        private final String value;
+
+        HeapDimension(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        @Override
+        public Field<String> getField() {
+            return DSL.field(DSL.name(this.value), String.class);
+        }
+
+        @Override
+        public String getName() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String TYPE_VALUE = "mem_type";
+        }
+    }
+
+    public enum DiskDimension implements MetricDimension {
+        DISK_NAME(Constants.NAME_VALUE);
+
+        private final String value;
+
+        DiskDimension(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String NAME_VALUE = "disk_name";
+        }
+    }
+
+    public enum CommonDimension implements MetricDimension {
+        INDEX_NAME(Constants.INDEX_NAME_VALUE),
+        OPERATION(Constants.OPERATION_VALUE),
+        SHARD_ROLE(Constants.SHARD_ROLE_VALUE),
+        SHARD_ID(Constants.SHARD_ID_VALUE),
+        EXCEPTION(Constants.EXCEPTION_VALUE),
+        THREAD_NAME(Constants.THREAD_NAME),
+        FAILED(Constants.FAILED_VALUE);
+
+        private final String value;
+
+        CommonDimension(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String INDEX_NAME_VALUE = "index_name";
+            public static final String SHARD_ID_VALUE = "shard_id";
+            public static final String OPERATION_VALUE = "operation";
+            public static final String SHARD_ROLE_VALUE = "shard_role";
+            public static final String EXCEPTION_VALUE = "exception";
+            public static final String FAILED_VALUE = "failed";
+            public static final String THREAD_NAME = "thread_name";
+        }
+    }
+
+    public enum ThreadPoolDimension implements MetricDimension, JooqFieldValue {
+        THREAD_POOL_TYPE(Constants.TYPE_VALUE);
+
+        private final String value;
+
+        ThreadPoolDimension(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        @Override
+        public Field<String> getField() {
+            return DSL.field(DSL.name(this.value), String.class);
+        }
+
+        @Override
+        public String getName() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String TYPE_VALUE = "threadpool_type";
         }
     }
 
