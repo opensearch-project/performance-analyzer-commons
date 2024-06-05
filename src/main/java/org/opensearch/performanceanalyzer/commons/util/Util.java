@@ -86,9 +86,15 @@ public class Util {
                         });
     }
 
+    /*
+     * Enum to represent the collector mode.
+     * RCA - Only RCA Collectors enabled,
+     * RTF - Only RTF Collectors enabled,
+     * DUAL - Both RCA and RTF Collectors enabled.
+     */
     public enum CollectorMode {
         RCA(0),
-        OTEL(1),
+        RTF(1),
         DUAL(2);
 
         private final int value;

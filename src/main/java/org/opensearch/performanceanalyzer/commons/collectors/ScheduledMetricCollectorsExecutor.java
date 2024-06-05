@@ -180,7 +180,7 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
     private boolean canSchedule(PerformanceAnalyzerMetricsCollector collector) {
         if (collector instanceof TelemetryCollector) {
             return (collectorsSetting == Util.CollectorMode.DUAL.getValue())
-                    || (collectorsSetting == Util.CollectorMode.OTEL.getValue());
+                    || (collectorsSetting == Util.CollectorMode.RTF.getValue());
         }
         return (collectorsSetting == Util.CollectorMode.DUAL.getValue())
                 || (collectorsSetting == Util.CollectorMode.RCA.getValue());

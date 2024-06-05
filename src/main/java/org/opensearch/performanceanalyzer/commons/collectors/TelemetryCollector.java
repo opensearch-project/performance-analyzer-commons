@@ -5,4 +5,5 @@
 
 package org.opensearch.performanceanalyzer.commons.collectors;
 
+/** Marker interface for telemetry collectors. */
 public interface TelemetryCollector {}
