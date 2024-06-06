@@ -44,10 +44,14 @@ public enum StatMetrics implements MeasurementSet {
     /** Tracks time taken by respective collectors to collect event metrics. */
     DISKS_COLLECTOR_EXECUTION_TIME(
             "DisksCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    RTF_DISKS_COLLECTOR_EXECUTION_TIME(
+            "RTFDisksCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     GC_INFO_COLLECTOR_EXECUTION_TIME(
             "GCInfoCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     HEAP_METRICS_COLLECTOR_EXECUTION_TIME(
             "HeapMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    RTF_HEAP_METRICS_COLLECTOR_EXECUTION_TIME(
+            "RTFHeapMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     MOUNTED_PARTITION_METRICS_COLLECTOR_EXECUTION_TIME(
             "MountedPartitionMetricsCollectorExecutionTime",
             "millis",
@@ -109,6 +113,11 @@ public enum StatMetrics implements MeasurementSet {
             "millis",
             StatsType.LATENCIES,
             Statistics.SUM),
+    RTF_NODE_STATS_ALL_SHARDS_METRICS_COLLECTOR_EXECUTION_TIME(
+            "RTFNodeStatsAllShardsMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
     NODE_STATS_FIXED_SHARDS_METRICS_COLLECTOR_EXECUTION_TIME(
             "NodeStatsFixedShardsMetricsCollectorExecutionTime",
             "millis",
@@ -123,6 +132,11 @@ public enum StatMetrics implements MeasurementSet {
             "ShardStateCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     THREADPOOL_METRICS_COLLECTOR_EXECUTION_TIME(
             "ThreadPoolMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    RTF_THREADPOOL_METRICS_COLLECTOR_EXECUTION_TIME(
+            "RTFThreadPoolMetricsCollectorExecutionTime",
             "millis",
             StatsType.LATENCIES,
             Statistics.SUM),
