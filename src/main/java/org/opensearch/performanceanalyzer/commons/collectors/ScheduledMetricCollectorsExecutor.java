@@ -18,6 +18,11 @@ import org.opensearch.performanceanalyzer.commons.stats.ServiceMetrics;
 import org.opensearch.performanceanalyzer.commons.stats.metrics.StatMetrics;
 import org.opensearch.performanceanalyzer.commons.util.Util;
 
+/*
+ * This class is responsible for scheduling the metrics collection.
+ * It creates a thread pool of size collectorThreadCount and runs the metrics collection
+ * in the thread pool.
+ */
 public class ScheduledMetricCollectorsExecutor extends Thread {
     private static final Logger LOG = LogManager.getLogger(ScheduledMetricCollectorsExecutor.class);
     private final int collectorThreadCount;
