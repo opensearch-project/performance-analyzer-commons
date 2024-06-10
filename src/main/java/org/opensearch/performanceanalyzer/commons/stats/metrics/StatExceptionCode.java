@@ -71,13 +71,16 @@ public enum StatExceptionCode {
 
     /** Below tracks Collector specific Errors. */
     DISK_METRICS_COLLECTOR_ERROR("DiskMetricsError"),
+    RTF_DISK_METRICS_COLLECTOR_ERROR("RTFDiskMetricsError"),
     GC_INFO_COLLECTOR_ERROR("GCInfoCollectorError"),
     HEAP_METRICS_COLLECTOR_ERROR("HeapMetricsCollectorError"),
+    RTF_HEAP_METRICS_COLLECTOR_ERROR("RTFHeapMetricsCollectorError"),
     MOUNTED_PARTITION_METRICS_COLLECTOR_ERROR("MountedPartitionMetricsCollectorError"),
     NETWORK_COLLECTION_ERROR("NetworkCollectionError"),
     OS_METRICS_COLLECTOR_ERROR("OSMetricsCollectorError"),
     STATS_COLLECTOR_ERROR("StatsCollectorError"),
     THREADPOOL_METRICS_COLLECTOR_ERROR("ThreadPoolMetricsCollectorError"),
+    RTF_THREADPOOL_METRICS_COLLECTOR_ERROR("RTFThreadPoolMetricsCollectorError"),
     SHARD_STATE_COLLECTOR_ERROR("ShardStateCollectorError"),
     CACHE_CONFIG_METRICS_COLLECTOR_ERROR("CacheConfigMetricsCollectorError"),
     ADMISSION_CONTROL_COLLECTOR_ERROR("AdmissionControlCollectorError"),
@@ -91,6 +94,7 @@ public enum StatExceptionCode {
     ELECTION_TERM_COLLECTOR_ERROR("ElectionTermCollectorError"),
     SHARD_INDEXING_PRESSURE_COLLECTOR_ERROR("ShardIndexingPressureMetricsCollectorError"),
     NODESTATS_COLLECTION_ERROR("NodeStatsCollectionError"),
+    RTF_NODESTATS_COLLECTION_ERROR("RTFNodeStatsCollectionError"),
     CLUSTER_MANAGER_NODE_NOT_UP("ClusterManagerNodeNotUp"),
 
     /** Below tracks Reader specific Errors. */

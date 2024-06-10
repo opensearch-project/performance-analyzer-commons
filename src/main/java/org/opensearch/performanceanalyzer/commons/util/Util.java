@@ -85,4 +85,26 @@ public class Util {
                             return null;
                         });
     }
+
+    /*
+     * Enum to represent the collector mode.
+     * RCA - Only RCA Collectors enabled,
+     * TELEMETRY - Only Telemetry Collectors enabled,
+     * DUAL - Both RCA and Telemetry Collectors enabled.
+     */
+    public enum CollectorMode {
+        RCA(0),
+        TELEMETRY(1),
+        DUAL(2);
+
+        private final int value;
+
+        CollectorMode(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 }
