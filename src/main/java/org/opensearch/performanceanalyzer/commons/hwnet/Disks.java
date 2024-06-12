@@ -60,7 +60,7 @@ public class Disks {
     };
 
     static {
-        Util.invokePrivileged(() -> listDisks());
+        Util.invokePrivilegedAndLogError(() -> listDisks());
         oldkvTimestamp = System.currentTimeMillis();
         kvTimestamp = oldkvTimestamp;
     }
