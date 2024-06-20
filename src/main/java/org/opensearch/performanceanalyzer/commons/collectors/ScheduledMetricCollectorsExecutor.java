@@ -183,6 +183,10 @@ public class ScheduledMetricCollectorsExecutor extends Thread {
     }
 
     private boolean canSchedule(PerformanceAnalyzerMetricsCollector collector) {
+        // Scheduling statsCollector to collect statMetrics irrespective of CollectorMode
+        if (collector instanceof StatsCollector) {
+            return true;
+        }
         if (collector instanceof TelemetryCollector) {
             return (collectorsSetting == Util.CollectorMode.DUAL.getValue())
                     || (collectorsSetting == Util.CollectorMode.TELEMETRY.getValue());
