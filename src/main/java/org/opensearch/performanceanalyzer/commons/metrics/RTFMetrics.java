@@ -232,6 +232,7 @@ public class RTFMetrics {
 
     public enum CommonDimension implements MetricDimension {
         INDEX_NAME(Constants.INDEX_NAME_VALUE),
+        INDEX_UUID(Constants.INDEX_UUID_VALUE),
         OPERATION(Constants.OPERATION_VALUE),
         SHARD_ROLE(Constants.SHARD_ROLE_VALUE),
         SHARD_ID(Constants.SHARD_ID_VALUE),
@@ -252,6 +253,7 @@ public class RTFMetrics {
 
         public static class Constants {
             public static final String INDEX_NAME_VALUE = "index_name";
+            public static final String INDEX_UUID_VALUE = "index_uuid";
             public static final String SHARD_ID_VALUE = "shard_id";
             public static final String OPERATION_VALUE = "operation";
             public static final String SHARD_ROLE_VALUE = "shard_role";
