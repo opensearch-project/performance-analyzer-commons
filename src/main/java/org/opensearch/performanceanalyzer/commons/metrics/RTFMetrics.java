@@ -336,4 +336,23 @@ public class RTFMetrics {
             public static final String PACKET_PER_SEC_VALUE = "packets/s";
         }
     }
+
+    public enum OSMetrics {
+        CPU_UTILIZATION(AllMetrics.OSMetrics.Constants.CPU_VALUE);
+
+        private final String value;
+
+        OSMetrics(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String CPU_VALUE = "CPU_Utilization";
+        }
+    }
 }
