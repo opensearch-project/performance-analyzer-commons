@@ -340,7 +340,8 @@ public class RTFMetrics {
     }
 
     public enum OSMetrics {
-        CPU_UTILIZATION(AllMetrics.OSMetrics.Constants.CPU_VALUE);
+        CPU_UTILIZATION(Constants.CPU_VALUE),
+        HEAP_ALLOCATED(Constants.HEAP_ALLOCATED);
 
         private final String value;
 
@@ -355,6 +356,7 @@ public class RTFMetrics {
 
         public static class Constants {
             public static final String CPU_VALUE = "cpu_utilization";
+            public static final String HEAP_ALLOCATED = "heap_allocated";
         }
     }
 }
