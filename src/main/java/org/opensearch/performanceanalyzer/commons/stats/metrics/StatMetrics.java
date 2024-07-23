@@ -66,6 +66,8 @@ public enum StatMetrics implements MeasurementSet {
             Statistics.SUM),
     OS_METRICS_COLLECTOR_EXECUTION_TIME(
             "OSMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    RTF_OS_METRICS_COLLECTOR_EXECUTION_TIME(
+            "RTFOSMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     STAT_COLLECTOR_EXECUTION_TIME(
             "StatCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
 
@@ -77,6 +79,11 @@ public enum StatMetrics implements MeasurementSet {
             Statistics.SUM),
     CACHE_CONFIG_METRICS_COLLECTOR_EXECUTION_TIME(
             "CacheConfigMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
+    RTF_CACHE_CONFIG_METRICS_COLLECTOR_EXECUTION_TIME(
+            "RTFCacheConfigMetricsCollectorExecutionTime",
             "millis",
             StatsType.LATENCIES,
             Statistics.SUM),

@@ -292,6 +292,107 @@ public class RTFMetrics {
         }
     }
 
+    public enum CacheConfigDimension implements MetricDimension, JooqFieldValue {
+        CACHE_TYPE(RTFMetrics.CacheConfigDimension.Constants.TYPE_VALUE);
+
+        private final String value;
+
+        CacheConfigDimension(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        @Override
+        public Field<String> getField() {
+            return DSL.field(DSL.name(this.value), String.class);
+        }
+
+        @Override
+        public String getName() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String TYPE_VALUE = "cache_type";
+        }
+    }
+
+    public enum CacheConfigValue implements MetricValue {
+        CACHE_MAX_SIZE(RTFMetrics.CacheConfigValue.Constants.CACHE_MAX_SIZE_VALUE);
+
+        private final String value;
+
+        CacheConfigValue(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String CACHE_MAX_SIZE_VALUE = "cache_max_size";
+        }
+    }
+
+    public enum OSMetrics {
+        CPU_UTILIZATION(RTFMetrics.OSMetrics.Constants.CPU_VALUE),
+        PAGING_MAJ_FLT_RATE(RTFMetrics.OSMetrics.Constants.PAGING_MAJFLT_VALUE),
+        PAGING_MIN_FLT_RATE(RTFMetrics.OSMetrics.Constants.PAGING_MINFLT_VALUE),
+        PAGING_RSS(RTFMetrics.OSMetrics.Constants.RSS_VALUE),
+        SCHED_RUNTIME(RTFMetrics.OSMetrics.Constants.RUNTIME_VALUE),
+        SCHED_WAITTIME(RTFMetrics.OSMetrics.Constants.WAITTIME_VALUE),
+        SCHED_CTX_RATE(RTFMetrics.OSMetrics.Constants.CTXRATE_VALUE),
+        HEAP_ALLOC_RATE(RTFMetrics.OSMetrics.Constants.HEAP_ALLOC_VALUE),
+        IO_READ_THROUGHPUT(RTFMetrics.OSMetrics.Constants.READ_THROUGHPUT_VALUE),
+        IO_WRITE_THROUGHPUT(RTFMetrics.OSMetrics.Constants.WRITE_THROUGHPUT_VALUE),
+        IO_TOT_THROUGHPUT(RTFMetrics.OSMetrics.Constants.TOTAL_THROUGHPUT_VALUE),
+        IO_READ_SYSCALL_RATE(RTFMetrics.OSMetrics.Constants.READ_SYSCALL_RATE_VALUE),
+        IO_WRITE_SYSCALL_RATE(RTFMetrics.OSMetrics.Constants.WRITE_SYSCALL_RATE_VALUE),
+        IO_TOTAL_SYSCALL_RATE(RTFMetrics.OSMetrics.Constants.TOTAL_SYSCALL_RATE_VALUE),
+        THREAD_BLOCKED_TIME(RTFMetrics.OSMetrics.Constants.BLOCKED_TIME_VALUE),
+        THREAD_BLOCKED_EVENT(RTFMetrics.OSMetrics.Constants.BLOCKED_COUNT_VALUE),
+        THREAD_WAITED_TIME(RTFMetrics.OSMetrics.Constants.WAITED_TIME_VALUE),
+        THREAD_WAITED_EVENT(RTFMetrics.OSMetrics.Constants.WAITED_COUNT_VALUE);
+
+        private final String value;
+
+        OSMetrics(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String CPU_VALUE = "cpu_utilization";
+            public static final String PAGING_MAJFLT_VALUE = "paging_maj_flt_rate";
+            public static final String PAGING_MINFLT_VALUE = "paging_min_flt_rate";
+            public static final String RSS_VALUE = "paging_rss";
+            public static final String RUNTIME_VALUE = "xched_runtime";
+            public static final String WAITTIME_VALUE = "sched_wait_time";
+            public static final String CTXRATE_VALUE = "sched_ctx_rate";
+            public static final String HEAP_ALLOC_VALUE = "heap_alloc_rate";
+            public static final String READ_THROUGHPUT_VALUE = "io_read_throughput";
+            public static final String WRITE_THROUGHPUT_VALUE = "io_write_throughput";
+            public static final String TOTAL_THROUGHPUT_VALUE = "io_tot_throughput";
+            public static final String READ_SYSCALL_RATE_VALUE = "io_read_sys_call_rate";
+            public static final String WRITE_SYSCALL_RATE_VALUE = "io_write_sys_call_rate";
+            public static final String TOTAL_SYSCALL_RATE_VALUE = "io_total_sys_call_rate";
+            public static final String BLOCKED_TIME_VALUE = "thread_blocked_time";
+            public static final String BLOCKED_COUNT_VALUE = "thread_blocked_event";
+            public static final String WAITED_TIME_VALUE = "thread_waited_time";
+            public static final String WAITED_COUNT_VALUE = "thread_waited_event";
+        }
+    }
+
     public enum MetricUnits {
         CORES(Constants.CORES_VALUE),
         COUNT_PER_SEC(Constants.COUNT_PER_SEC_VALUE),
