@@ -407,7 +407,8 @@ public class RTFMetrics {
         MEGABYTE_PER_SEC(Constants.MEGABYTE_PER_SEC_VALUE),
         SEGMENT_PER_FLOW(Constants.SEGMENT_PER_FLOW_VALUE),
         BYTE_PER_FLOW(Constants.BYTE_PER_FLOW_VALUE),
-        PACKET_PER_SEC(Constants.PACKET_PER_SEC_VALUE);
+        PACKET_PER_SEC(Constants.PACKET_PER_SEC_VALUE),
+        RATE(Constants.RATE);
 
         private final String value;
 
@@ -435,6 +436,28 @@ public class RTFMetrics {
             public static final String SEGMENT_PER_FLOW_VALUE = "segments/flow";
             public static final String BYTE_PER_FLOW_VALUE = "B/flow";
             public static final String PACKET_PER_SEC_VALUE = "packets/s";
+            public static final String RATE = "rate";
+        }
+    }
+
+    public enum OSMetrics {
+        CPU_UTILIZATION(Constants.CPU_VALUE),
+        HEAP_ALLOCATED(Constants.HEAP_ALLOCATED);
+
+        private final String value;
+
+        OSMetrics(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String CPU_VALUE = "cpu_utilization";
+            public static final String HEAP_ALLOCATED = "heap_allocated";
         }
     }
 }
