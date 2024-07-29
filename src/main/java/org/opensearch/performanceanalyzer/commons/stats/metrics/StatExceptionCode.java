@@ -78,11 +78,13 @@ public enum StatExceptionCode {
     MOUNTED_PARTITION_METRICS_COLLECTOR_ERROR("MountedPartitionMetricsCollectorError"),
     NETWORK_COLLECTION_ERROR("NetworkCollectionError"),
     OS_METRICS_COLLECTOR_ERROR("OSMetricsCollectorError"),
+    RTF_OS_METRICS_COLLECTOR_ERROR("RTFOSMetricsCollectorError"),
     STATS_COLLECTOR_ERROR("StatsCollectorError"),
     THREADPOOL_METRICS_COLLECTOR_ERROR("ThreadPoolMetricsCollectorError"),
     RTF_THREADPOOL_METRICS_COLLECTOR_ERROR("RTFThreadPoolMetricsCollectorError"),
     SHARD_STATE_COLLECTOR_ERROR("ShardStateCollectorError"),
     CACHE_CONFIG_METRICS_COLLECTOR_ERROR("CacheConfigMetricsCollectorError"),
+    RTF_CACHE_CONFIG_METRICS_COLLECTOR_ERROR("RTFCacheConfigMetricsCollectorError"),
     ADMISSION_CONTROL_COLLECTOR_ERROR("AdmissionControlCollectorError"),
     CIRCUIT_BREAKER_COLLECTOR_ERROR("CircuitBreakerCollectorError"),
     CLUSTER_MANAGER_SERVICE_EVENTS_METRICS_COLLECTOR_ERROR(
