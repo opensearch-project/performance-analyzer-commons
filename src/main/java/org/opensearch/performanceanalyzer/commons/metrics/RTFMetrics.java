@@ -340,24 +340,6 @@ public class RTFMetrics {
         }
     }
 
-    public enum OSMetrics {
-        CPU_UTILIZATION(RTFMetrics.OSMetrics.Constants.CPU_VALUE);
-        private final String value;
-
-        OSMetrics(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
-
-        public static class Constants {
-            public static final String CPU_VALUE = "cpu_utilization";
-        }
-    }
-
     public enum MetricUnits {
         CORES(Constants.CORES_VALUE),
         COUNT_PER_SEC(Constants.COUNT_PER_SEC_VALUE),

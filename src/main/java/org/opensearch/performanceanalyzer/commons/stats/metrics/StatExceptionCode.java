@@ -78,7 +78,6 @@ public enum StatExceptionCode {
     MOUNTED_PARTITION_METRICS_COLLECTOR_ERROR("MountedPartitionMetricsCollectorError"),
     NETWORK_COLLECTION_ERROR("NetworkCollectionError"),
     OS_METRICS_COLLECTOR_ERROR("OSMetricsCollectorError"),
-    RTF_OS_METRICS_COLLECTOR_ERROR("RTFOSMetricsCollectorError"),
     STATS_COLLECTOR_ERROR("StatsCollectorError"),
     THREADPOOL_METRICS_COLLECTOR_ERROR("ThreadPoolMetricsCollectorError"),
     RTF_THREADPOOL_METRICS_COLLECTOR_ERROR("RTFThreadPoolMetricsCollectorError"),
