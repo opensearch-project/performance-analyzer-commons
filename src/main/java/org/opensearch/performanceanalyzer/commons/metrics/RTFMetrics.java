@@ -292,6 +292,54 @@ public class RTFMetrics {
         }
     }
 
+    public enum CacheConfigDimension implements MetricDimension, JooqFieldValue {
+        CACHE_TYPE(RTFMetrics.CacheConfigDimension.Constants.TYPE_VALUE);
+
+        private final String value;
+
+        CacheConfigDimension(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        @Override
+        public Field<String> getField() {
+            return DSL.field(DSL.name(this.value), String.class);
+        }
+
+        @Override
+        public String getName() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String TYPE_VALUE = "cache_type";
+        }
+    }
+
+    public enum CacheConfigValue implements MetricValue {
+        CACHE_MAX_SIZE(RTFMetrics.CacheConfigValue.Constants.CACHE_MAX_SIZE_VALUE);
+
+        private final String value;
+
+        CacheConfigValue(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String CACHE_MAX_SIZE_VALUE = "cache_max_size";
+        }
+    }
+
     public enum MetricUnits {
         CORES(Constants.CORES_VALUE),
         COUNT_PER_SEC(Constants.COUNT_PER_SEC_VALUE),

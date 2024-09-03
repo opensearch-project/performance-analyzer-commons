@@ -83,6 +83,7 @@ public enum StatExceptionCode {
     RTF_THREADPOOL_METRICS_COLLECTOR_ERROR("RTFThreadPoolMetricsCollectorError"),
     SHARD_STATE_COLLECTOR_ERROR("ShardStateCollectorError"),
     CACHE_CONFIG_METRICS_COLLECTOR_ERROR("CacheConfigMetricsCollectorError"),
+    RTF_CACHE_CONFIG_METRICS_COLLECTOR_ERROR("RTFCacheConfigMetricsCollectorError"),
     ADMISSION_CONTROL_COLLECTOR_ERROR("AdmissionControlCollectorError"),
     CIRCUIT_BREAKER_COLLECTOR_ERROR("CircuitBreakerCollectorError"),
     CLUSTER_MANAGER_SERVICE_EVENTS_METRICS_COLLECTOR_ERROR(

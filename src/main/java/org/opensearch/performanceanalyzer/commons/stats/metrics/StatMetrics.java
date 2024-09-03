@@ -80,6 +80,11 @@ public enum StatMetrics implements MeasurementSet {
             "millis",
             StatsType.LATENCIES,
             Statistics.SUM),
+    RTF_CACHE_CONFIG_METRICS_COLLECTOR_EXECUTION_TIME(
+            "RTFCacheConfigMetricsCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
     CIRCUIT_BREAKER_COLLECTOR_EXECUTION_TIME(
             "CircuitBreakerCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     CLUSTER_APPLIER_SERVICE_STATS_COLLECTOR_EXECUTION_TIME(
