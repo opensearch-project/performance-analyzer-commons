@@ -36,7 +36,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.diffplug.spotless' version '6.25.0'
-    id 'com.github.spotbugs' version '6.0.7'
+    id 'com.github.spotbugs' version '6.1.2'
 }
 
 spotbugsMain {
@@ -66,8 +66,8 @@ allprojects {
 }
 
 java {
-    targetCompatibility = JavaVersion.VERSION_11
-    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 apply plugin: 'java'
@@ -81,9 +81,9 @@ dependencies {
         implementation files("${System.properties['java.home']}/../lib/tools.jar")
     }
 
-    def jacksonVersion = "2.15.1"
-    def jacksonDataBindVersion = "2.14.1"
-    def junitVersion  = "4.13.1"
+    def jacksonVersion = "2.18.2"
+    def jacksonDataBindVersion = "2.18.2"
+    def junitVersion  = "4.13.2"
     def log4jVersion = "2.21.0"
 
     implementation "org.jooq:jooq:3.10.8"
@@ -115,7 +115,7 @@ configurations.each {
     c -> c.resolutionStrategy.dependencySubstitution {
         all { DependencySubstitution dependency ->
             if (dependency.requested.group == 'org.apache.bcel') {
-                dependency.useTarget 'org.apache.bcel:bcel:6.6.1'
+                dependency.useTarget 'org.apache.bcel:bcel:6.10.0'
             }
         }
     }
