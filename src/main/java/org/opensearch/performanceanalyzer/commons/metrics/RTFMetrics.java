@@ -108,6 +108,31 @@ public class RTFMetrics {
         }
     }
 
+    public enum OperationsValue implements MetricValue {
+        INDEXING_RATE(Constants.INDEXING_RATE),
+        SEARCH_RATE(Constants.SEARCH_RATE),
+        INDEXING_LATENCY(Constants.INDEXING_LATENCY),
+        SEARCH_LATENCY(Constants.SEARCH_LATENCY);
+
+        private final String value;
+
+        OperationsValue(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String INDEXING_RATE = "indexing_rate";
+            public static final String SEARCH_RATE = "search_rate";
+            public static final String INDEXING_LATENCY = "indexing_latency";
+            public static final String SEARCH_LATENCY = "search_latency";
+        }
+    }
+
     public enum ThreadPoolValue implements MetricValue {
         THREADPOOL_QUEUE_SIZE(Constants.QUEUE_SIZE_VALUE),
         THREADPOOL_REJECTED_REQS(Constants.REJECTED_VALUE),
