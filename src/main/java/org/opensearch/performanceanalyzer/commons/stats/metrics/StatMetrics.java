@@ -52,6 +52,11 @@ public enum StatMetrics implements MeasurementSet {
             "HeapMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
     RTF_HEAP_METRICS_COLLECTOR_EXECUTION_TIME(
             "RTFHeapMetricsCollectorExecutionTime", "millis", StatsType.LATENCIES, Statistics.SUM),
+    RTF_SHARD_OPERATION_COLLECTOR_EXECUTION_TIME(
+            "RTFShardOperationCollectorExecutionTime",
+            "millis",
+            StatsType.LATENCIES,
+            Statistics.SUM),
     MOUNTED_PARTITION_METRICS_COLLECTOR_EXECUTION_TIME(
             "MountedPartitionMetricsCollectorExecutionTime",
             "millis",
