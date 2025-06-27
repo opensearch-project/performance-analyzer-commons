@@ -108,6 +108,31 @@ public class RTFMetrics {
         }
     }
 
+    public enum ShardOperationsValue implements MetricValue {
+        SHARD_INDEXING_RATE(Constants.SHARD_INDEXING_RATE),
+        SHARD_SEARCH_RATE(Constants.SHARD_SEARCH_RATE),
+        SHARD_INDEXING_LATENCY(Constants.SHARD_INDEXING_LATENCY),
+        SHARD_SEARCH_LATENCY(Constants.SHARD_SEARCH_LATENCY);
+
+        private final String value;
+
+        ShardOperationsValue(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        public static class Constants {
+            public static final String SHARD_INDEXING_RATE = "shard_indexing_rate";
+            public static final String SHARD_SEARCH_RATE = "shard_search_rate";
+            public static final String SHARD_INDEXING_LATENCY = "shard_indexing_latency";
+            public static final String SHARD_SEARCH_LATENCY = "shard_search_latency";
+        }
+    }
+
     public enum ThreadPoolValue implements MetricValue {
         THREADPOOL_QUEUE_SIZE(Constants.QUEUE_SIZE_VALUE),
         THREADPOOL_REJECTED_REQS(Constants.REJECTED_VALUE),

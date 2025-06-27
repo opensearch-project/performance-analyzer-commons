@@ -75,6 +75,7 @@ public enum StatExceptionCode {
     GC_INFO_COLLECTOR_ERROR("GCInfoCollectorError"),
     HEAP_METRICS_COLLECTOR_ERROR("HeapMetricsCollectorError"),
     RTF_HEAP_METRICS_COLLECTOR_ERROR("RTFHeapMetricsCollectorError"),
+    RTF_SHARD_OPERATION_COLLECTOR_ERROR("RTFShardOperationCollectorError"),
     MOUNTED_PARTITION_METRICS_COLLECTOR_ERROR("MountedPartitionMetricsCollectorError"),
     NETWORK_COLLECTION_ERROR("NetworkCollectionError"),
     OS_METRICS_COLLECTOR_ERROR("OSMetricsCollectorError"),
