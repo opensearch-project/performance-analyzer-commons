@@ -26,8 +26,7 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        maven { url "https://central.sonatype.com/repository/maven-snapshots/" }
-        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://ci.opensearch.org/ci/dbc/snapshots/maven/" }
     }
 }
 
@@ -59,8 +58,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
-        maven { url "https://central.sonatype.com/repository/maven-snapshots/" }
-        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://ci.opensearch.org/ci/dbc/snapshots/maven/" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
     group 'org.opensearch.performanceanalyzer.commons'
@@ -228,10 +226,11 @@ publishing {
         if (buildVersion.toString().endsWith("SNAPSHOT")) {
             maven {
                 name = "Snapshots"
-                url = "https://central.sonatype.com/repository/maven-snapshots/"
-                credentials {
-                    username = System.getenv("SONATYPE_USERNAME")
-                    password = System.getenv("SONATYPE_PASSWORD")
+                url = System.getenv("MAVEN_SNAPSHOTS_S3_REPO")
+                credentials(AwsCredentials) {
+                    accessKey = System.getenv("AWS_ACCESS_KEY_ID")
+                    secretKey = System.getenv("AWS_SECRET_ACCESS_KEY")
+                    sessionToken = System.getenv("AWS_SESSION_TOKEN")
                 }
             }
         }
