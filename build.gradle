@@ -36,7 +36,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.diffplug.spotless' version '6.25.0'
-    id 'com.github.spotbugs' version '6.1.5'
+    id 'com.github.spotbugs' version '6.2.4'
 }
 
 spotbugsMain {
@@ -108,17 +108,6 @@ dependencies {
     testImplementation group: 'org.hamcrest', name: 'hamcrest-library', version: '2.1'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
-}
-
-//TODO: remove once spotbugs upgrades to 4.7.4
-configurations.each {
-    c -> c.resolutionStrategy.dependencySubstitution {
-        all { DependencySubstitution dependency ->
-            if (dependency.requested.group == 'org.apache.bcel') {
-                dependency.useTarget 'org.apache.bcel:bcel:6.6.1'
-            }
-        }
-    }
 }
 
 compileJava {
