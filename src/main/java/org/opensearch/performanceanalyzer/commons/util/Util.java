@@ -52,17 +52,7 @@ public class Util {
         AccessController.doPrivileged(
                 (PrivilegedAction<Void>)
                         () -> {
-                            try {
-                                runner.run();
-                            } catch (Exception ex) {
-                                LOG.debug(
-                                        (Supplier<?>)
-                                                () ->
-                                                        new ParameterizedMessage(
-                                                                "Privileged Invocation failed {}",
-                                                                ex.toString()),
-                                        ex);
-                            }
+                            runner.run();
                             return null;
                         });
     }
