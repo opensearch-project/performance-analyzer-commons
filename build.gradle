@@ -35,7 +35,7 @@ plugins {
     id 'application'
     id 'java-library'
     id 'maven-publish'
-    id 'com.diffplug.spotless' version '6.25.0'
+    id 'com.diffplug.spotless' version '8.1.0'
     id 'com.github.spotbugs' version '6.2.4'
 }
 
@@ -66,8 +66,8 @@ allprojects {
 }
 
 java {
-    targetCompatibility = JavaVersion.VERSION_21
-    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_25
+    sourceCompatibility = JavaVersion.VERSION_25
 }
 
 apply plugin: 'java'
@@ -148,6 +148,12 @@ spotless {
 
         // add support for spotless:off and spotless:on tags to exclude sections of code
         toggleOffOn()
+
+        // use targetExclude to exclude all LINE_UNDEFINED linting errors
+        // these errors popped up when upgrading spotless from v6.25.0 to v8.1.0
+        target {
+            targetExclude '**/LINE_UNDEFINED'
+        }
     }
 }
 

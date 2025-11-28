@@ -30,10 +30,10 @@ jobs:
           issue-title: 'Release performance-analyzer-commons ${{ steps.get_data.outputs.version }}'
           issue-body: "Please approve or deny the release of performance-analyzer-commons **TAG**: ${{ github.ref_name }}  **COMMIT**: ${{ github.sha }} **VERSION** : ${{ steps.get_data.outputs.version }} "
           exclude-workflow-initiator-as-approver: true
-      - name: Set up JDK 21
+      - name: Set up JDK 25
         uses: actions/setup-java@v3
         with:
-          java-version: 21
+          java-version: 25
           distribution: 'temurin'
           cache: gradle
       - name: Build with Gradle
