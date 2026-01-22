@@ -81,13 +81,22 @@ dependencies {
         implementation files("${System.properties['java.home']}/../lib/tools.jar")
     }
 
-    def jacksonVersion = "2.15.1"
-    def jacksonDataBindVersion = "2.14.1"
+    def jacksonAnnotationsVersion = "2.20"
+    def jacksonDataBindVersion = "2.20.1"
     def junitVersion  = "4.13.1"
-    def log4jVersion = "2.21.0"
+    def log4jVersion = "2.25.3"
+
+    configurations.all {
+        incoming.beforeResolve {
+            resolutionStrategy {
+                force "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+                force "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+            }
+        }
+    }
 
     implementation "org.jooq:jooq:3.10.8"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonAnnotationsVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDataBindVersion}"
     implementation 'com.google.guava:guava:32.0.1-jre'
     implementation 'com.google.code.gson:gson:2.9.0'
