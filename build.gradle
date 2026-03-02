@@ -35,8 +35,8 @@ plugins {
     id 'application'
     id 'java-library'
     id 'maven-publish'
-    id 'com.diffplug.spotless' version '8.1.0'
-    id 'com.github.spotbugs' version '6.2.4'
+    id 'com.diffplug.spotless' version '6.25.0'
+    id 'com.github.spotbugs' version '6.0.7'
 }
 
 spotbugsMain {
@@ -66,8 +66,8 @@ allprojects {
 }
 
 java {
-    targetCompatibility = JavaVersion.VERSION_21
-    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 apply plugin: 'java'
@@ -81,22 +81,13 @@ dependencies {
         implementation files("${System.properties['java.home']}/../lib/tools.jar")
     }
 
-    def jacksonAnnotationsVersion = "2.20"
-    def jacksonDataBindVersion = "2.20.1"
+    def jacksonVersion = "2.15.1"
+    def jacksonDataBindVersion = "2.14.1"
     def junitVersion  = "4.13.1"
-    def log4jVersion = "2.25.3"
-
-    configurations.all {
-        incoming.beforeResolve {
-            resolutionStrategy {
-                force "org.apache.logging.log4j:log4j-core:${log4jVersion}"
-                force "org.apache.logging.log4j:log4j-api:${log4jVersion}"
-            }
-        }
-    }
+    def log4jVersion = "2.21.0"
 
     implementation "org.jooq:jooq:3.10.8"
-    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonAnnotationsVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDataBindVersion}"
     implementation 'com.google.guava:guava:32.0.1-jre'
     implementation 'com.google.code.gson:gson:2.9.0'
@@ -117,6 +108,17 @@ dependencies {
     testImplementation group: 'org.hamcrest', name: 'hamcrest-library', version: '2.1'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
+}
+
+//TODO: remove once spotbugs upgrades to 4.7.4
+configurations.each {
+    c -> c.resolutionStrategy.dependencySubstitution {
+        all { DependencySubstitution dependency ->
+            if (dependency.requested.group == 'org.apache.bcel') {
+                dependency.useTarget 'org.apache.bcel:bcel:6.6.1'
+            }
+        }
+    }
 }
 
 compileJava {
@@ -157,12 +159,6 @@ spotless {
 
         // add support for spotless:off and spotless:on tags to exclude sections of code
         toggleOffOn()
-
-        // use targetExclude to exclude all LINE_UNDEFINED linting errors
-        // these errors popped up when upgrading spotless from v6.25.0 to v8.1.0
-        target {
-            targetExclude '**/LINE_UNDEFINED'
-        }
     }
 }
 
