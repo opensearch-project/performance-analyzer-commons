@@ -44,7 +44,7 @@ public class EventLogFileHandler {
     }
 
     public void writeTmpFile(List<Event> dataEntries, long epoch) {
-        Util.invokePrivileged(() -> writeTmpFileWithPrivilege(dataEntries, epoch));
+        Util.invokePrivilegedAndLogError(() -> writeTmpFileWithPrivilege(dataEntries, epoch));
     }
 
     /**
@@ -93,7 +93,7 @@ public class EventLogFileHandler {
     }
 
     public void renameFromTmp(long epoch) {
-        Util.invokePrivileged(() -> renameFromTmpWithPrivilege(epoch));
+        Util.invokePrivilegedAndLogError(() -> renameFromTmpWithPrivilege(epoch));
     }
 
     public void renameFromTmpWithPrivilege(long epoch) {
@@ -161,7 +161,7 @@ public class EventLogFileHandler {
     }
 
     public void deleteAllFiles() {
-        Util.invokePrivileged(this::deleteAllFilesWithPrivilege);
+        Util.invokePrivilegedAndLogError(this::deleteAllFilesWithPrivilege);
     }
 
     public void deleteAllFilesWithPrivilege() {
@@ -197,6 +197,6 @@ public class EventLogFileHandler {
     }
 
     public void removeFilesWithPrivilege(File file) {
-        Util.invokePrivileged(() -> PerformanceAnalyzerMetrics.removeMetrics(file));
+        Util.invokePrivilegedAndLogError(() -> PerformanceAnalyzerMetrics.removeMetrics(file));
     }
 }
