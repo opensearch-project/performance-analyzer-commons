@@ -82,7 +82,7 @@ dependencies {
     }
 
     def jacksonAnnotationsVersion = "2.20"
-    def jacksonDataBindVersion = "2.20.1"
+    def jacksonDataBindVersion = "2.21.7"
     def junitVersion  = "4.13.1"
     def log4jVersion = "2.25.3"
 
