@@ -12,9 +12,7 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Megha Goyal      | [goyamegh](https://github.com/goyamegh)               | Amazon      |
 | Saurabh Singh    | [getsaurabh02](https://github.com/getsaurabh02)       | Amazon      |
 | Sagar            | [sgup432](https://github.com/sgup432)                 | Amazon      |
-| Atharva Sharma            | [atharvasharma61](https://github.com/atharvasharma61) | Amazon      |
 | Nishchay Malhotra         | [nishchay21](https://github.com/nishchay21)           | Amazon      |
-| DevJhaAbhishek            | [DevJhaAbhishek](https://github.com/DevJhaAbhishek)   | Amazon      |
 | Varunsrivathsa Venkatesha | [varunsrivathsav](https://github.com/varunsrivathsav) | Amazon      |
 | Ranjith Ramachandra       | [rramachand21](https://github.com/rramachand21)       | Amazon      |
 | Dharmesh Singh            | [psychbot](https://github.com/psychbot)       | Amazon      |
@@ -25,3 +23,5 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Maintainer      | GitHub ID                                   | Affiliation |
 |-----------------|---------------------------------------------|-------------|
 | Subhobrata Dey  | [sbcd90](https://github.com/sbcd90)         | Amazon      |
+| Atharva Sharma  | [atharvasharma61](https://github.com/atharvasharma61) | Amazon      |
+| DevJhaAbhishek  | [DevJhaAbhishek](https://github.com/DevJhaAbhishek)   | Amazon      |
